@@ -1,0 +1,50 @@
+* {
+    margin: 0;
+}
+
+p {
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    color: #00FF00;
+    text-align: justify;
+    background-color: rgba(0, 255, 0, 0.2);
+}
+
+.paragrafo {
+    color: blueviolet;
+    border: 5px inset black;
+    border-radius: 10px;
+    padding: 10px;
+}
+
+/*seletor de id*/
+#meuParagrafo:hover {
+    background-color: chocolate;
+    color: black;
+    font-family: Tahoma;
+    font-weight: 900;
+    font-size: 20px;
+}
+
+.tela {
+    background-color: blueviolet;
+    height: 30vw;
+    width: 30vw;
+    cursor: grab;
+}
+
+.tela:hover{
+    height: 40vw;
+    width: 40vw;
+}
+
+.tela2 {
+    background-color: yellow;
+    height: 20vw;
+    width: 20vw;
+    cursor: grab;
+}
+
+.tela2:hover{
+    height: 30vw;
+    width: 30vw;
+}
