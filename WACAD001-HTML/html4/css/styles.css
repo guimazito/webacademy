@@ -1,0 +1,17 @@
+#email {
+    width: 300px;
+}
+
+#entrance {
+    width: 50px;
+}
+
+textarea {
+    width: 400px;
+    height: 80px;
+}
+
+input[type="reset"],input[type="submit"] {
+    margin-top: 20px;
+    cursor: pointer;
+}
