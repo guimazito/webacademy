@@ -1,0 +1,50 @@
+* {
+    background-color: gray;
+}
+
+.paragraph {
+    width: 300px;
+    text-align: justify;
+    border: 1px solid black;
+    box-shadow: 4px 4px 10px 4px;
+    padding: 10px;
+    background-image: url(../image/img.png);
+    background-size: 100%;
+    background-repeat: no-repeat;
+    width: 95%;
+    color: white;
+    min-width: 400px;
+    min-height: 250px;
+    margin: 2%;
+}
+
+.paragraph2 {
+    margin-top: 50px;
+    border: 2px solid black;
+    padding: 10px;
+    overflow: auto;
+    width: 450px;
+    height: 200px;
+    text-align: justify;
+}
+
+/*Por padrão span é diplay inline, mas podemos deixar
+com o comportamento de uma div, diplay block*/
+span {
+    display: block;
+    color: purple;
+    border: 1px dotted greenyellow;
+}
+
+.escondido {
+    display: none;
+}
+
+.paragraph3 {
+    text-indent: 20px;
+    text-transform: lowercase;
+    text-align: justify;
+    text-decoration: underline;
+    word-spacing: 3px;
+    letter-spacing: 2px;
+}
