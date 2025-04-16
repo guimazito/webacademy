@@ -121,3 +121,15 @@ img {
     background-color: lightslategray;
     grid-area: footer;
 }
+
+@media screen and (max-width: 670px) {
+    .container3 {
+        grid-template-areas: "header"
+                             "navigation"
+                             "main"
+                             "aside"
+                             "footer";
+        grid-template-columns: 1fr;
+        grid-template-rows: 100px 200px 200px 100px 100px;
+    }    
+}
