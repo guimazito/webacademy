@@ -7,25 +7,24 @@ function randomValueFromArray(array){
   return array[random];
 }
 
-// const storyText = "It was 94 fahrenheit outside, so :insertx: went for a walk. When they got to :inserty:, they stared in horror for a few moments, then :insertz:. Bob saw the whole thing, but was not surprised — :insertx: weighs 300 pounds, and it was a hot day."
-const storyText = "Estava fazendo 94 fahrenheit lá fora quando :insertx: decidiu dar uma volta. Assim que chegou à orla de Copacabana, parou, arregalou os olhos e então se transformou em uma nuvem de vapor e flutuou lentamente para o céu. Bob assistiu à cena com um gole de água de coco, sem esboçar reação — :insertx: sempre disse que o calor a fazia 'evaporar', e naquele dia, realmente estava insuportável."
+const storyText = "Estava fazendo 94 fahrenheit lá fora quando :insertx: decidiu dar uma volta. Assim que chegou :inserty:, parou, arregalou os olhos e então se transformou em uma nuvem de vapor de 300 libras e flutuou lentamente para o céu. Bob assistiu à cena com um gole de :insertz:, sem esboçar reação — :insertx: sempre disse que o calor o fazia 'evaporar', e naquele dia, realmente estava insuportável."
 
 const insertX = [
-  "King Kong",
-  "Touro de Wall Street",
-  "Estátua da Liberdade",
+  "o King Kong",
+  "o Touro de Wall Street",
+  "o Hulk",
 ];
 
 const insertY = [
-  "Parque Ibirapuera",
-  "Ponte do Morumbi",
-  "a Avenida Paulista"
+  "no Cristo Redentor",
+  "no Machu Picchu",
+  "na Grande Muralha da China",
 ];
 
 const insertZ = [
-  "spontaneously combusted",
-  "melted into a puddle on the sidewalk",
-  "turned into a slug and crawled away"
+  "água de coco",
+  "coca-cola",
+  "capirinha",
 ];
 
 randomize.addEventListener('click', result);
@@ -37,9 +36,9 @@ randomize.addEventListener('click', result);
     const yItem = randomValueFromArray(insertY);
     const zItem = randomValueFromArray(insertZ);
 
-    newStory = newStory.replaceAll(':insertx:', xItem);
-    newStory = newStory.replace(':inserty:', yItem);
-    newStory = newStory.replace(':insertz:', zItem);
+    newStory = newStory.replaceAll(':insertx:', `<strong style="color: orange;">${xItem}</strong>`);
+    newStory = newStory.replace(':inserty:', `<strong style="color: green;">${yItem}</strong>`);
+    newStory = newStory.replace(':insertz:', `<strong style="color: brown;">${zItem}</strong>`);
 
     if(customName.value !== '') {
       const name = customName.value;
@@ -49,11 +48,11 @@ randomize.addEventListener('click', result);
     if(document.getElementById("uk").checked) {
       const weightInPounds = 300;
       const weight = Math.round(weightInPounds / 14) + ' stone';
-      const temperature = Math.round((94 - 32) * (5 / 9)) + ' centigrade';
-      newStory = newStory.replace('300 pounds', weight);
+      const temperature = Math.round((94 - 32) * (5 / 9)) + ' centígrados';
+      newStory = newStory.replace('300 libras', weight);
       newStory = newStory.replace('94 fahrenheit', temperature);
     }
 
-    story.textContent = newStory;
+    story.innerHTML = newStory;
     story.style.visibility = 'visible';
   }
