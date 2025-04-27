@@ -11,15 +11,33 @@
     <h1>Menu</h1>
 
     <div class="menu">
+
       <div class="menu-item">
-          <h2>Change Balls Quantity</h2>
-          <input id="changeBallsQuantityInput" type="number">
-          <button id="changeBallsQuantityButton">OK</button>
+        <fieldset>
+          <legend>Quantidade</legend>
+            <input id="changeQuantityInput" type="number">
+            <button id="changeQuantityButton">OK</button>
+        </fieldset>
       </div>
+
       <div class="menu-item">
-        <h2>Change Balls Color</h2>
-          <input id="changeBallsColorInput" type="color">
+        <fieldset>
+          <legend>Cor</legend>
+          <input id="changeColorInput" type="color">
+        </fieldset>
       </div>
+
+      <div class="menu-item">
+        <fieldset>
+          <legend>Forma</legend>
+          <select name="form" id="form">
+            <option value="ball">Bola</option>
+            <option value="triangle">Triângulo</option>
+            <option value="square">Quadrado</option>
+          </select>
+        </fieldset>
+      </div>
+
     </div>
 
     <canvas></canvas>        

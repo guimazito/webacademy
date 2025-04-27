@@ -1,5 +1,6 @@
 html, body {
     margin: 0;
+    padding: 0;
 }
   
 html {
@@ -12,30 +13,31 @@ body {
     height: inherit;
     background-color: gray;
 }
-  
-/* h1 {
-    font-size: 2rem;
-    letter-spacing: -1px;
-    position: absolute;
-    margin: 0;
-    top: -4px;
-    right: 5px;
-  
-    color: transparent;
-    text-shadow: 0 0 4px white;
-} */
 
 .menu {
     display: flex;
     justify-content: center;
-    padding: 5px;
 }
 
 h1 {
     display: flex;
     justify-content: center;
+    margin: 0;
+    padding-top: 10px;
 }
 
 .menu-item {
     margin: 10px;
+}
+
+fieldset {
+    height: 40px;
+}
+
+#changeQuantityInput {
+    width: 50px;
+}
+
+#changeQuantityButton {
+    cursor: pointer;
 }

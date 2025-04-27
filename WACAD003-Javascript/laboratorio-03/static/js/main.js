@@ -1,22 +1,21 @@
 const canvas = document.querySelector("canvas");
 const ctx = canvas.getContext("2d");
-const changeQuatityInput = document.querySelector("#changeBallsQuantityInput");
-const changeQuatityButton = document.querySelector("#changeBallsQuantityButton");
+const changeQuatityInput = document.querySelector("#changeQuantityInput");
+const changeQuatityButton = document.querySelector("#changeQuantityButton");
+const changeForm = document.querySelector("#form");
 const width = (canvas.width = window.innerWidth);
 const height = (canvas.height = window.innerHeight);
 
-let balls = [];
-let squares = [];
-let changeColorInput = document.querySelector("#changeBallsColorInput");
+let objects = [];
+let changeColorInput = document.querySelector("#changeColorInput");
 
 changeQuatityInput.value = 25;
 initialColor = "#2b5bca";
 changeColorInput.value = initialColor;
-console.log('color_begin: ', changeColorInput.value);
+// console.log('color_begin: ', changeColorInput.value);
 
 // generate random number
 function random(min, max) {
-  console.log(Math.floor(Math.random() * (max - min + 1)) + min);
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
@@ -45,7 +44,7 @@ function randomColor(hexColor) {
 
 // creating balls
 function createBalls() {
-  while (balls.length < changeQuatityInput.value) {
+  while (objects.length < changeQuatityInput.value) {
     let size = random(10, 20);
     let ball = new Ball(
       random(0 + size, width - size),
@@ -55,151 +54,105 @@ function createBalls() {
       randomColor(changeColorInput.value),
       size,
     );
-    balls.push(ball);
+    objects.push(ball);
+  }
+}
+
+// creating triangles
+function createTriangles() {
+  while (objects.length < changeQuatityInput.value) {
+    let size = random(10, 50);
+    let x1 = random(0 + size, width - size);
+    let y1 = random(0 + size, height - size);
+
+    let x2 = x1 + size;
+    let y2 = y1;
+
+    let x3 = x1 + size / 2;
+    let y3 = y1 - Math.sqrt(size ** 2 - (size / 2) ** 2);
+
+    let triangle = new Triangle(
+      x1,
+      y1,
+      x2,
+      y2,
+      x3,
+      y3,
+      random(-7, 7),
+      random(-7, 7),
+      randomColor(changeColorInput.value),
+      size
+    );
+    objects.push(triangle);
   }
 }
 
 // creating squares
 function createSquares() {
-  while (squares.length < changeQuatityInput.value) {
-    let size = random(10, 20);
+  while (objects.length < changeQuatityInput.value) {
+    let size = random(10, 50);
+    let x1 = random(0 + size, width - size);
+    let y1 = random(0 + size, height - size);
+
+    let x2 = x1 + size;
+    let y2 = y1;
+    let x3 = x1;
+    let y3 = y1 + size;
+    let x4 = x2;
+    let y4 = y3;
+
     let square = new Square(
-      // random(0 + size, width - size),
-      // random(0 + size, height - size),
-      // random(0 + size, width - size),
-      // random(0 + size, height - size),
-      // random(0 + size, width - size),
-      // random(0 + size, height - size),
-      100,
-      100,
-      150,
-      50,
-      200,
-      100,
+      x1,
+      y1,
+      x2,
+      y2,
+      x3,
+      y3,
+      x4,
+      y4,
       random(-7, 7),
       random(-7, 7),
       randomColor(changeColorInput.value),
-      size,
+      size
     );
-    squares.push(square);
+    objects.push(square);
   }
 }
 
-// loop square game
-function loop2() {
-  ctx.fillStyle = "rgba(0, 0, 0, 0.25)";
-  ctx.fillRect(0, 0, width, height);
-
-  for (let i = 0; i < squares.length; i++) {
-    squares[i].draw();
-    squares[i].update();
-    // squares[i].collisionDetect();
+// creating objects
+function createObjects() {
+  switch (changeForm.value) {
+    case "ball":
+      createBalls();
+      break;
+    case "triangle":
+      createTriangles();
+      break;
+    case "square":
+      createSquares();
+      break;
+    default:
+      break;
   }
-
-  requestAnimationFrame(loop2);
 }
 
-// loop ball game
+// game loop
 function loop() {
   ctx.fillStyle = "rgba(0, 0, 0, 0.25)";
   ctx.fillRect(0, 0, width, height);
 
-  for (let i = 0; i < balls.length; i++) {
-    balls[i].draw();
-    balls[i].update();
-    balls[i].collisionDetect();
+  for (let i = 0; i < objects.length; i++) {
+    objects[i].draw();
+    objects[i].update();
+    objects[i].collisionDetect();
   }
 
   requestAnimationFrame(loop);
 }
 
-// reset balls quantity
-function resetBalls() {
-  balls = [];
-}
-
-// square constructor
-class Square {
-  constructor(x1, y1, x2, y2, x3, y3, velX, velY, color, size) {
-    this.x1 = x1;
-    this.y1 = y1;
-    this.x2 = x2;
-    this.y2 = y2;
-    this.x3 = x3;
-    this.y3 = y3;
-    this.velX = velX;
-    this.velY = velY;
-    this.color = color;
-    this.size = size;
-  }
-
-  draw() {
-    ctx.beginPath();
-    ctx.fillStyle = this.color;
-    ctx.moveTo(this.x1, this.y1);
-    ctx.lineTo(this.x2, this.y2);
-    ctx.lineTo(this.x3, this.y3);
-    ctx.closePath();
-    ctx.fill();
-  }
-
-  update() {
-    if (this.x1 + this.size >= width) {
-      this.velX = -(this.velX);
-    }
-
-    if (this.x1 - this.size <= 0) {
-      this.velX = -(this.velX);
-    }
-
-    if (this.y1 + this.size >= height) {
-      this.velY = -(this.velY);
-    }
-
-    if (this.y1 - this.size <= 0) {
-      this.velY = -(this.velY);
-    }
-
-    if (this.x2 + this.size >= width) {
-      this.velX = -(this.velX);
-    }
-
-    if (this.x2 - this.size <= 0) {
-      this.velX = -(this.velX);
-    }
-
-    if (this.y2 + this.size >= height) {
-      this.velY = -(this.velY);
-    }
-
-    if (this.y2 - this.size <= 0) {
-      this.velY = -(this.velY);
-    }
-
-    if (this.x3 + this.size >= width) {
-      this.velX = -(this.velX);
-    }
-
-    if (this.x3 - this.size <= 0) {
-      this.velX = -(this.velX);
-    }
-
-    if (this.y3 + this.size >= height) {
-      this.velY = -(this.velY);
-    }
-
-    if (this.y3 - this.size <= 0) {
-      this.velY = -(this.velY);
-    }
-
-    this.x1 += this.velX;
-    this.y1 += this.velY;
-    this.x2 += this.velX;
-    this.y2 += this.velY;
-    this.x3 += this.velX;
-    this.y3 += this.velY;
-  }
-    
+// reset objects quantity
+function resetObjects() {
+  objects = []
 }
 
 // ball constructor
@@ -242,35 +195,155 @@ class Ball {
   }
   
   collisionDetect() {
-    // console.log('color_colision: ', changeColorInput.value);
-    for (let j = 0; j < balls.length; j++) {
-      if (!(this === balls[j])) {
-        const dx = this.x - balls[j].x;
-        const dy = this.y - balls[j].y;
+    for (let j = 0; j < objects.length; j++) {
+      if (!(this === objects[j])) {
+        const dx = this.x - objects[j].x;
+        const dy = this.y - objects[j].y;
         const distance = Math.sqrt(dx * dx + dy * dy);
         
-        if (distance < this.size + balls[j].size) {
-          balls[j].color = this.color = randomColor(changeColorInput.value);
+        if (distance < this.size + objects[j].size) {
+          objects[j].color = this.color = randomColor(changeColorInput.value);
         }
       }
     }
   };
 }
 
-// createBalls();
-// loop();
+// triangle constructor
+class Triangle {
+  constructor(x1, y1, x2, y2, x3, y3, velX, velY, color, size) {
+    this.x1 = x1;
+    this.y1 = y1;
+    this.x2 = x2;
+    this.y2 = y2;
+    this.x3 = x3;
+    this.y3 = y3;
+    this.velX = velX;
+    this.velY = velY;
+    this.color = color;
+    this.size = size;
+  }
 
-createSquares();
-loop2();
+  draw() {
+    ctx.beginPath();
+    ctx.fillStyle = this.color;
+    ctx.moveTo(this.x1, this.y1);
+    ctx.lineTo(this.x2, this.y2);
+    ctx.lineTo(this.x3, this.y3);
+    ctx.closePath();
+    ctx.fill();
+  }
+
+  update() {
+    this.x1 += this.velX;
+    this.y1 += this.velY;
+    this.x2 += this.velX;
+    this.y2 += this.velY;
+    this.x3 += this.velX;
+    this.y3 += this.velY;
+
+    // checking for collision with canvas edges
+    if (this.x1 + this.size >= width || this.x1 - this.size <= 0) {
+      this.velX = -this.velX;
+    }
+    if (this.y1 + this.size >= height || this.y1 - this.size <= 0) {
+      this.velY = -this.velY;
+    }
+  }
+
+  collisionDetect() {
+    for (let j = 0; j < objects.length; j++) {
+      if (!(this === objects[j])) {
+        const dx1 = this.x1 - objects[j].x1;
+        const dy1 = this.y1 - objects[j].y1;
+        const distance = Math.sqrt(dx1 * dx1 + dy1 * dy1);
+
+        if (distance < this.size + objects[j].size) {
+          objects[j].color = this.color = randomColor(changeColorInput.value);
+        }
+      }
+    }
+  }
+}
+
+// square constructor
+class Square {
+  constructor(x1, y1, x2, y2, x3, y3, x4, y4, velX, velY, color, size) {
+    this.x1 = x1;
+    this.y1 = y1;
+    this.x2 = x2;
+    this.y2 = y2;
+    this.x3 = x3;
+    this.y3 = y3;
+    this.x4 = x4;
+    this.y4 = y4;
+    this.velX = velX;
+    this.velY = velY;
+    this.color = color;
+    this.size = size;
+  }
+
+  draw() {
+    ctx.beginPath();
+    ctx.fillStyle = this.color;
+    ctx.moveTo(this.x1, this.y1);
+    ctx.lineTo(this.x2, this.y2);
+    ctx.lineTo(this.x4, this.y4);
+    ctx.lineTo(this.x3, this.y3);
+    ctx.closePath();
+    ctx.fill();
+  }
+
+  update() {
+    this.x1 += this.velX;
+    this.y1 += this.velY;
+    this.x2 += this.velX;
+    this.y2 += this.velY;
+    this.x3 += this.velX;
+    this.y3 += this.velY;
+    this.x4 += this.velX;
+    this.y4 += this.velY;
+    
+    // checking for collision with canvas edges
+    if (this.x1 <= 0 || this.x2 >= width) this.velX = -this.velX;
+    if (this.y1 <= 0 || this.y3 >= height) this.velY = -this.velY;
+  }
+
+  collisionDetect() {
+    for (let j = 0; j < objects.length; j++) {
+      if (!(this === objects[j])) {
+        const dx = this.x1 - objects[j].x1;
+        const dy = this.y1 - objects[j].y1;
+        const distance = Math.sqrt(dx * dx + dy * dy);
+
+        if (distance < this.size + objects[j].size) {
+          objects[j].color = this.color = randomColor(changeColorInput.value);
+        }
+      }
+    }
+  }
+}
+
+createObjects();
+loop();
 
 changeColorInput.addEventListener("input", () => {
-  console.log('color_changeColorInput: ', changeColorInput.value);
-  resetBalls();
-  createBalls();
+  // console.log('color_changeColorInput: ', changeColorInput.value);
+  // console.log('form_changeColorInput: ', changeForm.value);
+  resetObjects();
+  createObjects();
 });
 
 changeQuatityButton.addEventListener("click", () => {
-  console.log('color_changeQuatityButton: ', changeColorInput.value);
-  resetBalls();
-  createBalls();  
+  // console.log('color_changeQuatityButton: ', changeColorInput.value);
+  // console.log('form_changeQuantityButton: ', changeForm.value);
+  resetObjects();
+  createObjects();
+});
+
+changeForm.addEventListener("click", () => {
+  // console.log('color_changeForm: ', changeColorInput.value);
+  // console.log('form_changeForm: ', changeForm.value);
+  resetObjects();
+  createObjects();
 });
