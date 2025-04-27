@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width">
-    <title>Bouncing balls</title>
+    <title>Bouncing Objects</title>
     <link rel="stylesheet" href="static/css/style.css">
   </head>
 
@@ -14,34 +14,33 @@
 
       <div class="menu-item">
         <fieldset>
-          <legend>Quantidade</legend>
-            <input id="changeQuantityInput" type="number">
-            <button id="changeQuantityButton">OK</button>
+          <legend>Quantity</legend>
+            <input id="quantity" name="quantity" type="range">
         </fieldset>
       </div>
 
       <div class="menu-item">
         <fieldset>
-          <legend>Cor</legend>
-          <input id="changeColorInput" type="color">
+          <legend>Color</legend>
+          <input id="color" type="color">
         </fieldset>
       </div>
 
       <div class="menu-item">
         <fieldset>
-          <legend>Forma</legend>
-          <select name="form" id="form">
-            <option value="ball">Bola</option>
-            <option value="triangle">Triângulo</option>
-            <option value="square">Quadrado</option>
+          <legend>Form</legend>
+          <select id="form" name="form">
+            <option value="ball">Ball</option>
+            <option value="triangle">Triangle</option>
+            <option value="square">Square</option>
           </select>
         </fieldset>
       </div>
 
     </div>
 
-    <canvas></canvas>        
+    <canvas></canvas>
+
     <script src="static/js/main.js"></script>
   </body>
-
 </html>

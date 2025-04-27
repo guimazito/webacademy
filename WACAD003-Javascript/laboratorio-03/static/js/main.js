@@ -1,18 +1,17 @@
 const canvas = document.querySelector("canvas");
 const ctx = canvas.getContext("2d");
-const changeQuatityInput = document.querySelector("#changeQuantityInput");
-const changeQuatityButton = document.querySelector("#changeQuantityButton");
+const changeQuantity = document.querySelector("#quantity");
 const changeForm = document.querySelector("#form");
 const width = (canvas.width = window.innerWidth);
 const height = (canvas.height = window.innerHeight);
 
 let objects = [];
-let changeColorInput = document.querySelector("#changeColorInput");
+let changeColor = document.querySelector("#color");
 
-changeQuatityInput.value = 25;
+changeQuantity.value = 25;
 initialColor = "#2b5bca";
-changeColorInput.value = initialColor;
-// console.log('color_begin: ', changeColorInput.value);
+changeColor.value = initialColor;
+// console.log('color_begin: ', changeColor.value);
 
 // generate random number
 function random(min, max) {
@@ -44,14 +43,14 @@ function randomColor(hexColor) {
 
 // creating balls
 function createBalls() {
-  while (objects.length < changeQuatityInput.value) {
+  while (objects.length < changeQuantity.value) {
     let size = random(10, 20);
     let ball = new Ball(
       random(0 + size, width - size),
       random(0 + size, height - size),
       random(-7, 7),
       random(-7, 7),
-      randomColor(changeColorInput.value),
+      randomColor(changeColor.value),
       size,
     );
     objects.push(ball);
@@ -60,7 +59,7 @@ function createBalls() {
 
 // creating triangles
 function createTriangles() {
-  while (objects.length < changeQuatityInput.value) {
+  while (objects.length < changeQuantity.value) {
     let size = random(10, 50);
     let x1 = random(0 + size, width - size);
     let y1 = random(0 + size, height - size);
@@ -80,7 +79,7 @@ function createTriangles() {
       y3,
       random(-7, 7),
       random(-7, 7),
-      randomColor(changeColorInput.value),
+      randomColor(changeColor.value),
       size
     );
     objects.push(triangle);
@@ -89,7 +88,7 @@ function createTriangles() {
 
 // creating squares
 function createSquares() {
-  while (objects.length < changeQuatityInput.value) {
+  while (objects.length < changeQuantity.value) {
     let size = random(10, 50);
     let x1 = random(0 + size, width - size);
     let y1 = random(0 + size, height - size);
@@ -112,7 +111,7 @@ function createSquares() {
       y4,
       random(-7, 7),
       random(-7, 7),
-      randomColor(changeColorInput.value),
+      randomColor(changeColor.value),
       size
     );
     objects.push(square);
@@ -202,7 +201,7 @@ class Ball {
         const distance = Math.sqrt(dx * dx + dy * dy);
         
         if (distance < this.size + objects[j].size) {
-          objects[j].color = this.color = randomColor(changeColorInput.value);
+          objects[j].color = this.color = randomColor(changeColor.value);
         }
       }
     }
@@ -259,7 +258,7 @@ class Triangle {
         const distance = Math.sqrt(dx1 * dx1 + dy1 * dy1);
 
         if (distance < this.size + objects[j].size) {
-          objects[j].color = this.color = randomColor(changeColorInput.value);
+          objects[j].color = this.color = randomColor(changeColor.value);
         }
       }
     }
@@ -317,7 +316,7 @@ class Square {
         const distance = Math.sqrt(dx * dx + dy * dy);
 
         if (distance < this.size + objects[j].size) {
-          objects[j].color = this.color = randomColor(changeColorInput.value);
+          objects[j].color = this.color = randomColor(changeColor.value);
         }
       }
     }
@@ -327,22 +326,22 @@ class Square {
 createObjects();
 loop();
 
-changeColorInput.addEventListener("input", () => {
-  // console.log('color_changeColorInput: ', changeColorInput.value);
+changeColor.addEventListener("input", () => {
+  // console.log('color_changeColorInput: ', changeColor.value);
   // console.log('form_changeColorInput: ', changeForm.value);
   resetObjects();
   createObjects();
 });
 
-changeQuatityButton.addEventListener("click", () => {
-  // console.log('color_changeQuatityButton: ', changeColorInput.value);
-  // console.log('form_changeQuantityButton: ', changeForm.value);
+changeQuantity.addEventListener("input", () => {
+  // console.log('color_changeQuatity: ', changeColor.value);
+  // console.log('form_changeQuantity: ', changeForm.value);
   resetObjects();
   createObjects();
 });
 
-changeForm.addEventListener("click", () => {
-  // console.log('color_changeForm: ', changeColorInput.value);
+changeForm.addEventListener("input", () => {
+  // console.log('color_changeForm: ', changeColor.value);
   // console.log('form_changeForm: ', changeForm.value);
   resetObjects();
   createObjects();

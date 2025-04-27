@@ -27,17 +27,13 @@ h1 {
 }
 
 .menu-item {
-    margin: 10px;
+    margin-bottom: 10px;
 }
 
 fieldset {
     height: 40px;
 }
 
-#changeQuantityInput {
-    width: 50px;
-}
-
-#changeQuantityButton {
-    cursor: pointer;
+#quantity {
+    width: 130px;
 }
