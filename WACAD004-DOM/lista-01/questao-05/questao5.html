@@ -1,0 +1,54 @@
+<body>
+    <h1>Listas</h1>
+  
+    <p id="lista-titulo" name="lista">Minhas listas:</p>
+  
+    <ul class="lista-itens-1">
+      <li id="one" class="hot">item a</li>
+      <li id="two" class="hot">item b</li>
+      <li id="three" class="hot">item c</li>
+      <li id="four">item d</li>
+    </ul>
+  
+    <ul class="lista-itens-2">
+      <li id="one" class="hot">item a</li>
+      <li id="two" class="hot">item b</li>
+      <li id="three" class="hot">item c</li>
+      <li id="four">item d</li>
+    </ul>
+  
+    <ul class="lista-itens-3">
+      <li id="one" class="hot">item a</li>
+      <li id="two" class="hot">item b</li>
+      <li id="three" class="hot">item c</li>
+      <li id="four">item d</li>
+    </ul>
+  
+    <ul class="lista-itens-4">
+      <li id="one" class="hot">item a</li>
+      <li id="two" class="hot">item b</li>
+      <li id="three" class="hot">item c</li>
+      <li id="four">item d</li>
+    </ul>
+</body>
+
+<script>
+    // REMOVER NO FINAL
+    document.body.style.backgroundColor = "gray";
+
+    // Letra A
+    let items = document.querySelectorAll('.lista-itens-2 li');
+    items.forEach(item => {
+        item.style.backgroundColor = "purple";
+    });
+
+    // Letra B
+    let items2 = document.querySelectorAll('.lista-itens-2 .hot');
+    items2.forEach(item => {
+        item.classList.remove('hot');
+        item.classList.add('cold');
+    });
+    
+    
+
+</script>
