@@ -18,3 +18,37 @@
     <button>Remover último item</button>
   </div>
 </body>
+
+<script>
+  function addNewItem() {
+    const input = document.querySelector('input');
+    const newItem = input.value;
+    // console.log(newItem);
+    if (newItem.trim() !== '') {
+      const ul = document.getElementById('lista-itens');
+      const li = document.createElement('li');
+      li.textContent = newItem;
+      ul.appendChild(li);
+      input.value = '';
+    } else {
+      alert('Digite um item para adicionar à lista.');
+      input.value = '';
+    }
+  }
+
+  function removeItem() {
+    const ul = document.getElementById('lista-itens');
+    console.log(ul.childElementCount);
+    if (ul.childElementCount > 1) {
+      ul.removeChild(ul.lastElementChild);
+    } else {
+      alert('Não é possível remover o último item!');
+    }
+  }
+
+  let addButton = document.querySelectorAll('button')[0];
+  addButton.addEventListener('click', addNewItem);
+
+  let removeButton = document.querySelectorAll('button')[1];
+  removeButton.addEventListener('click', removeItem);  
+</script>
