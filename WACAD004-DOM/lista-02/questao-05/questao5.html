@@ -1,3 +1,17 @@
+<style>
+  button {
+    cursor: pointer;
+  }
+
+  .add-btn:hover {
+    background-color: lightblue;
+  }
+
+  .remove-btn:hover {
+    background-color: lightcoral;
+  }
+</style>
+
 <body>
   <h1>To-do</h1>
 
@@ -7,7 +21,7 @@
 
   <div>
     <input placeholder="Digite aqui o item" />
-    <button>Adicionar</button>
+    <button class="add-btn">Adicionar</button>
   </div>
 
   <ul id="lista-itens">
@@ -15,15 +29,14 @@
   </ul>
 
   <div>
-    <button>Remover último item</button>
+    <button class="remove-btn">Remover último item</button>
   </div>
 </body>
 
 <script>
-  function addNewItem() {
+  function addItem() {
     const input = document.querySelector('input');
     const newItem = input.value;
-    // console.log(newItem);
     if (newItem.trim() !== '') {
       const ul = document.getElementById('lista-itens');
       const li = document.createElement('li');
@@ -31,23 +44,22 @@
       ul.appendChild(li);
       input.value = '';
     } else {
-      alert('Digite um item para adicionar à lista.');
+      alert('Não é permitido adicionar itens vazios!');
       input.value = '';
     }
   }
 
   function removeItem() {
     const ul = document.getElementById('lista-itens');
-    console.log(ul.childElementCount);
     if (ul.childElementCount > 1) {
       ul.removeChild(ul.lastElementChild);
     } else {
-      alert('Não é possível remover o último item!');
+      alert('A lista não pode ficar vazia!');
     }
   }
 
   let addButton = document.querySelectorAll('button')[0];
-  addButton.addEventListener('click', addNewItem);
+  addButton.addEventListener('click', addItem);
 
   let removeButton = document.querySelectorAll('button')[1];
   removeButton.addEventListener('click', removeItem);  
