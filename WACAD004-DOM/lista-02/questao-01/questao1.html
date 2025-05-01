@@ -17,7 +17,30 @@
     // Item i
     let lista1 = document.getElementById("lista-itens-1");
     let firstChild = lista1.firstElementChild;
-    let lastChild = lista1.lastChild;
+    let lastChild = lista1.lastElementChild;
+    console.log('Item i:');
     console.log('Primeiro filho:', firstChild);
     console.log('Último filho:', lastChild);
+
+    // Item ii
+    let lista2 = document.getElementById("lista-itens-1");
+    let parent = lista2.parentElement;
+    console.log('Item ii:');
+    console.log('Elemento pai:', parent);
+
+    // Item iii
+    let lista3 = document.getElementById("lista-itens-1");
+    let children = lista3.children;
+    console.log('Item iii:');
+    for (let i = 0; i < children.length; i++) {
+        console.log(`Filho ${i + 1}:`, children[i]);
+    }
+
+    // Item iv
+    let lista4 = document.getElementById("two");
+    let previousSibling = lista4.previousElementSibling;
+    let nextSibling = lista4.nextElementSibling;
+    console.log('Item iv:');
+    console.log('Irmão anterior:', previousSibling);
+    console.log('Próximo irmão:', nextSibling);
 </script>
