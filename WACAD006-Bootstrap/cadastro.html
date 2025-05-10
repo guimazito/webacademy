@@ -7,7 +7,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-SgOJa3DmI69IUzQ2PVdRZhwQ+dy64/BUtbMJw1MZ8t5HZApcHrRKUc4W0kG879m7" crossorigin="anonymous">
   </head>
   <body>
-    <!-- login -->
+    <!-- cadastro -->
     <div class="container-fluid vh-100">
       <div class="row h-100" >
         <div class="col-md-4 bg-secondary bg-opacity-25 text-center d-flex align-items-center justify-content-center">
@@ -20,22 +20,20 @@
             <label for="inputEmail" class="form-label">Email</label>
             <input type="email" class="form-control mb-3" id="inputEmail" required>
             <label for="inputEmailConfirmation" class="form-label">Confirmar Email</label>
-            <input type="emailConfirmation" class="form-control mb-3" id="inputEmailConfirmation" required>
+            <input type="email" class="form-control mb-3" id="inputEmailConfirmation" required>
             <label for="inputPassword" class="form-label">Senha</label>
             <input type="password" class="form-control mb-3" id="inputPassword" required>
             <button type="submit" class="btn btn-success w-100 mb-3">Confirmar Cadastro</button>
             <div class="d-flex justify-content-center">
-              <a href="login.html" class="alert-link text-center">já possuo cadastro</a>
+              <a href="login.html" class="alert-link text-center text-primary">já possuo cadastro</a>
             </div>
           </form>
-        </div>
-        
-       </div>
-    
+        </div>        
+       </div>    
     </div>
 
-
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js" integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq" crossorigin="anonymous"></script>
+  
   <script>
     function entrar(event) {
       event.preventDefault();
