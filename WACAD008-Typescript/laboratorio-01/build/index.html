@@ -41,11 +41,11 @@
           </div>
           <form>
             <div class="modal-body text-start">
-              <label for="newProduct" class="form-label">Produto</label>
-              <input type="text" class="form-control mb-3" id="newProduct" required>
+              <label for="newTitle" class="form-label">Lembrete</label>
+              <input type="text" class="form-control mb-3" id="newTitle" required>
             </div>
             <div class="modal-footer border-0">
-              <button type="submit" class="btn btn-success w-100">Confirmar Cadastro</button>
+              <button type="submit" class="btn btn-success w-100">Confirmar Edição</button>
             </div>
           </form>
         </div>
@@ -69,7 +69,6 @@
             if (response.ok) {
                 const data = await response.json();
                 reminderInput.value = "";
-                // alert("Lembrete adicionado com sucesso!")
             } else {
                 alert("Erro ao adicionar lembrete!");
             }
@@ -101,8 +100,29 @@
                     });
                     fetchReminders();
                 });
-            });
-        }
+
+                tr.querySelector(`#edit-${reminder._id}`).addEventListener("click", () => {
+                    const modal = document.getElementById("modalEditReminder");
+                    const newTitleInput = modal.querySelector("#newTitle");
+                    newTitleInput.value = reminder.title;
+
+                    modal.querySelector("form").onsubmit = async (e) => {
+                        e.preventDefault();
+                        const newTitle = newTitleInput.value;
+                        await fetch(`http://localhost:3000/api/reminder/${reminder._id}`, {
+                            method: "PUT",
+                            headers: {
+                                "Content-Type": "application/json"
+                            },
+                            body: JSON.stringify({ title: newTitle })
+                        });
+                        fetchReminders();
+                        modal.querySelector(".btn-close").click();
+                    };
+                });
+            });       
+        };
+        
         fetchReminders();
     </script>
 
