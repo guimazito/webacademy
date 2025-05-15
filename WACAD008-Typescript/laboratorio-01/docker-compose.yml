@@ -1,0 +1,32 @@
+services:
+
+  mongodbb:
+    image: mongo:latest
+    container_name: mongodbb
+    restart: unless-stopped
+    # environment:
+    #   MONGO_INITDB_ROOT_USERNAME: yyyyyy
+    #   MONGO_INITDB_ROOT_PASSWORD: xxxxxx
+    ports:
+      - 27017:27017
+    volumes:
+      - ./mongo_data:/data/db
+
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: backend
+    restart: unless-stopped
+    ports:
+      - 3000:3000
+    environment:
+      - DB_BASE_URL=mongodb://mongodbb:27017
+    depends_on:
+      - mongodbb
+
+  
+# Open database in Docker
+# docker exec -it mongodb bash
+# mongosh (por enquanto sem senha ainda)
+# mongosh --username yyyyyy --password xxxxxx
