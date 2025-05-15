@@ -6,18 +6,13 @@
     <title>Reminder App</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-SgOJa3DmI69IUzQ2PVdRZhwQ+dy64/BUtbMJw1MZ8t5HZApcHrRKUc4W0kG879m7" crossorigin="anonymous">
 </head>
-<body style="background-color: black; color: white">
-    <h1>Reminders</h1>
-    <input type="text" id="reminderInput" placeholder="Enter a reminder">
-    <button id="addReminderButton">Add Reminder</button>
+<body class="bg-dark text-light">
     <div class="container text-center">
-      <div class="d-flex align-items-start mb-3 mt-5">
-        <h5>Gerenciar Lembretes:</h5>
-      </div>
+      <h1 class="d-flex justify-content-start mt-5">Meus Lembretes</h1>
       <div class="d-flex justify-content-end align-items-end mb-3 mt-5">
-        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalEditReminderrr">Novo Lembrete</button>
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalNewReminder">Novo Lembrete</button>
       </div>
-      <table class="table">
+      <table class="table border table-dark table-striped">
         <thead>
           <tr>
             <th scope="col">id</th>
@@ -31,21 +26,41 @@
       </table>
     </div>
 
+    <!-- modal new reminder -->
+    <div class="modal" id="modalNewReminder" tabindex="-1">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content bg-dark text-light">
+          <div class="modal-header">
+            <h5 class="modal-title">Adicionar Lembrete</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <form>
+            <div class="modal-body text-start">
+              <input type="text" class="form-control" id="newTitle" placeholder="Insira o título" required>
+            </div>
+            <div class="modal-footer border-0">
+              <button type="submit" class="btn btn-success w-100" id="addReminderButton">Confirmar</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    <!-- modal new reminder -->
+
     <!-- modal edit reminder -->
     <div class="modal" id="modalEditReminder" tabindex="-1">
       <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
+        <div class="modal-content bg-dark text-light">
           <div class="modal-header">
             <h5 class="modal-title">Editar Lembrete</h5>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <form>
             <div class="modal-body text-start">
-              <label for="newTitle" class="form-label">Lembrete</label>
-              <input type="text" class="form-control mb-3" id="newTitle" required>
+              <input type="text" class="form-control" id="editTitle" required>
             </div>
             <div class="modal-footer border-0">
-              <button type="submit" class="btn btn-success w-100">Confirmar Edição</button>
+              <button type="submit" class="btn btn-success w-100">Confirmar</button>
             </div>
           </form>
         </div>
@@ -55,8 +70,8 @@
 
     <script>
         document.getElementById("addReminderButton").addEventListener("click", async () => {
-            const title = document.getElementById("reminderInput").value;
-            if (!title) return alert("Insira um lembrete!");
+            const title = document.getElementById("newTitle").value;
+            if (!title) return alert("O título não pode estar vazio!");
             
             const response = await fetch("http://localhost:3000/api/reminder", {
                 method: "POST",
@@ -68,7 +83,7 @@
 
             if (response.ok) {
                 const data = await response.json();
-                reminderInput.value = "";
+                newTitle.value = "";
             } else {
                 alert("Erro ao adicionar lembrete!");
             }
@@ -88,8 +103,8 @@
                     <td>${reminder.title}</td>
                     <td>${new Date(reminder.createdAt).toLocaleString()}</td>
                     <td>
-                        <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#modalEditReminder" id=edit-${reminder._id}>Editar</button>
-                        <button type="button" class="btn btn-danger" id=delete-${reminder._id}>Excluir</button>
+                      <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#modalEditReminder" id=edit-${reminder._id}>Editar</button>
+                      <button type="button" class="btn btn-danger" id=delete-${reminder._id}>Excluir</button>
                     </td>
                 `;
                 tbody.appendChild(tr);
@@ -103,18 +118,18 @@
 
                 tr.querySelector(`#edit-${reminder._id}`).addEventListener("click", () => {
                     const modal = document.getElementById("modalEditReminder");
-                    const newTitleInput = modal.querySelector("#newTitle");
-                    newTitleInput.value = reminder.title;
+                    const editTitleInput = modal.querySelector("#editTitle");
+                    editTitleInput.value = reminder.title;
 
                     modal.querySelector("form").onsubmit = async (e) => {
                         e.preventDefault();
-                        const newTitle = newTitleInput.value;
+                        const editTitle = editTitleInput.value;
                         await fetch(`http://localhost:3000/api/reminder/${reminder._id}`, {
                             method: "PUT",
                             headers: {
                                 "Content-Type": "application/json"
                             },
-                            body: JSON.stringify({ title: newTitle })
+                            body: JSON.stringify({ title: editTitle })
                         });
                         fetchReminders();
                         modal.querySelector(".btn-close").click();
