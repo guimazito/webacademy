@@ -77,4 +77,5 @@ app.listen(PORT, () => {
     compilar o projeto: npx tsc
     executar o projeto: node build/js/index.js
     agora: npm start
+    docker compose up --build
 */
