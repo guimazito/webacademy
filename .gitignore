@@ -190,3 +190,6 @@ yarn-error.log
 
 # Mp4 files
 *.mp4
+
+# Database files
+mongo_data
