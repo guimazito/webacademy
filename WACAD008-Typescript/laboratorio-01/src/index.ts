@@ -1,5 +1,5 @@
 import cors from "cors"
-import { connect, model, Schema } from 'mongoose';
+import { connect, model, Schema } from "mongoose";
 import express, { Request, Response } from "express";
 
 interface Reminder {
@@ -7,10 +7,8 @@ interface Reminder {
     createdAt: Date;
 }
 
-const app = express();
 const PORT = 3000;
-
-const reminders: Reminder[] = [];
+const app = express();
 
 app.use(cors());
 app.use(express.json());
@@ -29,45 +27,38 @@ const reminderSchema = new Schema<Reminder>({
 
 const ReminderModel = model<Reminder>('Reminder', reminderSchema);
 
+
 app.get("/api/reminder", async (req: Request, res: Response) => {
     const reminders = await ReminderModel.find();
     res.status(200).json(reminders);
 });
 
+
 app.post("/api/reminder", async (req: Request, res: Response): Promise<void> => {
     const { title } = req.body;
-    if (!title) {
-        res.status(400).json({ error: "Título é obrigatório" });
-        return;
-    }
+    if (!title) res.status(400).json({ error: "Título é obrigatório" });
     const reminder = await ReminderModel.create({ title, createdAt: new Date() });
     res.status(201).json(reminder);
 });
 
+
 app.put("/api/reminder/:id", async (req: Request, res: Response): Promise<void> => {
     const { id } = req.params;
     const { title } = req.body;
-    if (!title) {
-        res.status(400).json({ error: "Título é obrigatório" });
-        return;
-    }
-    const reminder = await ReminderModel.findByIdAndUpdate(id, { title }, { new: true });
-    if (!reminder) {
-        res.status(404).json({ error: "Lembrete não encontrado" });
-        return;
-    }
+    if (!title) res.status(400).json({ error: "Título é obrigatório" });
+    const reminder = await ReminderModel.findByIdAndUpdate(id, { title, createdAt: new Date() }, { new: true });
+    if (!reminder) res.status(404).json({ error: "Lembrete não encontrado" });
     res.status(200).json(reminder);
 });
+
 
 app.delete("/api/reminder/:id", async (req: Request, res: Response): Promise<void> => {
     const { id } = req.params;
     const reminder = await ReminderModel.findByIdAndDelete(id);
-    if (!reminder) {
-        res.status(404).json({ error: "Lembrete não encontrado" });
-        return;
-    }
+    if (!reminder) res.status(404).json({ error: "Lembrete não encontrado" });
     res.status(200).json({ message: "Lembrete excluído com sucesso" });
 });
+
 
 app.listen(PORT, () => {
     console.log(`Servidor rodando em http://localhost:${PORT}`);
