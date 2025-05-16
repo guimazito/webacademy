@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Reminder App</title>
+    <title>Lembretes App</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-SgOJa3DmI69IUzQ2PVdRZhwQ+dy64/BUtbMJw1MZ8t5HZApcHrRKUc4W0kG879m7" crossorigin="anonymous">
 </head>
 <body class="bg-dark text-light">
@@ -17,7 +17,8 @@
           <tr>
             <th scope="col">id</th>
             <th scope="col">Lembrete</th>
-            <th scope="col">Data</th>
+            <th scope="col">Data e Hora Criação</th>
+            <th scope="col">Data Limite</th>
             <th scope="col">Ações</th>
           </tr>
         </thead>
@@ -36,7 +37,10 @@
           </div>
           <form>
             <div class="modal-body text-start">
-              <input type="text" class="form-control" id="newTitle" placeholder="Insira o título" required>
+              <label for="newTitle" class="form-label">Título</label>
+              <input type="text" class="form-control mb-2" id="newTitle" placeholder="Insira o título" required>
+              <label for="newFinishUntil" class="form-label">Data Limite</label>
+              <input type="date" class="form-control" id="newFinishUntil" placeholder="Insira a data limite" required>
             </div>
             <div class="modal-footer border-0">
               <button type="submit" class="btn btn-success w-100" id="addReminderButton">Confirmar</button>
@@ -71,6 +75,7 @@
     <script>
         document.getElementById("addReminderButton").addEventListener("click", async () => {
             const title = document.getElementById("newTitle").value;
+            const finishUntil = document.getElementById("newFinishUntil").value;
             if (!title) return alert("O título não pode estar vazio!");
             
             const response = await fetch("http://localhost:3000/api/reminder", {
@@ -78,12 +83,13 @@
                 headers: {
                     "Content-Type": "application/json"
                 },
-                body: JSON.stringify({ title })
+                body: JSON.stringify({ title, finishUntil })
             });
 
             if (response.ok) {
                 const data = await response.json();
                 newTitle.value = "";
+                newFinishUntil.value = "";
             } else {
                 alert("Erro ao adicionar lembrete!");
             }
@@ -102,6 +108,7 @@
                     <th scope="row">${index + 1}</th>
                     <td>${reminder.title}</td>
                     <td>${new Date(reminder.createdAt).toLocaleString()}</td>
+                    <td>${reminder.finishUntil.slice(0, 10).split('-').reverse().join('/')}</td>
                     <td>
                       <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#modalEditReminder" id=edit-${reminder._id}>Editar</button>
                       <button type="button" class="btn btn-danger" id=delete-${reminder._id}>Excluir</button>
