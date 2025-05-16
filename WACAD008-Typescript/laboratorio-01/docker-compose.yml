@@ -25,6 +25,15 @@ services:
     depends_on:
       - mongodbb
 
+  frontend:
+    image: nginx:alpine
+    container_name: frontend
+    volumes:
+      - ./build:/usr/share/nginx/html:ro
+    ports:
+      - 8080:80
+    depends_on:
+      - backend
   
 # Open database in Docker
 # docker exec -it mongodb bash
