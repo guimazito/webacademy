@@ -5,6 +5,8 @@ import express, { Request, Response } from "express";
 interface Reminder {
     title: string;
     createdAt: Date;
+    finishUntil: Date;
+    description: string;
 }
 
 const PORT = 3000;
@@ -23,6 +25,8 @@ connect(`${DB_BASE_URL}/reminderdb`, {
 const reminderSchema = new Schema<Reminder>({
     title: { type: String, required: true },
     createdAt: { type: Date, default: Date.now },
+    finishUntil: { type: Date, required: true },
+    description: { type: String, required: false },
 }, {versionKey: false});
 
 const ReminderModel = model<Reminder>('Reminder', reminderSchema);
@@ -30,14 +34,21 @@ const ReminderModel = model<Reminder>('Reminder', reminderSchema);
 
 app.get("/api/reminder", async (req: Request, res: Response) => {
     const reminders = await ReminderModel.find();
+    console.log(reminders);
     res.status(200).json(reminders);
 });
 
 
 app.post("/api/reminder", async (req: Request, res: Response): Promise<void> => {
-    const { title } = req.body;
+    const { title, finishUntil, description } = req.body;
     if (!title) res.status(400).json({ error: "Título é obrigatório" });
-    const reminder = await ReminderModel.create({ title, createdAt: new Date() });
+    const reminder = await ReminderModel.create({
+        title,
+        createdAt: new Date(),
+        finishUntil: new Date(finishUntil),
+        description: null
+    });
+    if (!reminder) res.status(500).json({ error: "Erro ao criar lembrete" });
     res.status(201).json(reminder);
 });
 
