@@ -1,16 +1,38 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lembretes App</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-SgOJa3DmI69IUzQ2PVdRZhwQ+dy64/BUtbMJw1MZ8t5HZApcHrRKUc4W0kG879m7" crossorigin="anonymous">
-</head>
-<body class="bg-dark text-light">
+  <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Lembretes App</title>
+      <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-SgOJa3DmI69IUzQ2PVdRZhwQ+dy64/BUtbMJw1MZ8t5HZApcHrRKUc4W0kG879m7" crossorigin="anonymous">
+  </head>
+  <body class="container-100 bg-dark text-light">
+    <!-- navbar -->
+    <nav class="navbar navbar-expand-lg bg-body-tertiary mb-2">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="index.html">Escola XPTO</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="index.html">Alunos</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="class.html">Classes</a>
+            </li>
+          </ul>
+          <a id="exit" href="index.html" class="btn btn-secondary ms-auto">Sair</a>
+        </div>
+      </div>
+    </nav>
+    <!-- navbar -->
+
     <div class="container text-center">
       <h1 class="d-flex justify-content-start mt-5">Meus Alunos</h1>
       <div class="d-flex justify-content-end align-items-end mb-3 mt-5">
-        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalNewStudent">Novo Aluno</button>
+        <button id="buttonNewStudent" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalNewStudent">Novo Aluno</button>
       </div>
       <table class="table border table-dark table-striped">
         <thead>
@@ -47,6 +69,15 @@
               <input type="number" class="form-control mb-2" id="newHeight" placeholder="Insira a altura" step="0.01" required>
               <label for="newWeight" class="form-label">Peso</label>
               <input type="number" class="form-control mb-2" id="newWeight" placeholder="Insira o peso" step="0.01" required>
+              
+              <label for="newClass" class="form-label">Classe</label>
+              <select class="form-select" id="newClass" required>
+                <option selected>Open this select menu</option>
+                <option value="1">One</option>
+                <option value="2">Two</option>
+                <option value="3">Three</option>
+              </select>
+
             </div>
             <div class="modal-footer border-0">
               <button type="submit" class="btn btn-success w-100" id="addStudentButton">Confirmar</button>
@@ -57,7 +88,7 @@
     </div>
     <!-- modal new student -->
 
-    <!-- modal edit reminder -->
+    <!-- modal edit student -->
     <div class="modal" id="modalEditStudent" tabindex="-1">
       <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content bg-dark text-light">
@@ -76,89 +107,102 @@
         </div>
       </div>
     </div>
-    <!-- modal edit reminder -->
+    <!-- modal edit student -->
 
     <script>
-        document.getElementById("addStudentButton").addEventListener("click", async () => {
-            const name = document.getElementById("newName").value;
-            const age = document.getElementById("newAge").value;
-            const height = document.getElementById("newHeight").value;
-            const weight = document.getElementById("newWeight").value;
-            if (!name || !age) return alert("O nome não pode estar vazio!");
-            
-            const response = await fetch("http://localhost:4000/api/students", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify({ name, age, height, weight })
-            });
+      document.getElementById("addStudentButton").addEventListener("click", async () => {
+          const name = document.getElementById("newName").value;
+          const age = document.getElementById("newAge").value;
+          const height = document.getElementById("newHeight").value;
+          const weight = document.getElementById("newWeight").value;
+          if (!name || !age) return alert("O nome não pode estar vazio!");
+          
+          const response = await fetch("http://localhost:4000/api/students", {
+              method: "POST",
+              headers: {
+                  "Content-Type": "application/json"
+              },
+              body: JSON.stringify({ name, age, height, weight })
+          });
 
-            if (response.ok) {
-                const data = await response.json();
-                newName.value = "";
-                newAge.value = "";
-            } else {
-                alert("Erro ao adicionar aluno!");
-            }
-        fetchStudents();
+          if (response.ok) {
+              const data = await response.json();
+              newName.value = "";
+              newAge.value = "";
+          } else {
+              alert("Erro ao adicionar aluno!");
+          }
+      fetchStudents();
+      });
+
+      document.getElementById("buttonNewStudent").addEventListener("click", async () => {
+        const response = await fetch("http://localhost:4000/api/classes");
+        const classes = await response.json();
+        const select = document.getElementById("newClass");
+        select.innerHTML = "";
+        classes.forEach((classItem) => {
+          const option = document.createElement("option");
+          option.value = classItem.id;
+          option.textContent = classItem.name;
+          select.appendChild(option);
         });
-                        
-        async function fetchStudents() {
-            const response = await fetch("http://localhost:4000/api/students");
-            const students = await response.json();
-            const tbody = document.querySelector("table tbody")
-            tbody.innerHTML = "";
+      });      
+      
+      async function fetchStudents() {
+          const response = await fetch("http://localhost:4000/api/students");
+          const students = await response.json();
+          const tbody = document.querySelector("table tbody")
+          tbody.innerHTML = "";
 
-            students.forEach((student, index) => {
-                const tr = document.createElement("tr");
-                tr.innerHTML = `
-                    <th scope="row">${student.id}</th>
-                    <td>${student.name}</td>
-                    <td>${student.age}</td>
-                    <td>${student.height}</td>
-                    <td>${student.weight}</td>
-                    <td>${student.class.name}</td>
-                    <td>
-                      <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#modalEditStudent" id=edit-${student.id}>Editar</button>
-                      <button type="button" class="btn btn-danger" id=delete-${student.id}>Excluir</button>
-                    </td>
-                `;
-                tbody.appendChild(tr);
+          students.forEach((student, index) => {
+              const tr = document.createElement("tr");
+              tr.innerHTML = `
+                  <th scope="row">${student.id}</th>
+                  <td>${student.name}</td>
+                  <td>${student.age}</td>
+                  <td>${student.height}</td>
+                  <td>${student.weight}</td>
+                  <td>${student.class.name}</td>
+                  <td>
+                    <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#modalEditStudent" id=edit-${student.id}>Editar</button>
+                    <button type="button" class="btn btn-danger" id=delete-${student.id}>Excluir</button>
+                  </td>
+              `;
+              tbody.appendChild(tr);
 
-                tr.querySelector(`#delete-${student.id}`).addEventListener("click", async () => {
-                    await fetch(`http://localhost:4000/api/students/${student.id}`, {
-                        method: "DELETE"
-                    });
-                    fetchStudents();
-                });
+              tr.querySelector(`#delete-${student.id}`).addEventListener("click", async () => {
+                  await fetch(`http://localhost:4000/api/students/${student.id}`, {
+                      method: "DELETE"
+                  });
+                  fetchStudents();
+              });
 
-                tr.querySelector(`#edit-${student.id}`).addEventListener("click", () => {
-                    const modal = document.getElementById("modalEditStudent");
-                    const editTitleInput = modal.querySelector("#editTitle");
-                    editTitleInput.value = student.title;
+              tr.querySelector(`#edit-${student.id}`).addEventListener("click", () => {
+                  const modal = document.getElementById("modalEditStudent");
+                  const editTitleInput = modal.querySelector("#editTitle");
+                  editTitleInput.value = student.title;
 
-                    modal.querySelector("form").onsubmit = async (e) => {
-                        e.preventDefault();
-                        const editTitle = editTitleInput.value;
-                        await fetch(`http://localhost:4000/api/reminder/${reminder._id}`, {
-                            method: "PUT",
-                            headers: {
-                                "Content-Type": "application/json"
-                            },
-                            body: JSON.stringify({ title: editTitle })
-                        });
-                        fetchReminders();
-                        modal.querySelector(".btn-close").click();
-                    };
-                });
-            });       
-        };
-        
-        fetchStudents();
+                  modal.querySelector("form").onsubmit = async (e) => {
+                      e.preventDefault();
+                      const editTitle = editTitleInput.value;
+                      await fetch(`http://localhost:4000/api/student/${student.id}`, {
+                          method: "PUT",
+                          headers: {
+                              "Content-Type": "application/json"
+                          },
+                          body: JSON.stringify({ title: editTitle })
+                      });
+                      fetchStudents();
+                      modal.querySelector(".btn-close").click();
+                  };
+              });
+          });       
+      };
+      
+      fetchStudents();
     </script>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js" integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq" crossorigin="anonymous"></script>
 
-</body>
+  </body>
 </html>
