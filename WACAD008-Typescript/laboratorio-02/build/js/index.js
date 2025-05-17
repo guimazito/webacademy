@@ -8,23 +8,43 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
+const cors_1 = __importDefault(require("cors"));
+const dotenv_1 = __importDefault(require("dotenv"));
 const util_1 = require("./utils/util");
+const express_1 = __importDefault(require("express"));
+dotenv_1.default.config();
+const app = (0, express_1.default)();
+const PORT = process.env.PORT || 3000;
+app.use((0, cors_1.default)());
+app.use(express_1.default.json());
 class Student {
-    constructor(id, name, age, height, weight) {
+    constructor(id, name, age, height, weight, studentClass) {
         this.id = id;
         this.name = name;
         this.age = age;
         this.height = height;
         this.weight = weight;
-        this.id = id;
-        this.name = name;
-        this.age = age;
-        this.height = height;
-        this.weight = weight;
+        this.studentClass = studentClass;
+    }
+    toJSON() {
+        return {
+            id: this.id,
+            name: this.name,
+            age: this.age,
+            height: this.height,
+            weight: this.weight,
+            class: {
+                id: this.studentClass.id,
+                name: this.studentClass.name
+            }
+        };
     }
 }
-class StudentClass {
+class Class {
     constructor(id, name, students) {
         this.id = id;
         this.name = name;
@@ -52,7 +72,7 @@ class StudentClass {
 class ExternalAPI {
     constructor() {
         this.fetchStudents = () => __awaiter(this, void 0, void 0, function* () {
-            const data = yield fetch("https://randomuser.me/api/?results=2").then(response => {
+            const data = yield fetch("https://randomuser.me/api/1.4/?nat=br&results=2").then(response => {
                 return response.json();
             }).catch(error => {
                 if (error instanceof Error)
@@ -64,7 +84,7 @@ class ExternalAPI {
 }
 class StudentAdapter extends Student {
     constructor(adaptee) {
-        super(0, "", 0, 0, 0);
+        super(0, "", 0, 0, 0, undefined);
         this.adaptee = adaptee;
     }
     request() {
@@ -72,21 +92,33 @@ class StudentAdapter extends Student {
             const data = yield this.adaptee.fetchStudents();
             if (!data || !data.results)
                 return [];
-            return data.results.map((student, idx) => new Student(idx + 1, `${student.name.first} ${student.name.last}`, student.dob.age || 0, (0, util_1.ramdom)(1.3, 2), //height
-            (0, util_1.ramdom)(40, 120) //weight
-            ));
+            const studentClass = new Class(1, "Educação Física", []);
+            const students = data.results.map((student, idx) => new Student(idx + 1, `${student.name.first} ${student.name.last}`, student.dob.age || 0, (0, util_1.ramdom)(1.3, 2), //height
+            (0, util_1.ramdom)(40, 120), //weight
+            studentClass));
+            studentClass.students = students;
+            return students;
         });
     }
 }
-const Claudio = new Student(1, "Claudio", 33, 1.75, 80);
-const Albano = new Student(2, "Albano", 32, 1.72, 75);
-const ClassA = new StudentClass(1, "Class A", [Claudio, Albano]);
-console.log(ClassA.getNumStudents());
-console.log(ClassA.getAverageAge());
-console.log(ClassA.getAverageHeight());
-console.log(ClassA.getAverageWeight());
-// const api = new ExternalAPI()
-// api.fetchStudents().then(students => console.log(students))
+const students = [];
 const adaptee = new ExternalAPI();
-const studentAdapter = new StudentAdapter(adaptee);
-studentAdapter.request().then(students => console.log(students));
+const studentsAdapter = new StudentAdapter(adaptee);
+let response = [];
+(() => __awaiter(void 0, void 0, void 0, function* () {
+    response = yield studentsAdapter.request();
+    students.push(...response);
+}))();
+app.get("/api/students", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    res.status(200).json(students);
+}));
+app.post("/api/students", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const { name, age, height, weight } = req.body;
+    console.log(name, age, height, weight);
+    const newStudent = new Student(students.length + 1, name, age, height, weight, new Class(1, "Educação Física", []));
+    students.push(newStudent);
+    res.status(201).json(students);
+}));
+app.listen(PORT, () => {
+    console.log(`Servidor rodando em http://localhost:${PORT}`);
+});

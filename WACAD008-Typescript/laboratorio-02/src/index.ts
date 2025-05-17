@@ -1,4 +1,15 @@
+import cors from "cors"
+import dotenv from "dotenv";
 import { ramdom } from "./utils/util";
+import express, { Request, Response } from "express";
+
+dotenv.config();
+
+const app = express();
+const PORT = process.env.PORT || 3000;
+
+app.use(cors());
+app.use(express.json());
 
 class Student {
 
@@ -7,17 +18,26 @@ class Student {
         public name: string,
         public age: number,
         public height: number,
-        public weight: number
-    ) {
-        this.id = id
-        this.name = name
-        this.age = age
-        this.height = height
-        this.weight = weight
+        public weight: number,
+        public studentClass: Class
+    ) {}
+
+    toJSON() {
+        return {
+            id: this.id,
+            name: this.name,
+            age: this.age,
+            height: this.height,
+            weight: this.weight,
+            class: {
+                id: this.studentClass.id,
+                name: this.studentClass.name
+            }
+        };
     }
 }
 
-class StudentClass {
+class Class {
 
     constructor(
         public id: number,
@@ -54,7 +74,7 @@ class ExternalAPI {
     public fetchStudents = async (): Promise<{ results: any[] }> => {
     
         const data = await fetch(
-            "https://randomuser.me/api/?results=2"
+            "https://randomuser.me/api/1.4/?nat=br&results=2",
         ).then(response => {
             return response.json()
         }).catch(error => {
@@ -75,7 +95,7 @@ class StudentAdapter extends Student {
     constructor(
         adaptee: ExternalAPI
     ) {
-        super(0, "", 0, 0, 0);
+        super(0, "", 0, 0, 0, undefined as unknown as Class);
         this.adaptee = adaptee;
     }
 
@@ -84,28 +104,63 @@ class StudentAdapter extends Student {
 
         if (!data || !data.results) return [];
 
-        
-        return data.results.map((student: any, idx: number) =>
+        const studentClass = new Class(
+            1,
+            "Educação Física",
+            []
+        );
+
+        const students = data.results.map((student: any, idx: number) =>
             new Student(
                 idx + 1,
                 `${student.name.first} ${student.name.last}`,
                 student.dob.age || 0,
                 ramdom(1.3, 2), //height
-                ramdom(40, 120) //weight
+                ramdom(40, 120), //weight
+                studentClass
             )
         );
+        
+        studentClass.students = students;
+
+        return students;
     }
 }
 
-const Claudio = new Student(1, "Claudio", 33, 1.75, 80)
-const Albano = new Student(2, "Albano", 32, 1.72, 75)
-const ClassA = new StudentClass(1, "Class A", [Claudio, Albano])
-console.log(ClassA.getNumStudents())
-console.log(ClassA.getAverageAge())
-console.log(ClassA.getAverageHeight())
-console.log(ClassA.getAverageWeight())
-// const api = new ExternalAPI()
-// api.fetchStudents().then(students => console.log(students))
+const students: Student[] = [];
 const adaptee = new ExternalAPI();
-const studentAdapter = new StudentAdapter(adaptee);
-studentAdapter.request().then(students => console.log(students));
+const studentsAdapter = new StudentAdapter(adaptee);
+
+let response: Student[] = [];
+(async () => {
+    response = await studentsAdapter.request();
+    students.push(...response);
+})();
+
+app.get("/api/students", async (req: Request, res: Response) => {
+    res.status(200).json(students);
+});
+
+app.post("/api/students", async (req: Request, res: Response) => {
+    const { name, age, height, weight } = req.body;
+    console.log(name, age, height, weight);
+    const newStudent = new Student(
+        students.length + 1,
+        name,
+        age,
+        height,
+        weight,
+        new Class(
+            1,
+            "Educação Física",
+            []
+        )
+    )
+    students.push(newStudent);
+
+    res.status(201).json(students);
+});
+
+app.listen(PORT, () => {
+    console.log(`Servidor rodando em http://localhost:${PORT}`);
+});
