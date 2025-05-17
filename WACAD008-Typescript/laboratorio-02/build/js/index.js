@@ -92,15 +92,15 @@ class StudentAdapter extends Student {
             const data = yield this.adaptee.fetchStudents();
             if (!data || !data.results)
                 return [];
-            const studentClass = new Class(1, "Educação Física", []);
             const students = data.results.map((student, idx) => new Student(idx + 1, `${student.name.first} ${student.name.last}`, student.dob.age || 0, (0, util_1.ramdom)(1.3, 2), //height
             (0, util_1.ramdom)(40, 120), //weight
-            studentClass));
-            studentClass.students = students;
+            class1));
+            class1.students = students;
             return students;
         });
     }
 }
+// Populate first students
 const students = [];
 const adaptee = new ExternalAPI();
 const studentsAdapter = new StudentAdapter(adaptee);
@@ -109,15 +109,56 @@ let response = [];
     response = yield studentsAdapter.request();
     students.push(...response);
 }))();
+// Populate first class
+const classes = [];
+const class1 = new Class(1, "Educação Física", students);
+classes.push(class1);
+// Students endpoints
 app.get("/api/students", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     res.status(200).json(students);
 }));
 app.post("/api/students", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { name, age, height, weight } = req.body;
-    console.log(name, age, height, weight);
     const newStudent = new Student(students.length + 1, name, age, height, weight, new Class(1, "Educação Física", []));
     students.push(newStudent);
     res.status(201).json(students);
+}));
+app.delete("/api/students/:id", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const { id } = req.params;
+    const studentIndex = students.findIndex((student) => student.id === Number(id));
+    if (studentIndex === -1)
+        res.status(404).json({ error: "Aluno não encontrado!" });
+    res.status(200).json(students.splice(studentIndex, 1));
+}));
+// Classes endpoints
+app.get("/api/classes", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    res.status(200).json(classes);
+}));
+app.post("/api/classes", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const { name } = req.body;
+    if (!name)
+        res.status(400).json({ error: "Nome da classe é obrigatório!" });
+    const newClass = new Class(classes.length + 1, name, []);
+    classes.push(newClass);
+    res.status(201).json(classes);
+}));
+app.put("/api/classes/:id", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const { id } = req.params;
+    const { name } = req.body;
+    const classIndex = classes.findIndex((class1) => class1.id === Number(id));
+    if (classIndex === -1)
+        res.status(404).json({ error: "Classe não encontrada!" });
+    if (!name)
+        res.status(400).json({ error: "Nome da classe é obrigatório!" });
+    classes[classIndex].name = name;
+    res.status(200).json(classes);
+}));
+app.delete("/api/classes/:id", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const { id } = req.params;
+    const classIndex = classes.findIndex((class1) => class1.id === Number(id));
+    if (classIndex === -1)
+        res.status(404).json({ error: "Classe não encontrada!" });
+    res.status(200).json(classes.splice(classIndex, 1));
 }));
 app.listen(PORT, () => {
     console.log(`Servidor rodando em http://localhost:${PORT}`);
