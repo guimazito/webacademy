@@ -1,6 +1,9 @@
 import cors from "cors"
+import dotenv from "dotenv";
 import { connect, model, Schema } from "mongoose";
 import express, { Request, Response } from "express";
+
+dotenv.config();
 
 interface Reminder {
     title: string;
@@ -9,13 +12,12 @@ interface Reminder {
     description: string;
 }
 
-const PORT = 3000;
 const app = express();
+const PORT = process.env.PORT || 4000;
+const DB_BASE_URL = process.env.DB_BASE_URL || "mongodb://mongodbb:27017";
 
 app.use(cors());
 app.use(express.json());
-
-const DB_BASE_URL = process.env.DB_BASE_URL || "mongodb://mongodbb:27017";
 
 connect(`${DB_BASE_URL}/reminderdb`, {
     maxPoolSize: 50,
