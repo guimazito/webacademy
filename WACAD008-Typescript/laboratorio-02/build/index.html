@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lembretes App</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-SgOJa3DmI69IUzQ2PVdRZhwQ+dy64/BUtbMJw1MZ8t5HZApcHrRKUc4W0kG879m7" crossorigin="anonymous">
+</head>
+<body class="bg-dark text-light">
+    <div class="container text-center">
+      <h1 class="d-flex justify-content-start mt-5">Meus Alunos</h1>
+      <div class="d-flex justify-content-end align-items-end mb-3 mt-5">
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalNewStudent">Novo Aluno</button>
+      </div>
+      <table class="table border table-dark table-striped">
+        <thead>
+          <tr>
+            <th scope="col">id</th>
+            <th scope="col">Aluno</th>
+            <th scope="col">Idade</th>
+            <th scope="col">Altura</th>
+            <th scope="col">Peso</th>
+            <th scope="col">Classe</th>
+            <th scope="col">Ações</th>
+          </tr>
+        </thead>
+        <tbody>       
+        </tbody>
+      </table>
+    </div>
+
+    <!-- modal new student -->
+    <div class="modal" id="modalNewStudent" tabindex="-1">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content bg-dark text-light">
+          <div class="modal-header">
+            <h5 class="modal-title">Adicionar Aluno</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <form>
+            <div class="modal-body text-start">
+              <label for="newName" class="form-label">Nome</label>
+              <input type="text" class="form-control mb-2" id="newName" placeholder="Insira o nome" required>
+              <label for="newAge" class="form-label">Idade</label>
+              <input type="number" class="form-control mb-2" id="newAge" placeholder="Insira a idade" required>
+              <label for="newHeight" class="form-label">Altura</label>
+              <input type="number" class="form-control mb-2" id="newHeight" placeholder="Insira a altura" step="0.01" required>
+              <label for="newWeight" class="form-label">Peso</label>
+              <input type="number" class="form-control mb-2" id="newWeight" placeholder="Insira o peso" step="0.01" required>
+            </div>
+            <div class="modal-footer border-0">
+              <button type="submit" class="btn btn-success w-100" id="addStudentButton">Confirmar</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    <!-- modal new student -->
+
+    <!-- modal edit reminder -->
+    <div class="modal" id="modalEditStudent" tabindex="-1">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content bg-dark text-light">
+          <div class="modal-header">
+            <h5 class="modal-title">Editar Lembrete</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <form>
+            <div class="modal-body text-start">
+              <input type="text" class="form-control" id="editTitle" required>
+            </div>
+            <div class="modal-footer border-0">
+              <button type="submit" class="btn btn-success w-100">Confirmar</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    <!-- modal edit reminder -->
+
+    <script>
+        document.getElementById("addStudentButton").addEventListener("click", async () => {
+            const name = document.getElementById("newName").value;
+            const age = document.getElementById("newAge").value;
+            const height = document.getElementById("newHeight").value;
+            const weight = document.getElementById("newWeight").value;
+            if (!name || !age) return alert("O nome não pode estar vazio!");
+            
+            const response = await fetch("http://localhost:4000/api/students", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({ name, age, height, weight })
+            });
+
+            if (response.ok) {
+                const data = await response.json();
+                newName.value = "";
+                newAge.value = "";
+            } else {
+                alert("Erro ao adicionar aluno!");
+            }
+        fetchStudents();
+        });
+                        
+        async function fetchStudents() {
+            const response = await fetch("http://localhost:4000/api/students");
+            const students = await response.json();
+            const tbody = document.querySelector("table tbody")
+            tbody.innerHTML = "";
+
+            students.forEach((student, index) => {
+                const tr = document.createElement("tr");
+                tr.innerHTML = `
+                    <th scope="row">${student.id}</th>
+                    <td>${student.name}</td>
+                    <td>${student.age}</td>
+                    <td>${student.height}</td>
+                    <td>${student.weight}</td>
+                    <td>${student.class.name}</td>
+                    <td>
+                      <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#modalEditStudent" id=edit-${student.id}>Editar</button>
+                      <button type="button" class="btn btn-danger" id=delete-${student.id}>Excluir</button>
+                    </td>
+                `;
+                tbody.appendChild(tr);
+
+                tr.querySelector(`#delete-${student.id}`).addEventListener("click", async () => {
+                    await fetch(`http://localhost:4000/api/students/${student.id}`, {
+                        method: "DELETE"
+                    });
+                    fetchStudents();
+                });
+
+                tr.querySelector(`#edit-${student.id}`).addEventListener("click", () => {
+                    const modal = document.getElementById("modalEditStudent");
+                    const editTitleInput = modal.querySelector("#editTitle");
+                    editTitleInput.value = student.title;
+
+                    modal.querySelector("form").onsubmit = async (e) => {
+                        e.preventDefault();
+                        const editTitle = editTitleInput.value;
+                        await fetch(`http://localhost:4000/api/reminder/${reminder._id}`, {
+                            method: "PUT",
+                            headers: {
+                                "Content-Type": "application/json"
+                            },
+                            body: JSON.stringify({ title: editTitle })
+                        });
+                        fetchReminders();
+                        modal.querySelector(".btn-close").click();
+                    };
+                });
+            });       
+        };
+        
+        fetchStudents();
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js" integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq" crossorigin="anonymous"></script>
+
+</body>
+</html>
