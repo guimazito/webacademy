@@ -158,9 +158,9 @@ app.post("/api/students", async (req: Request, res: Response) => {
     const newStudent = new Student(
         students.length + 1,
         name,
-        age,
-        height,
-        weight,
+        Number(age),
+        Number(height),
+        Number(weight),
         studentClass
     );
     students.push(newStudent);
@@ -246,6 +246,20 @@ app.delete("/api/classes/:id", async (req: Request, res: Response) => {
     const classIndex = classes.findIndex((class1) => class1.id === Number(id));
     if (classIndex === -1) res.status(404).json({ error: "Classe não encontrada!" })
     res.status(200).json(classes.splice(classIndex, 1));
+});
+
+// Statistics endpoint
+app.get("/api/statistics", async (req: Request, res: Response) => {
+    const stats = classes.map((studentClass) => ({
+        classId: studentClass.id,
+        className: studentClass.name,
+        numStudents: studentClass.getNumStudents(),
+        averageAge: studentClass.getAverageAge(),
+        averageHeight: studentClass.getAverageHeight(),
+        averageWeight: studentClass.getAverageWeight()
+    }));
+
+    res.status(200).json(stats);
 });
 
 app.listen(PORT, () => {

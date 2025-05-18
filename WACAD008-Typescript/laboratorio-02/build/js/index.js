@@ -128,7 +128,7 @@ app.post("/api/students", (req, res) => __awaiter(void 0, void 0, void 0, functi
         res.status(400).json({ error: "Classe não encontrada!" });
         return;
     }
-    const newStudent = new Student(students.length + 1, name, age, height, weight, studentClass);
+    const newStudent = new Student(students.length + 1, name, Number(age), Number(height), Number(weight), studentClass);
     students.push(newStudent);
     studentClass.students.push(newStudent);
     res.status(201).json(students);
@@ -151,7 +151,7 @@ app.put("/api/students/:id", (req, res) => __awaiter(void 0, void 0, void 0, fun
     students[studentIndex].height = height;
     students[studentIndex].weight = weight;
     students[studentIndex].studentClass = studentClass;
-    // remove student from old class
+    // remove student from old class (VERIFICAR)
     const oldClassIndex = classes.findIndex(c => c.id === students[studentIndex].studentClass.id);
     if (oldClassIndex !== -1) {
         const oldClass = classes[oldClassIndex];
@@ -204,6 +204,18 @@ app.delete("/api/classes/:id", (req, res) => __awaiter(void 0, void 0, void 0, f
     if (classIndex === -1)
         res.status(404).json({ error: "Classe não encontrada!" });
     res.status(200).json(classes.splice(classIndex, 1));
+}));
+// Statistics endpoint
+app.get("/api/statistics", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const stats = classes.map((studentClass) => ({
+        classId: studentClass.id,
+        className: studentClass.name,
+        numStudents: studentClass.getNumStudents(),
+        averageAge: studentClass.getAverageAge(),
+        averageHeight: studentClass.getAverageHeight(),
+        averageWeight: studentClass.getAverageWeight()
+    }));
+    res.status(200).json(stats);
 }));
 app.listen(PORT, () => {
     console.log(`Servidor rodando em http://localhost:${PORT}`);
