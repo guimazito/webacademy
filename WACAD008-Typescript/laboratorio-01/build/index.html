@@ -76,7 +76,7 @@
         document.getElementById("addReminderButton").addEventListener("click", async () => {
             const title = document.getElementById("newTitle").value;
             const finishUntil = document.getElementById("newFinishUntil").value;
-            if (!title) return alert("O título não pode estar vazio!");
+            if (!title) return alert("Os campos não podem estar vazios!");
             
             const response = await fetch("http://localhost:3000/api/reminder", {
                 method: "POST",

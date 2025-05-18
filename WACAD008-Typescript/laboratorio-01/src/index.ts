@@ -8,8 +8,8 @@ dotenv.config();
 interface Reminder {
     title: string;
     createdAt: Date;
-    finishUntil: Date;
-    description: string;
+    finishUntil: Date | null;
+    description: string | null;
 }
 
 const app = express();
@@ -27,8 +27,8 @@ connect(`${DB_BASE_URL}/reminderdb`, {
 const reminderSchema = new Schema<Reminder>({
     title: { type: String, required: true },
     createdAt: { type: Date, default: Date.now },
-    finishUntil: { type: Date, required: true },
-    description: { type: String, required: false },
+    finishUntil: { type: Date, required: false, default: null },
+    description: { type: String, required: false, default: null },
 }, {versionKey: false});
 
 const ReminderModel = model<Reminder>('Reminder', reminderSchema);
@@ -47,8 +47,8 @@ app.post("/api/reminder", async (req: Request, res: Response): Promise<void> => 
     const reminder = await ReminderModel.create({
         title,
         createdAt: new Date(),
-        finishUntil: new Date(finishUntil),
-        description: null
+        finishUntil: finishUntil ? new Date(finishUntil) : null,
+        description: description ? description : null
     });
     if (!reminder) res.status(500).json({ error: "Erro ao criar lembrete" });
     res.status(201).json(reminder);
