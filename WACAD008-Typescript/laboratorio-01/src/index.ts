@@ -36,7 +36,6 @@ const ReminderModel = model<Reminder>('Reminder', reminderSchema);
 
 app.get("/api/reminder", async (req: Request, res: Response) => {
     const reminders = await ReminderModel.find();
-    console.log(reminders);
     res.status(200).json(reminders);
 });
 
