@@ -145,12 +145,18 @@
                     modal.querySelector("form").onsubmit = async (e) => {
                         e.preventDefault();
                         const editTitle = editTitleInput.value;
+                        const editFinishUntil = editFinishUntilInput.value;
+                        const editDescription = editDescriptionInput.value;
                         await fetch(`http://localhost:3000/api/reminder/${reminder._id}`, {
                             method: "PUT",
                             headers: {
                                 "Content-Type": "application/json"
                             },
-                            body: JSON.stringify({ title: editTitle })
+                            body: JSON.stringify({
+                              title: editTitle,
+                              finishUntil: editFinishUntil,
+                              description: editDescription
+                            })
                         });
                         fetchReminders();
                         modal.querySelector(".btn-close").click();
