@@ -1,87 +1,90 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lembretes App</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-SgOJa3DmI69IUzQ2PVdRZhwQ+dy64/BUtbMJw1MZ8t5HZApcHrRKUc4W0kG879m7" crossorigin="anonymous">
-</head>
-<body class="bg-dark text-light">
-    <div class="container text-center">
-      <h1 class="d-flex justify-content-start mt-5">Meus Lembretes</h1>
-      <div class="d-flex justify-content-end align-items-end mb-3 mt-5">
-        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalNewReminder">Novo Lembrete</button>
+  <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Lembretes App</title>
+      <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-SgOJa3DmI69IUzQ2PVdRZhwQ+dy64/BUtbMJw1MZ8t5HZApcHrRKUc4W0kG879m7" crossorigin="anonymous">
+  </head>
+  <body class="bg-dark text-light">
+      <div class="container text-center">
+        <h1 class="d-flex justify-content-start mt-5">Meus Lembretes</h1>
+        <div class="d-flex justify-content-end align-items-end mb-3 mt-5">
+          <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalNewReminder">Novo Lembrete</button>
+        </div>
+        <table class="table border table-dark table-striped">
+          <thead>
+            <tr>
+              <th scope="col">id</th>
+              <th scope="col">Lembrete</th>
+              <th scope="col">Data e Hora Criação</th>
+              <th scope="col">Data Limite</th>
+              <th scope="col">Descrição</th>
+              <th scope="col">Ações</th>
+            </tr>
+          </thead>
+          <tbody class="align-middle">       
+          </tbody>
+        </table>
       </div>
-      <table class="table border table-dark table-striped">
-        <thead>
-          <tr>
-            <th scope="col">id</th>
-            <th scope="col">Lembrete</th>
-            <th scope="col">Data e Hora Criação</th>
-            <th scope="col">Data Limite</th>
-            <th scope="col">Descrição</th>
-            <th scope="col">Ações</th>
-          </tr>
-        </thead>
-        <tbody class="align-middle">       
-        </tbody>
-      </table>
-    </div>
 
-    <!-- modal new reminder -->
-    <div class="modal" id="modalNewReminder" tabindex="-1">
-      <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content bg-dark text-light">
-          <div class="modal-header">
-            <h5 class="modal-title">Adicionar Lembrete</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      <!-- modal new reminder -->
+      <div class="modal" id="modalNewReminder" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content bg-dark text-light">
+            <div class="modal-header">
+              <h5 class="modal-title">Adicionar Lembrete</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form>
+              <div class="modal-body text-start">
+                <label for="newTitle" class="form-label">Título</label>
+                <input type="text" class="form-control mb-2" id="newTitle" placeholder="Insira o título" required>
+                <label for="newFinishUntil" class="form-label">Data Limite</label>
+                <input type="date" class="form-control mb-2" id="newFinishUntil">
+                <label for="newDescription" class="form-label">Descrição</label>
+                <input type="text" class="form-control" id="newDescription" placeholder="Insira a descrição">
+              </div>
+              <div class="modal-footer border-0">
+                <button type="submit" class="btn btn-success w-100">Confirmar</button>
+              </div>
+            </form>
           </div>
-          <form>
-            <div class="modal-body text-start">
-              <label for="newTitle" class="form-label">Título</label>
-              <input type="text" class="form-control mb-2" id="newTitle" placeholder="Insira o título" required>
-              <label for="newFinishUntil" class="form-label">Data Limite</label>
-              <input type="date" class="form-control mb-2" id="newFinishUntil">
-              <label for="newDescription" class="form-label">Descrição</label>
-              <input type="text" class="form-control" id="newDescription" placeholder="Insira a descrição">
-            </div>
-            <div class="modal-footer border-0">
-              <button type="submit" class="btn btn-success w-100" id="addReminderButton">Confirmar</button>
-            </div>
-          </form>
         </div>
       </div>
-    </div>
-    <!-- modal new reminder -->
+      <!-- modal new reminder -->
 
-    <!-- modal edit reminder -->
-    <div class="modal" id="modalEditReminder" tabindex="-1">
-      <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content bg-dark text-light">
-          <div class="modal-header">
-            <h5 class="modal-title">Editar Lembrete</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      <!-- modal edit reminder -->
+      <div class="modal" id="modalEditReminder" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content bg-dark text-light">
+            <div class="modal-header">
+              <h5 class="modal-title">Editar Lembrete</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form>
+              <div class="modal-body text-start">
+                <label for="editTitle" class="form-label">Título</label>
+                <input type="text" class="form-control mb-2" id="editTitle" placeholder="Insira o título" required>
+                <label for="editFinishUntil" class="form-label">Data Limite</label>
+                <input type="date" class="form-control mb-2" id="editFinishUntil">
+                <label for="editDescription" class="form-label">Descrição</label>
+                <input type="text" class="form-control" id="editDescription" placeholder="Insira a descrição">
+              </div>
+              <div class="modal-footer border-0">
+                <button type="submit" class="btn btn-success w-100">Confirmar</button>
+              </div>
+            </form>
           </div>
-          <form>
-            <div class="modal-body text-start">
-              <label for="editTitle" class="form-label">Título</label>
-              <input type="text" class="form-control mb-2" id="editTitle" placeholder="Insira o título" required>
-              <label for="editFinishUntil" class="form-label">Data Limite</label>
-              <input type="date" class="form-control mb-2" id="editFinishUntil">
-              <label for="editDescription" class="form-label">Descrição</label>
-              <input type="text" class="form-control" id="editDescription" placeholder="Insira a descrição">
-            </div>
-            <div class="modal-footer border-0">
-              <button type="submit" class="btn btn-success w-100">Confirmar</button>
-            </div>
-          </form>
         </div>
       </div>
-    </div>
-    <!-- modal edit reminder -->
+      <!-- modal edit reminder -->
 
-    <script>
-        document.getElementById("addReminderButton").addEventListener("click", async () => {
+      <script>
+        document.addEventListener("DOMContentLoaded", function() {
+          document.querySelector("#modalNewReminder form").addEventListener("submit", async (e) => {
+            console.log("submit chamado1");
+            e.preventDefault();
             const title = document.getElementById("newTitle").value;
             const finishUntil = document.getElementById("newFinishUntil").value;
             const description = document.getElementById("newDescription").value;
@@ -97,78 +100,92 @@
 
             if (response.ok) {
                 const data = await response.json();
-                newTitle.value = "";
-                newFinishUntil.value = "";
+                document.getElementById("newTitle").value = "";
+                document.getElementById("newFinishUntil").value = "";
+                document.getElementById("newDescription").value = "";
+                document.querySelector("#modalNewReminder .btn-close").click();
             } else {
                 alert("Erro ao adicionar lembrete!");
             }
-        fetchReminders();
+            fetchReminders();
+          });
+
+          let editingReminderId = null;
+
+          document.querySelector("#modalEditReminder form").addEventListener("submit", async (e) => {
+            console.log("submit chamado2");
+            e.preventDefault();
+            const modal = document.getElementById("modalEditReminder");
+            const editTitleInput = modal.querySelector("#editTitle");
+            const editFinishUntilInput = modal.querySelector("#editFinishUntil");
+            const editDescriptionInput = modal.querySelector("#editDescription");
+            const editTitle = editTitleInput.value;
+            const editFinishUntil = editFinishUntilInput.value;
+            const editDescription = editDescriptionInput.value;
+
+            await fetch(`http://localhost:3000/api/reminder/${editingReminderId}`, {
+                method: "PUT",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    title: editTitle,
+                    finishUntil: editFinishUntil,
+                    description: editDescription
+                })
+            });
+            fetchReminders();
+            modal.querySelector(".btn-close").click();
+          });
+                          
+          async function fetchReminders() {
+              const response = await fetch("http://localhost:3000/api/reminder");
+              const reminders = await response.json();
+              const tbody = document.querySelector("table tbody")
+              tbody.innerHTML = "";
+
+              reminders.forEach((reminder, index) => {
+                  const tr = document.createElement("tr");
+                  tr.innerHTML = `
+                      <th scope="row">${index + 1}</th>
+                      <td>${reminder.title}</td>
+                      <td>${new Date(reminder.createdAt).toLocaleString()}</td>
+                      <td>${reminder.finishUntil ? reminder.finishUntil.slice(0, 10).split('-').reverse().join('/') : ""}</td>
+                      <td>${reminder.description ? reminder.description : ""}</td>
+                      <td>
+                        <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#modalEditReminder" id=edit-${reminder._id}>Editar</button>
+                        <button type="button" class="btn btn-danger" id=delete-${reminder._id}>Excluir</button>
+                      </td>
+                  `;
+                  tbody.appendChild(tr);
+
+                  tr.querySelector(`#delete-${reminder._id}`).addEventListener("click", async (e) => {
+                      e.preventDefault();
+                      await fetch(`http://localhost:3000/api/reminder/${reminder._id}`, {
+                          method: "DELETE"
+                      });
+                      fetchReminders();
+                  });
+
+                  tr.querySelector(`#edit-${reminder._id}`).addEventListener("click", async (e) => {
+                      e.preventDefault();
+                      const modal = document.getElementById("modalEditReminder");
+                      const editTitleInput = modal.querySelector("#editTitle");
+                      const editFinishUntilInput = modal.querySelector("#editFinishUntil");
+                      const editDescriptionInput = modal.querySelector("#editDescription");
+                      editTitleInput.value = reminder.title;
+                      editFinishUntilInput.value = reminder.finishUntil ? reminder.finishUntil.slice(0, 10) : "";
+                      editDescriptionInput.value = reminder.description;
+                      editingReminderId = reminder._id;                      
+                  });
+              });       
+          };
+          
+          fetchReminders();
         });
-                        
-        async function fetchReminders() {
-            const response = await fetch("http://localhost:3000/api/reminder");
-            const reminders = await response.json();
-            const tbody = document.querySelector("table tbody")
-            tbody.innerHTML = "";
+      </script>
 
-            reminders.forEach((reminder, index) => {
-                const tr = document.createElement("tr");
-                tr.innerHTML = `
-                    <th scope="row">${index + 1}</th>
-                    <td>${reminder.title}</td>
-                    <td>${new Date(reminder.createdAt).toLocaleString()}</td>
-                    <td>${reminder.finishUntil ? reminder.finishUntil.slice(0, 10).split('-').reverse().join('/') : ""}</td>
-                    <td>${reminder.description ? reminder.description : ""}</td>
-                    <td>
-                      <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#modalEditReminder" id=edit-${reminder._id}>Editar</button>
-                      <button type="button" class="btn btn-danger" id=delete-${reminder._id}>Excluir</button>
-                    </td>
-                `;
-                tbody.appendChild(tr);
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js" integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq" crossorigin="anonymous"></script>
 
-                tr.querySelector(`#delete-${reminder._id}`).addEventListener("click", async () => {
-                    await fetch(`http://localhost:3000/api/reminder/${reminder._id}`, {
-                        method: "DELETE"
-                    });
-                    fetchReminders();
-                });
-
-                tr.querySelector(`#edit-${reminder._id}`).addEventListener("click", () => {
-                    const modal = document.getElementById("modalEditReminder");
-                    const editTitleInput = modal.querySelector("#editTitle");
-                    const editFinishUntilInput = modal.querySelector("#editFinishUntil");
-                    const editDescriptionInput = modal.querySelector("#editDescription");
-                    editTitleInput.value = reminder.title;
-                    editFinishUntilInput.value = reminder.finishUntil ? reminder.finishUntil.slice(0, 10) : "";
-                    editDescriptionInput.value = reminder.description;
-
-                    modal.querySelector("form").onsubmit = async (e) => {
-                        e.preventDefault();
-                        const editTitle = editTitleInput.value;
-                        const editFinishUntil = editFinishUntilInput.value;
-                        const editDescription = editDescriptionInput.value;
-                        await fetch(`http://localhost:3000/api/reminder/${reminder._id}`, {
-                            method: "PUT",
-                            headers: {
-                                "Content-Type": "application/json"
-                            },
-                            body: JSON.stringify({
-                              title: editTitle,
-                              finishUntil: editFinishUntil,
-                              description: editDescription
-                            })
-                        });
-                        fetchReminders();
-                        modal.querySelector(".btn-close").click();
-                    };
-                });
-            });       
-        };
-        
-        fetchReminders();
-    </script>
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js" integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq" crossorigin="anonymous"></script>
-
-</body>
+  </body>
 </html>
