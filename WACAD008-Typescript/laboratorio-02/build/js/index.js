@@ -72,7 +72,7 @@ class Class {
 class ExternalAPI {
     constructor() {
         this.fetchStudents = () => __awaiter(this, void 0, void 0, function* () {
-            const data = yield fetch("https://randomuser.me/api/1.4/?nat=br&results=2").then(response => {
+            const data = yield fetch("https://randomuser.me/api/1.4/?nat=br&results=5").then(response => {
                 return response.json();
             }).catch(error => {
                 if (error instanceof Error)
@@ -146,25 +146,22 @@ app.put("/api/students/:id", (req, res) => __awaiter(void 0, void 0, void 0, fun
         res.status(400).json({ error: "Classe não encontrada!" });
         return;
     }
+    const oldClass = students[studentIndex].studentClass;
     students[studentIndex].name = name;
-    students[studentIndex].age = age;
-    students[studentIndex].height = height;
-    students[studentIndex].weight = weight;
+    students[studentIndex].age = Number(age);
+    students[studentIndex].height = Number(height);
+    students[studentIndex].weight = Number(weight);
     students[studentIndex].studentClass = studentClass;
     // remove student from old class (VERIFICAR)
-    const oldClassIndex = classes.findIndex(c => c.id === students[studentIndex].studentClass.id);
-    if (oldClassIndex !== -1) {
-        const oldClass = classes[oldClassIndex];
+    if (oldClass.id !== studentClass.id) {
         const studentIndexInOldClass = oldClass.students.findIndex(s => s.id === students[studentIndex].id);
         if (studentIndexInOldClass !== -1) {
             oldClass.students.splice(studentIndexInOldClass, 1);
         }
-    }
-    // add student in new class
-    const newClassIndex = classes.findIndex(c => c.id === studentClass.id);
-    if (newClassIndex !== -1) {
-        const newClass = classes[newClassIndex];
-        newClass.students.push(students[studentIndex]);
+        // Adicione na nova classe (se ainda não estiver)
+        if (!studentClass.students.find(s => s.id === students[studentIndex].id)) {
+            studentClass.students.push(students[studentIndex]);
+        }
     }
     res.status(200).json(students);
 }));
@@ -200,7 +197,7 @@ app.put("/api/classes/:id", (req, res) => __awaiter(void 0, void 0, void 0, func
 }));
 app.delete("/api/classes/:id", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { id } = req.params;
-    const classIndex = classes.findIndex((class1) => class1.id === Number(id));
+    const classIndex = classes.findIndex((classs) => classs.id === Number(id));
     if (classIndex === -1)
         res.status(404).json({ error: "Classe não encontrada!" });
     res.status(200).json(classes.splice(classIndex, 1));
@@ -211,9 +208,9 @@ app.get("/api/statistics", (req, res) => __awaiter(void 0, void 0, void 0, funct
         classId: studentClass.id,
         className: studentClass.name,
         numStudents: studentClass.getNumStudents(),
-        averageAge: studentClass.getAverageAge(),
-        averageHeight: studentClass.getAverageHeight(),
-        averageWeight: studentClass.getAverageWeight()
+        averageAge: studentClass.getAverageAge() ? (studentClass.getAverageAge()).toFixed(2) : 0,
+        averageHeight: studentClass.getAverageHeight() ? (studentClass.getAverageHeight()).toFixed(2) : 0,
+        averageWeight: studentClass.getAverageWeight() ? (studentClass.getAverageWeight()).toFixed(2) : 0
     }));
     res.status(200).json(stats);
 }));
