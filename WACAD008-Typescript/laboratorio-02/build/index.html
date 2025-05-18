@@ -3,7 +3,7 @@
   <head>
       <meta charset="UTF-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <title>Lembretes App</title>
+      <title>Escola App</title>
       <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-SgOJa3DmI69IUzQ2PVdRZhwQ+dy64/BUtbMJw1MZ8t5HZApcHrRKUc4W0kG879m7" crossorigin="anonymous">
   </head>
   <body class="container-100 bg-dark text-light">
@@ -68,16 +68,10 @@
               <label for="newHeight" class="form-label">Altura</label>
               <input type="number" class="form-control mb-2" id="newHeight" placeholder="Insira a altura" step="0.01" required>
               <label for="newWeight" class="form-label">Peso</label>
-              <input type="number" class="form-control mb-2" id="newWeight" placeholder="Insira o peso" step="0.01" required>
-              
+              <input type="number" class="form-control mb-2" id="newWeight" placeholder="Insira o peso" step="0.01" required>             
               <label for="newClass" class="form-label">Classe</label>
               <select class="form-select" id="newClass" required>
-                <option selected>Open this select menu</option>
-                <option value="1">One</option>
-                <option value="2">Two</option>
-                <option value="3">Three</option>
               </select>
-
             </div>
             <div class="modal-footer border-0">
               <button type="submit" class="btn btn-success w-100" id="addStudentButton">Confirmar</button>
@@ -93,12 +87,22 @@
       <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content bg-dark text-light">
           <div class="modal-header">
-            <h5 class="modal-title">Editar Lembrete</h5>
+            <h5 class="modal-title">Editar Aluno</h5>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <form>
             <div class="modal-body text-start">
-              <input type="text" class="form-control" id="editTitle" required>
+              <label for="editName" class="form-label">Nome</label>
+              <input type="text" class="form-control mb-2" id="editName" placeholder="Insira o nome" required>
+              <label for="editAge" class="form-label">Idade</label>
+              <input type="number" class="form-control mb-2" id="editAge" placeholder="Insira a idade" required>
+              <label for="editHeight" class="form-label">Altura</label>
+              <input type="number" class="form-control mb-2" id="editHeight" placeholder="Insira a altura" step="0.01" required>
+              <label for="editWeight" class="form-label">Peso</label>
+              <input type="number" class="form-control mb-2" id="editWeight" placeholder="Insira o peso" step="0.01" required>             
+              <label for="editClass" class="form-label">Classe</label>
+              <select class="form-select" id="editClass" required>
+              </select>
             </div>
             <div class="modal-footer border-0">
               <button type="submit" class="btn btn-success w-100">Confirmar</button>
@@ -115,14 +119,15 @@
           const age = document.getElementById("newAge").value;
           const height = document.getElementById("newHeight").value;
           const weight = document.getElementById("newWeight").value;
-          if (!name || !age) return alert("O nome não pode estar vazio!");
+          const classId = document.getElementById("newClass").value;
+          if (!name || !age || !height || !weight) return alert("Nenhum campo pode estar vazio!");
           
           const response = await fetch("http://localhost:4000/api/students", {
               method: "POST",
               headers: {
                   "Content-Type": "application/json"
               },
-              body: JSON.stringify({ name, age, height, weight })
+              body: JSON.stringify({ name, age, height, weight, classId })
           });
 
           if (response.ok) {
@@ -146,8 +151,8 @@
           option.textContent = classItem.name;
           select.appendChild(option);
         });
-      });      
-      
+      });     
+
       async function fetchStudents() {
           const response = await fetch("http://localhost:4000/api/students");
           const students = await response.json();
@@ -164,7 +169,7 @@
                   <td>${student.weight}</td>
                   <td>${student.class.name}</td>
                   <td>
-                    <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#modalEditStudent" id=edit-${student.id}>Editar</button>
+                    <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#modalEditStudent" name=editButton id=edit-${student.id}>Editar</button>
                     <button type="button" class="btn btn-danger" id=delete-${student.id}>Excluir</button>
                   </td>
               `;
@@ -177,20 +182,49 @@
                   fetchStudents();
               });
 
-              tr.querySelector(`#edit-${student.id}`).addEventListener("click", () => {
+              tr.querySelector(`#edit-${student.id}`).addEventListener("click", async () => {
                   const modal = document.getElementById("modalEditStudent");
-                  const editTitleInput = modal.querySelector("#editTitle");
-                  editTitleInput.value = student.title;
+                  const editNameInput = modal.querySelector("#editName");
+                  const editAgeInput = modal.querySelector("#editAge");
+                  const editHeightInput = modal.querySelector("#editHeight");
+                  const editWeightInput = modal.querySelector("#editWeight");
+                  const editClassSelect = modal.querySelector("#editClass");
+
+                  const response = await fetch("http://localhost:4000/api/classes");
+                  const classes = await response.json();
+                  editClassSelect.innerHTML = "";
+                  classes.forEach((classItem) => {
+                    const option = document.createElement("option");
+                    option.value = classItem.id;
+                    option.textContent = classItem.name;
+                    editClassSelect.appendChild(option);
+                  });
+
+                  editNameInput.value = student.name;
+                  editAgeInput.value = student.age;
+                  editHeightInput.value = student.height;
+                  editWeightInput.value = student.weight;
+                  editClassSelect.value = student.class.id;
 
                   modal.querySelector("form").onsubmit = async (e) => {
                       e.preventDefault();
-                      const editTitle = editTitleInput.value;
-                      await fetch(`http://localhost:4000/api/student/${student.id}`, {
+                      const editName = editNameInput.value;
+                      const editAge = editAgeInput.value;
+                      const editHeight = editHeightInput.value;
+                      const editWeight = editWeightInput.value;
+                      const editClass = editClassSelect.value;
+                      await fetch(`http://localhost:4000/api/students/${student.id}`, {
                           method: "PUT",
                           headers: {
                               "Content-Type": "application/json"
                           },
-                          body: JSON.stringify({ title: editTitle })
+                          body: JSON.stringify({
+                            name: editName,
+                            age: editAge,
+                            height: editHeight,
+                            weight: editWeight,
+                            classId: editClass
+                          })
                       });
                       fetchStudents();
                       modal.querySelector(".btn-close").click();
