@@ -118,10 +118,55 @@ app.get("/api/students", (req, res) => __awaiter(void 0, void 0, void 0, functio
     res.status(200).json(students);
 }));
 app.post("/api/students", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const { name, age, height, weight } = req.body;
-    const newStudent = new Student(students.length + 1, name, age, height, weight, new Class(1, "Educação Física", []));
+    const { name, age, height, weight, classId } = req.body;
+    if (!name || !age || !height || !weight) {
+        res.status(400).json({ error: "Nome, idade, altura e peso são obrigatórios!" });
+        return;
+    }
+    const studentClass = classes.find(c => c.id === Number(classId));
+    if (!studentClass) {
+        res.status(400).json({ error: "Classe não encontrada!" });
+        return;
+    }
+    const newStudent = new Student(students.length + 1, name, age, height, weight, studentClass);
     students.push(newStudent);
+    studentClass.students.push(newStudent);
     res.status(201).json(students);
+}));
+app.put("/api/students/:id", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const { id } = req.params;
+    const { name, age, height, weight, classId } = req.body;
+    const studentIndex = students.findIndex((student) => student.id === Number(id));
+    if (studentIndex === -1)
+        res.status(404).json({ error: "Aluno não encontrado!" });
+    if (!name || !age || !height || !weight)
+        res.status(400).json({ error: "Nome, idade, altura e peso são obrigatórios!" });
+    const studentClass = classes.find(c => c.id === Number(classId));
+    if (!studentClass) {
+        res.status(400).json({ error: "Classe não encontrada!" });
+        return;
+    }
+    students[studentIndex].name = name;
+    students[studentIndex].age = age;
+    students[studentIndex].height = height;
+    students[studentIndex].weight = weight;
+    students[studentIndex].studentClass = studentClass;
+    // remove student from old class
+    const oldClassIndex = classes.findIndex(c => c.id === students[studentIndex].studentClass.id);
+    if (oldClassIndex !== -1) {
+        const oldClass = classes[oldClassIndex];
+        const studentIndexInOldClass = oldClass.students.findIndex(s => s.id === students[studentIndex].id);
+        if (studentIndexInOldClass !== -1) {
+            oldClass.students.splice(studentIndexInOldClass, 1);
+        }
+    }
+    // add student in new class
+    const newClassIndex = classes.findIndex(c => c.id === studentClass.id);
+    if (newClassIndex !== -1) {
+        const newClass = classes[newClassIndex];
+        newClass.students.push(students[studentIndex]);
+    }
+    res.status(200).json(students);
 }));
 app.delete("/api/students/:id", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { id } = req.params;
