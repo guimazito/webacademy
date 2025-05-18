@@ -22,6 +22,9 @@
             <li class="nav-item">
               <a class="nav-link" href="class.html">Classes</a>
             </li>
+            <li class="nav-item">
+              <a class="nav-link" href="statistics.html">Estatísticas</a>
+            </li>
           </ul>
           <a id="exit" href="index.html" class="btn btn-secondary ms-auto">Sair</a>
         </div>
@@ -127,7 +130,7 @@
               headers: {
                   "Content-Type": "application/json"
               },
-              body: JSON.stringify({ name, age, height, weight, classId })
+              body: JSON.stringify({ name , age , height, weight, classId })
           });
 
           if (response.ok) {
