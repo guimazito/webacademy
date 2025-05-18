@@ -64,7 +64,12 @@
           </div>
           <form>
             <div class="modal-body text-start">
-              <input type="text" class="form-control" id="editTitle" required>
+              <label for="editTitle" class="form-label">Título</label>
+              <input type="text" class="form-control mb-2" id="editTitle" placeholder="Insira o título" required>
+              <label for="editFinishUntil" class="form-label">Data Limite</label>
+              <input type="date" class="form-control mb-2" id="editFinishUntil">
+              <label for="editDescription" class="form-label">Descrição</label>
+              <input type="text" class="form-control" id="editDescription" placeholder="Insira a descrição">
             </div>
             <div class="modal-footer border-0">
               <button type="submit" class="btn btn-success w-100">Confirmar</button>
@@ -131,7 +136,11 @@
                 tr.querySelector(`#edit-${reminder._id}`).addEventListener("click", () => {
                     const modal = document.getElementById("modalEditReminder");
                     const editTitleInput = modal.querySelector("#editTitle");
+                    const editFinishUntilInput = modal.querySelector("#editFinishUntil");
+                    const editDescriptionInput = modal.querySelector("#editDescription");
                     editTitleInput.value = reminder.title;
+                    editFinishUntilInput.value = reminder.finishUntil ? reminder.finishUntil.slice(0, 10) : "";
+                    editDescriptionInput.value = reminder.description;
 
                     modal.querySelector("form").onsubmit = async (e) => {
                         e.preventDefault();
