@@ -19,10 +19,11 @@
             <th scope="col">Lembrete</th>
             <th scope="col">Data e Hora Criação</th>
             <th scope="col">Data Limite</th>
+            <th scope="col">Descrição</th>
             <th scope="col">Ações</th>
           </tr>
         </thead>
-        <tbody>       
+        <tbody class="align-middle">       
         </tbody>
       </table>
     </div>
@@ -40,7 +41,9 @@
               <label for="newTitle" class="form-label">Título</label>
               <input type="text" class="form-control mb-2" id="newTitle" placeholder="Insira o título" required>
               <label for="newFinishUntil" class="form-label">Data Limite</label>
-              <input type="date" class="form-control" id="newFinishUntil" placeholder="Insira a data limite" required>
+              <input type="date" class="form-control mb-2" id="newFinishUntil">
+              <label for="newDescription" class="form-label">Descrição</label>
+              <input type="text" class="form-control" id="newDescription" placeholder="Insira a descrição">
             </div>
             <div class="modal-footer border-0">
               <button type="submit" class="btn btn-success w-100" id="addReminderButton">Confirmar</button>
@@ -76,14 +79,15 @@
         document.getElementById("addReminderButton").addEventListener("click", async () => {
             const title = document.getElementById("newTitle").value;
             const finishUntil = document.getElementById("newFinishUntil").value;
-            if (!title) return alert("Os campos não podem estar vazios!");
+            const description = document.getElementById("newDescription").value;
+            if (!title) return alert("O título não pode ser vazio!");
             
             const response = await fetch("http://localhost:3000/api/reminder", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
                 },
-                body: JSON.stringify({ title, finishUntil })
+                body: JSON.stringify({ title, finishUntil, description })
             });
 
             if (response.ok) {
@@ -108,7 +112,8 @@
                     <th scope="row">${index + 1}</th>
                     <td>${reminder.title}</td>
                     <td>${new Date(reminder.createdAt).toLocaleString()}</td>
-                    <td>${reminder.finishUntil.slice(0, 10).split('-').reverse().join('/')}</td>
+                    <td>${reminder.finishUntil ? reminder.finishUntil.slice(0, 10).split('-').reverse().join('/') : ""}</td>
+                    <td>${reminder.description ? reminder.description : ""}</td>
                     <td>
                       <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#modalEditReminder" id=edit-${reminder._id}>Editar</button>
                       <button type="button" class="btn btn-danger" id=delete-${reminder._id}>Excluir</button>
