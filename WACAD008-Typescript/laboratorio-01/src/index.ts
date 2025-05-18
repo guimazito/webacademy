@@ -57,9 +57,18 @@ app.post("/api/reminder", async (req: Request, res: Response): Promise<void> => 
 
 app.put("/api/reminder/:id", async (req: Request, res: Response): Promise<void> => {
     const { id } = req.params;
-    const { title } = req.body;
+    const { title, finishUntil, description } = req.body;
     if (!title) res.status(400).json({ error: "Título é obrigatório" });
-    const reminder = await ReminderModel.findByIdAndUpdate(id, { title, createdAt: new Date() }, { new: true });
+    const reminder = await ReminderModel.findByIdAndUpdate(
+        id,
+        {
+            title,
+            createdAt: new Date(),
+            finishUntil,
+            description
+        },
+        { new: true }
+    );
     if (!reminder) res.status(404).json({ error: "Lembrete não encontrado" });
     res.status(200).json(reminder);
 });
@@ -80,6 +89,6 @@ app.listen(PORT, () => {
 /*
     compilar o projeto: npx tsc
     executar o projeto: node build/js/index.js
-    agora: npm start
+    compilação e execução: npm start
     docker compose up --build
 */
