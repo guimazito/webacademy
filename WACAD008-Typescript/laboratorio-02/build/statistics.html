@@ -42,7 +42,7 @@
             <th scope="col">Resultado</th>
           </tr>
         </thead>
-        <tbody>
+        <tbody class="align-middle">
         </tbody>
       </table>
     </div>   
@@ -58,30 +58,30 @@
 
               const tr1 = document.createElement("tr");
               tr1.innerHTML = `
-                  <th scope="row" rowspan="4" class="align-middle">${statistic.className}</th>
+                  <th scope="row" rowspan="4">${statistic.className}</th>
                   <td>Número de Estudantes</td>
-                  <td>${statistic.numStudents}</td>
+                  <td>${statistic.numStudents ? statistic.numStudents : ""}</td>
               `;
               tbody.appendChild(tr1);
 
               const tr2 = document.createElement("tr");
               tr2.innerHTML = `
                   <td>Idade Média</td>
-                  <td>${statistic.averageAge}</td>
+                  <td>${statistic.averageAge ? statistic.averageAge : ""}</td>
               `;
               tbody.appendChild(tr2);
 
               const tr3 = document.createElement("tr");
               tr3.innerHTML = `
                   <td>Altura Média</td>
-                  <td>${statistic.averageHeight}</td>
+                  <td>${statistic.averageHeight ? statistic.averageHeight : ""}</td>
               `;
               tbody.appendChild(tr3);
 
               const tr4 = document.createElement("tr");
               tr4.innerHTML = `
                   <td>Peso Médio</td>
-                  <td>${statistic.averageWeight}</td>
+                  <td>${statistic.averageWeight ? statistic.averageWeight : ""}</td>
               `;
               tbody.appendChild(tr4);
               

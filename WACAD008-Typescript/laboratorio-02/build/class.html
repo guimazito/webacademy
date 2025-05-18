@@ -46,7 +46,7 @@
             <th scope="col">Ações</th>
           </tr>
         </thead>
-        <tbody>       
+        <tbody class="align-middle">       
         </tbody>
       </table>
     </div>
@@ -96,7 +96,7 @@
     <script>
       document.getElementById("addClassButton").addEventListener("click", async () => {
           const name = document.getElementById("newName").value;          
-          if (!name) return alert("O nome não pode estar vazio!");
+          if (!name) return alert("O nome não pode ser vazio!");
           
           const response = await fetch("http://localhost:4000/api/classes", {
               method: "POST",
