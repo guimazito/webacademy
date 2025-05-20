@@ -72,6 +72,14 @@ class Cart {
     getAll() {
         return this.items;
     }
+    getTotal() {
+        return this.items.reduce((total, item) => {
+            if (item instanceof Product) {
+                return total + item.price;
+            }
+            return total;
+        }, 0);
+    }
 }
 const stock = new Stock();
 const cart = new Cart();
@@ -80,8 +88,8 @@ const myProduct2 = new Tv(2, "Samsung Cristal", "Samsung", 2980, "samsung-crista
 const myProduct3 = new Tv(3, "Samsung QLED", "Samsung", 3800, "samsung-qled-65", "4K", 65);
 const myProduct4 = new Cellphone(4, "iPhone 14", "Apple", 5999, "iphone-14", 128);
 const myProduct5 = new Cellphone(5, "Motorola Edge 50", "Motorola", 2228, "motorola-edge-50", 256);
-const myProduct6 = new Bike(6, "Bicicleta Elétrica 500w", "Wehawk", 6000, "wehawk-29", 29);
-const myProduct7 = new Bike(7, "Caloi Vulcan", "Caloi", 8000, "caloi-29", 29);
+const myProduct6 = new Bike(6, "Wehawk 500W", "Wehawk", 6000, "wehawk-29", 29);
+const myProduct7 = new Bike(7, "Caloi Vulcan", "Caloi", 1125, "caloi-29", 29);
 stock.add(myProduct1);
 stock.add(myProduct2);
 stock.add(myProduct4);
@@ -122,6 +130,10 @@ app.put("/api/cart/remove", (req, res) => {
     else {
         res.status(404).json({ message: "Item não encontrado" });
     }
+});
+app.get("/api/cart/total", (req, res) => {
+    const total = cart.getTotal();
+    res.json({ total });
 });
 app.listen(PORT, () => {
     console.log(`Servidor rodando em http://localhost:${PORT}`);
