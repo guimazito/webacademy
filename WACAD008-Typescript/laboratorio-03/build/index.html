@@ -82,7 +82,8 @@
                             ${item.screenSize ? `<p class="card-text">Polegadas: ${item.screenSize}'</p>` : ""}
                             ${item.memory ? `<p class="card-text">Memória: ${item.memory} GB</p>`: ""}
                             ${item.rimSize ? `<p class="card-text">Aro: ${item.rimSize}</p>`: ""}
-                            <button type="button" class="btn btn-primary w-100 mt-auto" id=add-${item.id}>Adicionar no carrinho</button>
+                            <p class="card-text">Quantidade Disponível: ${item.quantity}</p>
+                            ${item.quantity ? `<button type="button" class="btn btn-primary w-100 mt-auto" id=add-${item.id}>Adicionar no carrinho</button>` : `<button type="button" class="btn btn-secondary w-100 mt-auto disabled" id=add-${item.id}>Indisponível</button>`}
                         </div>
                     </div>
                 `;
