@@ -1,25 +1,34 @@
 import dotenv from "dotenv"
-import express, { Request, Response } from "express"
+import router from "./router/router"
+import logger from "./middlewares/logger"
+import { engine } from "express-handlebars"
 import validadeEnv from "./utils/validadeEnv"
+import express, { Request, Response } from "express"
 
 dotenv.config()
 console.log(process.env)
 validadeEnv()
+const PORT = process.env.PORT || 4000
 const app = express()
 
-const PORT = process.env.PORT || 4000
+app.engine("handlebars", engine())
+app.set("view engine", "handlebars")
+app.set("views", `${__dirname}/views`)
 
-app.use((req, res, next) => {
+// Middleware to log requests
+app.use(logger("complete"))
+
+// Recorse to browser
+app.use("/css", express.static(`${process.cwd()}/public/css`))
+app.use("/js", express.static(`${process.cwd()}/public/js`))
+app.use("/img", express.static(`${process.cwd()}/public/img`))
+
+app.use(router)
+
+// Middleware to parse JSON bodies
+app.use((req: Request, res: Response, next) => {
     console.log("Request received")
     next()
-});
-
-app.get("/", (req: Request, res: Response) => {
-    res.send("Hello World");
-});
-
-app.get("/about", (req: Request, res: Response) => {
-    res.send("About");
 });
 
 app.listen(PORT, () => {

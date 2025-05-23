@@ -6,6 +6,7 @@ function validateEnv() {
         NODE_ENV: str({
             choices: ["development", "production"]
         }),
+        LOG_PATH: str(),
     })
 }
 
