@@ -84,15 +84,19 @@
                 <label for="newResolution" class="form-label">Resolução</label>
                 <input type="text" class="form-control mb-2" id="newResolution" placeholder="Insira a resolução" required>
                 <label for="newScreenSize" class="form-label">Polegadas</label>
-                <input type="text" class="form-control" id="newScreenSize" placeholder="Insira a resolução" required>
+                <input type="text" class="form-control" id="newScreenSize" placeholder="Insira o tamanho da tela" required>
               </div>
               <div id="inputCellphone">
                 <label for="newMemory" class="form-label">Memória</label>
-                <input type="text" class="form-control mb-2" id="newMemory" placeholder="Insira a memória" required>
+                <input type="text" class="form-control" id="newMemory" placeholder="Insira a memória" required>
+              </div>
+              <div id="inputBike">
+                <label for="newRimSize" class="form-label">Aro</label>
+                <input type="text" class="form-control" id="newRimSize" placeholder="Insira o tamanho do aro" required>
               </div>
             </div>
             <div class="modal-footer border-0">
-                <button type="submit" class="btn btn-success w-100" id="addClassButton">Confirmar</button>
+                <button type="submit" class="btn btn-success w-100" id="addProductButton">Confirmar</button>
             </div>
           </form>
         </div>
@@ -125,22 +129,30 @@
       const selectType = document.getElementById("newType");
       const inputTv = document.getElementById("inputTv");
       const inputCellphone = document.getElementById("inputCellphone");
+      const inputBike = document.getElementById("inputBike");
       selectType.addEventListener("change", (event) => {
           event.preventDefault();
           const selectedValue = event.target.value;
           if (selectedValue == 1) {
             inputTv.style.display = "block";
             inputCellphone.style.display = "none";
+            inputBike.style.display = "none";
           } else if (selectedValue == 2) {
             inputCellphone.style.display = "block";
+            inputTv.style.display = "none";
+            inputBike.style.display = "none";
+          } else if (selectedValue == 3) {
+            inputBike.style.display = "block";
+            inputCellphone.style.display = "none";
             inputTv.style.display = "none";
           } else {
               inputTv.style.display = "none";
               inputCellphone.style.display = "none";
+              inputBike.style.display = "none";
           }
       });
 
-      document.getElementById("addClassButton").addEventListener("click", async (event) => {
+      document.getElementById("addProductButton").addEventListener("click", async (event) => {
           event.preventDefault();
           const name = document.getElementById("newName").value;          
           if (!name) return alert("O nome não pode ser vazio!");
