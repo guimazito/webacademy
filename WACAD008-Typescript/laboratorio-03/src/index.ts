@@ -171,6 +171,49 @@ app.get("/api/stock", (req: Request, res: Response) => {
     res.json(items);
 });
 
+app.post("/api/stock", (req: Request, res: Response): void => {
+    const { model, brand, price, quantity, image, resolution, screenSize, memory, rimSize, category } = req.body;
+
+    if (!model || !brand || !price || !quantity || !image || !category) {
+        res.status(400).json({ message: "Dados incompletos" });
+        return;
+    }
+
+    const id = stock.getAll().length + 1;
+    let newProduct: Product;
+
+    switch (category) {
+        case "tv":
+            if (!resolution || !screenSize) {
+                res.status(400).json({ message: "Dados de TV incompletos" });
+                return;
+            }
+            newProduct = new Tv(id, model, brand, price, quantity, image, resolution, screenSize);
+            break;
+        case "cellphone":
+            if (!memory) {
+                res.status(400).json({ message: "Dados de celular incompletos" });
+                return;
+            }
+            newProduct = new Cellphone(id, model, brand, price, quantity, image, memory);
+            break;
+        case "bike":
+            if (!rimSize) {
+                res.status(400).json({ message: "Dados de bicicleta incompletos" });
+                return;
+            }
+            newProduct = new Bike(id, model, brand, price, quantity, image, rimSize);
+            break;
+        default:
+            res.status(400).json({ message: "Categoria inválida" });
+            return;
+    }
+
+    stock.add(newProduct);
+    res.status(201).json({ message: "Produto adicionado com sucesso", product: newProduct });
+});
+    
+
 // Cart endpoints
 app.get("/api/cart", (req: Request, res: Response) => {
     const items = cart.getAll();
