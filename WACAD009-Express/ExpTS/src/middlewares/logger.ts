@@ -19,7 +19,6 @@ function logger (type: LoggerType) {
             next();
         }
         } else {
-            // melhorar esse código
             return async (req: Request, res: Response, next: NextFunction) => {
                 await fs.writeFile(
                     `${process.cwd()}/${LOG_PATH}/logs.log`,
