@@ -83,7 +83,6 @@
       <script>
         document.addEventListener("DOMContentLoaded", function() {
           document.querySelector("#modalNewReminder form").addEventListener("submit", async (e) => {
-            console.log("submit chamado1");
             e.preventDefault();
             const title = document.getElementById("newTitle").value;
             const finishUntil = document.getElementById("newFinishUntil").value;
