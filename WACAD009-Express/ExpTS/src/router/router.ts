@@ -1,11 +1,11 @@
-import { Router, Request, Response } from "express";
+import { Prof } from "../types/main";
 import { LoremIpsum } from "lorem-ipsum";
+import { Router, Request, Response } from "express";
+import mainController from "../controllers/main";
 
 const router = Router();
 
-router.get("/", (req: Request, res: Response) => {
-    res.send("Você está na raiz da aplicação");
-});
+router.get("/", mainController.index);
 
 router.get("/hb1", (req: Request, res: Response) => {
     res.render("hb1", {
@@ -14,12 +14,26 @@ router.get("/hb1", (req: Request, res: Response) => {
     })
 });
 
-router.get("/hb2", (req: Request, res: Response) => {
-    res.render("hb2", {
-        show: true,
-        message: "Seja bem-vindo ao Handlebars 2",
-        layout: false
-    })
+router.get("/hb2",mainController.hb2);
+
+router.get('/hb3', (req: Request, res: Response) => {
+    const profes: Prof[] = [
+        { nome: "David Fernandes", sala: 1238 },
+        { nome: "Horácio Fernandes", sala: 1233 },
+        { nome: "Edleno Moura", sala: 1236 },
+        { nome: "Elaine Harada", sala: 1231 }
+    ];
+    res.render("hb3", { profes, layout: false });
+});
+
+router.get('/hb4', function (req: Request, res: Response) {
+    const profes = [
+        { nome: 'David Fernandes', sala: 1238 },
+        { nome: 'Horácio Fernandes', sala: 1233 },
+        { nome: 'Edleno Moura', sala: 1236 },
+        { nome: 'Elaine Harada', sala: 1231 },
+    ];
+    res.render('hb4', { profes, layout: false });
 });
 
 router.get("/about", (req: Request, res: Response) => {

@@ -19,7 +19,8 @@
     "express": "^5.1.0",
     "express-handlebars": "^8.0.3",
     "lorem-ipsum": "^2.0.8",
-    "morgan": "^1.10.0"
+    "morgan": "^1.10.0",
+    "sass": "^1.89.0"
   },
   "devDependencies": {
     "@types/express": "^5.0.2",

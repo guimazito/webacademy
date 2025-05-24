@@ -12,11 +12,16 @@ const PORT = process.env.PORT || 4000
 const app = express()
 
 app.engine("handlebars", engine())
+app.engine("handlebars", engine({
+    helpers: require(`${__dirname}/views/helpers/helpers.ts`),
+    layoutsDir: `${__dirname}/views/layouts`,
+    defaultLayout: "main",
+}));
 app.set("view engine", "handlebars")
 app.set("views", `${__dirname}/views`)
 
 // Middleware to log requests
-app.use(logger("complete"))
+app.use(logger("simple"))
 
 // Recorse to browser
 app.use("/css", express.static(`${process.cwd()}/public/css`))

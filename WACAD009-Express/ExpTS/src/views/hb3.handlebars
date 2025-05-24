@@ -7,10 +7,14 @@
     <link rel="stylesheet" href="/css/styles.css">
 </head>
 <body>
-    {{!-- show is defined in router.ts /hb2 --}}
-    {{#if poweredByNodejs}}
-        <span>{{name}} {{type}}</span> 
-    {{/if}}
+    <div class="container">
+        <p>Alguns professores do Icomp/UFAM</p>
+        <ul>
+            {{#each profes}}
+                <li>{{nome}} - sala {{sala}}</li>
+            {{/each}}
+        </ul>
+    </div>
 
     <script src="/js/index.js"></script>
 </body>
