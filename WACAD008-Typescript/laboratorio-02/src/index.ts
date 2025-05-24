@@ -207,7 +207,18 @@ app.delete("/api/students/:id", async (req: Request, res: Response) => {
     const { id } = req.params;
     const studentIndex = students.findIndex((student) => student.id === Number(id));
     if (studentIndex === -1) res.status(404).json({ error: "Aluno não encontrado!" })
-    res.status(200).json(students.splice(studentIndex, 1));
+    
+    const student = students[studentIndex];
+    const classStudents = student.studentClass.students;
+    const indexInClass = classStudents.findIndex(s => s.id === student.id);
+    
+    if (indexInClass !== -1) {
+        classStudents.splice(indexInClass, 1);
+    }
+
+    const removed = students.splice(studentIndex, 1);
+
+    res.status(200).json(removed);    
 });
 
 // Classes endpoints
