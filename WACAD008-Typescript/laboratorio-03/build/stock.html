@@ -80,17 +80,17 @@
               <input type="number" class="form-control mb-2" id="newPrice" placeholder="Insira o preço" required>
               <label for="newQuantity" class="form-label">Quantidade</label>
               <input type="number" class="form-control mb-2" id="newQuantity" placeholder="Insira a quantidade" required>
-              <div id="inputTv">
+              <div id="inputNewTv">
                 <label for="newResolution" class="form-label">Resolução</label>
                 <input type="text" class="form-control mb-2" id="newResolution" placeholder="Insira a resolução" required>
                 <label for="newScreenSize" class="form-label">Polegadas</label>
                 <input type="text" class="form-control" id="newScreenSize" placeholder="Insira o tamanho da tela" required>
               </div>
-              <div id="inputCellphone">
+              <div id="inputNewCellphone">
                 <label for="newMemory" class="form-label">Memória</label>
                 <input type="text" class="form-control" id="newMemory" placeholder="Insira a memória" required>
               </div>
-              <div id="inputBike">
+              <div id="inputNewBike">
                 <label for="newRimSize" class="form-label">Aro</label>
                 <input type="text" class="form-control" id="newRimSize" placeholder="Insira o tamanho do aro" required>
               </div>
@@ -109,12 +109,33 @@
       <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content bg-dark text-light">
           <div class="modal-header">
-            <h5 class="modal-title">Editar Classe</h5>
+            <h5 class="modal-title">Editar Produto</h5>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <form>
-            <div class="modal-body text-start">
-              <input type="text" class="form-control" id="editName" required>
+            <div class="modal-body text-start">              
+              <label for="editModel" class="form-label">Modelo</label>
+              <input type="text" class="form-control mb-2" id="editModel" placeholder="Insira o modelo" required>
+              <label for="editBrand" class="form-label">Marca</label>
+              <input type="text" class="form-control mb-2" id="editBrand" placeholder="Insira a marca" required>
+              <label for="editPrice" class="form-label">Preço</label>
+              <input type="number" class="form-control mb-2" id="editPrice" placeholder="Insira o preço" required>
+              <label for="editQuantity" class="form-label">Quantidade</label>
+              <input type="number" class="form-control mb-2" id="editQuantity" placeholder="Insira a quantidade" required>
+              <div id="inputEditTv">
+                <label for="editResolution" class="form-label">Resolução</label>
+                <input type="text" class="form-control mb-2" id="editResolution" placeholder="Insira a resolução">
+                <label for="editScreenSize" class="form-label">Polegadas</label>
+                <input type="text" class="form-control" id="editScreenSize" placeholder="Insira o tamanho da tela">
+              </div>
+              <div id="inputEditCellphone">
+                <label for="editMemory" class="form-label">Memória</label>
+                <input type="text" class="form-control" id="editMemory" placeholder="Insira a memória">
+              </div>
+              <div id="inputEditBike">
+                <label for="editRimSize" class="form-label">Aro</label>
+                <input type="text" class="form-control" id="editRimSize" placeholder="Insira o tamanho do aro">
+              </div>
             </div>
             <div class="modal-footer border-0">
               <button type="submit" class="btn btn-success w-100">Confirmar</button>
@@ -127,50 +148,76 @@
 
     <script>
       const selectType = document.getElementById("newType");
-      const inputTv = document.getElementById("inputTv");
-      const inputCellphone = document.getElementById("inputCellphone");
-      const inputBike = document.getElementById("inputBike");
+      const inputNewTv = document.getElementById("inputNewTv");
+      const inputNewCellphone = document.getElementById("inputNewCellphone");
+      const inputNewBike = document.getElementById("inputNewBike");
       selectType.addEventListener("change", (event) => {
           event.preventDefault();
           const selectedValue = event.target.value;
           if (selectedValue == 1) {
-            inputTv.style.display = "block";
-            inputCellphone.style.display = "none";
-            inputBike.style.display = "none";
+            inputNewTv.style.display = "block";
+            inputNewCellphone.style.display = "none";
+            inputNewBike.style.display = "none";
           } else if (selectedValue == 2) {
-            inputCellphone.style.display = "block";
-            inputTv.style.display = "none";
-            inputBike.style.display = "none";
+            inputNewCellphone.style.display = "block";
+            inputNewTv.style.display = "none";
+            inputNewBike.style.display = "none";
           } else if (selectedValue == 3) {
-            inputBike.style.display = "block";
-            inputCellphone.style.display = "none";
-            inputTv.style.display = "none";
+            inputNewBike.style.display = "block";
+            inputNewCellphone.style.display = "none";
+            inputNewTv.style.display = "none";
           } else {
-              inputTv.style.display = "none";
-              inputCellphone.style.display = "none";
-              inputBike.style.display = "none";
+              inputNewTv.style.display = "none";
+              inputNewCellphone.style.display = "none";
+              inputNewBike.style.display = "none";
           }
       });
 
       document.getElementById("addProductButton").addEventListener("click", async (event) => {
           event.preventDefault();
-          const name = document.getElementById("newName").value;          
-          if (!name) return alert("O nome não pode ser vazio!");
+          const model = document.getElementById("newModel").value;
+          const brand = document.getElementById("newBrand").value;
+          const price = document.getElementById("newPrice").value;
+          const quantity = document.getElementById("newQuantity").value;
+          const resolution = document.getElementById("newResolution").value;
+          const screenSize = document.getElementById("newScreenSize").value;
+          const memory = document.getElementById("newMemory").value;
+          const rimSize = document.getElementById("newRimSize").value;
+          const type = document.getElementById("newType").value;
+
+          if (!model || !brand || !price || !quantity || !type) return alert("Nenhum campo pode estar vazio!");
           
-          const response = await fetch("http://localhost:4000/api/classes", {
+          const response = await fetch("http://localhost:4000/api/stock", {
               method: "POST",
               headers: {
                   "Content-Type": "application/json"
               },
-              body: JSON.stringify({ name })
+              body: JSON.stringify({
+                model,
+                brand,
+                price,
+                quantity,
+                resolution,
+                screenSize,
+                memory,
+                rimSize,
+                type,
+              })
           });
 
           if (response.ok) {
               const data = await response.json();
-              newName.value = "";
-              newAge.value = "";
+              newModel.value = "";
+              newBrand.value = "";
+              newPrice.value = "";
+              newQuantity.value = "";
+              newResolution.value = "";
+              newScreenSize.value = "";
+              newMemory.value = "";
+              newRimSize.value = "";
+              document.querySelector("#modalNewProduct .btn-close").click();
           } else {
-              alert("Erro ao adicionar aluno!");
+              alert("Erro ao adicionar produto!");
           }
       fetchStock();
       });
@@ -213,18 +260,80 @@
               tr.querySelector(`#edit-${product.id}`).addEventListener("click", (event) => {
                   event.preventDefault();
                   const modal = document.getElementById("modalEditProduct");
-                  const editModelInput = modal.querySelector("#editName");
+                  const editModelInput = modal.querySelector("#editModel");
+                  const editBrandInput = modal.querySelector("#editBrand");
+                  const editPriceInput = modal.querySelector("#editPrice");
+                  const editQuantityInput = modal.querySelector("#editQuantity");
+                  const editResolutionInput = modal.querySelector("#editResolution");
+                  const editScreenSizeInput = modal.querySelector("#editScreenSize");
+                  const editMemoryInput = modal.querySelector("#editMemory");
+                  const editRimSizeInput = modal.querySelector("#editRimSize");
+                  const inputEditTv = modal.querySelector("#inputEditTv");
+                  const inputEditCellphone = modal.querySelector("#inputEditCellphone");
+                  const inputEditBike = modal.querySelector("#inputEditBike");
+                  
+                  if (product.resolution) {
+                    inputEditTv.style.display = "block";
+                    inputEditCellphone.style.display = "none";
+                    inputEditBike.style.display = "none";
+                    editResolutionInput.value = product.resolution;
+                    editScreenSizeInput.value = product.screenSize;
+                  } else if (product.memory) {
+                      inputEditTv.style.display = "none";
+                      inputEditCellphone.style.display = "block";
+                      inputEditBike.style.display = "none";
+                      editMemoryInput.value = product.memory;
+                  } else if (product.rimSize) {
+                      inputEditTv.style.display = "none";
+                      inputEditCellphone.style.display = "none";
+                      inputEditBike.style.display = "block";
+                      editRimSizeInput.value = product.rimSize;
+                  } else {
+                      inputEditTv.style.display = "none";
+                      inputEditCellphone.style.display = "none";
+                      inputEditBike.style.display = "none";
+                  }
+
                   editModelInput.value = product.model;
+                  editBrandInput.value = product.brand;
+                  editPriceInput.value = product.price;
+                  editQuantityInput.value = product.quantity;             
 
                   modal.querySelector("form").onsubmit = async (e) => {
                       e.preventDefault();
-                      const editName = editModelInput.value;
+                      const editModel = editModelInput.value;
+                      const editBrand = editBrandInput.value;
+                      const editPrice = editPriceInput.value;
+                      const editQuantity = editQuantityInput.value;
+                      const editResolution = editResolutionInput.value;
+                      const editScreenSize = editScreenSizeInput.value;
+                      const editMemory = editMemoryInput.value;
+                      const editRimSize = editRimSizeInput.value;
+
+                      if (inputEditTv.style.display === "block") {
+                          editResolutionInput.required = true;
+                          editScreenSizeInput.required = true;
+                      } else if (inputEditCellphone.style.display === "block") {
+                          editMemoryInput.required = true;
+                      } else if (inputEditBike.style.display === "block") {
+                          editRimSizeInput.required = true;
+                      }
+
                       await fetch(`http://localhost:4000/api/stock/${product.id}`, {
                           method: "PUT",
                           headers: {
                               "Content-Type": "application/json"
                           },
-                          body: JSON.stringify({ name: editName })
+                          body: JSON.stringify({
+                            model: editModel,
+                            brand: editBrand,
+                            price: editPrice,
+                            quantity: editQuantity,
+                            resolution: editResolution,
+                            screenSize: editScreenSize,
+                            memory: editMemory,
+                            rimSize: editRimSize,
+                          })
                       });
                       fetchStock();
                       modal.querySelector(".btn-close").click();

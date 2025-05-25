@@ -167,42 +167,43 @@ stock.add(myProduct7);
 
 // Stock endpoints
 app.get("/api/stock", (req: Request, res: Response) => {
-    const items = stock.getAll();
+    const items = stock.getAll().sort((a, b) => a.id - b.id);
     res.json(items);
 });
 
 app.post("/api/stock", (req: Request, res: Response): void => {
-    const { model, brand, price, quantity, image, resolution, screenSize, memory, rimSize, category } = req.body;
-
-    if (!model || !brand || !price || !quantity || !image || !category) {
+    const { model, brand, price, quantity, resolution, screenSize, memory, rimSize, type } = req.body;
+    
+    if (!model || !brand || !price || !quantity || !type) {
         res.status(400).json({ message: "Dados incompletos" });
         return;
     }
 
     const id = stock.getAll().length + 1;
+    const image = "default";
     let newProduct: Product;
 
-    switch (category) {
-        case "tv":
+    switch (type) {
+        case "1":
             if (!resolution || !screenSize) {
                 res.status(400).json({ message: "Dados de TV incompletos" });
                 return;
             }
-            newProduct = new Tv(id, model, brand, price, quantity, image, resolution, screenSize);
+            newProduct = new Tv(id, model, brand, Number(price), Number(quantity), image, resolution, Number(screenSize));
             break;
-        case "cellphone":
+        case "2":
             if (!memory) {
                 res.status(400).json({ message: "Dados de celular incompletos" });
                 return;
             }
-            newProduct = new Cellphone(id, model, brand, price, quantity, image, memory);
+            newProduct = new Cellphone(id, model, brand, Number(price), Number(quantity), image, Number(memory));
             break;
-        case "bike":
+        case "3":
             if (!rimSize) {
                 res.status(400).json({ message: "Dados de bicicleta incompletos" });
                 return;
             }
-            newProduct = new Bike(id, model, brand, price, quantity, image, rimSize);
+            newProduct = new Bike(id, model, brand, Number(price), Number(quantity), image, Number(rimSize));
             break;
         default:
             res.status(400).json({ message: "Categoria inválida" });
@@ -212,7 +213,42 @@ app.post("/api/stock", (req: Request, res: Response): void => {
     stock.add(newProduct);
     res.status(201).json({ message: "Produto adicionado com sucesso", product: newProduct });
 });
-    
+
+app.put("/api/stock/:id", (req: Request, res: Response) => {
+    const { id } = req.params;
+    const { model, brand, price, quantity, resolution, screenSize, memory, rimSize } = req.body;
+    const itemIndex = stock.getAll().findIndex((item) => item.id === Number(id));
+    if (itemIndex === -1) {
+        res.status(404).json({ message: "Item não encontrado" });
+        return;
+    }
+
+    const item = stock.getAll()[itemIndex];
+
+    if (model) item.model = model;
+    if (brand) item.brand = brand;
+    if (price) item.price = Number(price);
+    if (quantity) item.quantity = Number(quantity);
+    if (resolution && "resolution" in item) (item as Tv).resolution = resolution;
+    if (screenSize && "screenSize" in item) (item as Tv).screenSize = Number(screenSize);
+    if (memory && "memory" in item) (item as Cellphone).memory = Number(memory);
+    if (rimSize && "rimSize" in item) (item as Bike).rimSize = Number(rimSize);
+    stock.remove(item);
+    stock.add(item);
+    res.status(200).json({ message: "Item atualizado com sucesso", item });
+});
+
+app.delete("/api/stock/:id", (req: Request, res: Response) => {
+    const { id } = req.params;
+    const itemIndex = stock.getAll().findIndex((item) => item.id === Number(id));
+    if (itemIndex === -1) {
+        res.status(404).json({ message: "Item não encontrado" });
+        return;
+    }
+    const item = stock.getAll()[itemIndex];
+    stock.remove(item);
+    res.status(200).json({ message: "Item removido com sucesso", item });
+});
 
 // Cart endpoints
 app.get("/api/cart", (req: Request, res: Response) => {

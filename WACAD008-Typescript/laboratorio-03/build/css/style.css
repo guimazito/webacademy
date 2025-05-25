@@ -1,7 +1,7 @@
 .card-img-top {
   width: 100%;
-  height: 300px;         /* ajuste a altura conforme desejar */
-  object-fit: cover;     /* mantém o aspecto e preenche o espaço */
+  height: 300px;
+  object-fit: cover;
 }
 
 .card-img-bottom {
@@ -9,6 +9,10 @@
   height: 300px;
 }
 
-#inputTv, #inputCellphone, #inputBike {
+#inputNewTv, #inputNewCellphone, #inputNewBike {
+  display: none;
+}
+
+#inputEditTv, #inputEditCellphone, #inputEditBike {
   display: none;
 }

@@ -76,7 +76,7 @@
                         <img src="assets/${item.image}.png" class="card-img-top">
                         <div class="card-body d-flex align-items-start flex-column bg-secondary bg-opacity-100 card-img-bottom">
                             <h5 class="card-title">${item.model}</h5>
-                            <p class="card-text">R$ ${item.price.toLocaleString("pt-BR", { style: "currency", currency: "BRL" })}</p>
+                            <p class="card-text">${item.price.toLocaleString("pt-BR", { style: "currency", currency: "BRL" })}</p>
                             <p class="card-text">Marca: ${item.brand}</p>
                             ${item.resolution ? `<p class="card-text">Resolução: ${item.resolution}</p>` : ""}
                             ${item.screenSize ? `<p class="card-text">Polegadas: ${item.screenSize}'</p>` : ""}
