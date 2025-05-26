@@ -8,7 +8,7 @@ import express, { Request, Response } from "express"
 dotenv.config()
 console.log(process.env)
 validadeEnv()
-const PORT = process.env.PORT || 4000
+const PORT = process.env.PORT || 3333
 const app = express()
 
 app.engine("handlebars", engine())
@@ -21,7 +21,7 @@ app.set("view engine", "handlebars")
 app.set("views", `${__dirname}/views`)
 
 // Middleware to log requests
-app.use(logger("simple"))
+app.use(logger("complete"))
 
 // Recorse to browser
 app.use("/css", express.static(`${process.cwd()}/public/css`))
