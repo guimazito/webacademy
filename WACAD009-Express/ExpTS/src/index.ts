@@ -2,6 +2,9 @@ import dotenv from "dotenv"
 import router from "./router/router"
 import logger from "./middlewares/logger"
 import { engine } from "express-handlebars"
+// @ts-ignore
+import sassMiddleware from "sass-middleware"
+
 import validadeEnv from "./utils/validadeEnv"
 import express, { Request, Response } from "express"
 
@@ -35,6 +38,14 @@ app.use((req: Request, res: Response, next) => {
     console.log("Request received")
     next()
 });
+
+app.use(sassMiddleware({
+ src: `${__dirname}/../public/scss`,
+ dest: `${__dirname}/../public/css`,
+ outputStyle: "compressed",
+ prefix: "/css",
+}));
+app.use("/css", express.static(`${__dirname}/../public/css`));
 
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
