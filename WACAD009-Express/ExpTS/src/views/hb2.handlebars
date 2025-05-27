@@ -1,17 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="/css/styles.css">
-</head>
-<body>
-    {{!-- show is defined in router.ts /hb2 --}}
-    {{#if poweredByNodejs}}
-        <span>{{name}} {{type}}</span> 
-    {{/if}}
-
-    <script src="/js/index.js"></script>
-</body>
-</html>
+{{!-- poweredByNodejs, name and type are defined in controllers/main.ts /hb2 --}}
+{{#if poweredByNodejs}}
+    <span>{{name}} {{type}}</span> 
+{{/if}}

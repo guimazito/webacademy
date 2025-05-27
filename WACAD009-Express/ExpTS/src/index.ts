@@ -21,7 +21,7 @@ app.set("view engine", "handlebars")
 app.set("views", `${__dirname}/views`)
 
 // Middleware to log requests
-app.use(logger("complete"))
+app.use(logger("simple"))
 
 // Recorse to browser
 app.use("/css", express.static(`${process.cwd()}/public/css`))
