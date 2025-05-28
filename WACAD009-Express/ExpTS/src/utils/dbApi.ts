@@ -13,7 +13,6 @@ export async function get(endpoint: string) {
 export async function post(endpoint: string, data: any) {
     try {
         const response = await axios.post(`${process.env.DB_URL}/${endpoint}`, data);
-        console.log('dbapi', response.data);
         return response.data;
     } catch (error) {
         console.error(`Error posting data to ${process.env.DB_URL}/${endpoint}:`, error);
@@ -21,7 +20,29 @@ export async function post(endpoint: string, data: any) {
     }
 }
 
+export async function remove(endpoint: string) {
+    try {
+        const response = await axios.delete(`${process.env.DB_URL}/${endpoint}`);
+        return response.data;
+    } catch (error) {
+        console.error(`Error deleting data from ${process.env.DB_URL}/${endpoint}:`, error);
+        throw error;
+    }
+}
+
+export async function put(endpoint: string, data: any) {
+    try {
+        const response = await axios.put(`${process.env.DB_URL}/${endpoint}`, data);
+        return response.data;
+    } catch (error) {
+        console.error(`Error putting data to ${process.env.DB_URL}/${endpoint}:`, error);
+        throw error;
+    }
+}
+
 export default {
     get,
-    post
+    post,
+    put,
+    remove
 };

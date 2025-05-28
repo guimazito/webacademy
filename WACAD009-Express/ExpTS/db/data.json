@@ -13,28 +13,16 @@
       "stock": 8
     },
     {
-      "id": "3",
-      "name": "Monitor",
-      "price": 150,
-      "stock": 12
+      "name": "Teclados",
+      "price": "120",
+      "stock": "3",
+      "id": "32b1"
     },
     {
-      "id": "7133"
-    },
-    {
-      "id": "67d2"
-    },
-    {
-      "id": "78e2"
-    },
-    {
-      "id": "4283"
-    },
-    {
-      "id": "919f",
-      "name": "sabao",
-      "price": "123",
-      "stock": "2"
+      "name": "Mouse",
+      "price": "135",
+      "stock": "3",
+      "id": "9f97"
     }
   ]
 }

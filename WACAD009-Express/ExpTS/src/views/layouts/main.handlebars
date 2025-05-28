@@ -8,21 +8,21 @@
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
         <link rel="stylesheet" href="/css/styles.css">
     </head>
-    <body>
+    <body class="d-flex flex-column min-vh-100">
         <!-- navbar -->
         <nav class="navbar navbar-expand-lg bg-body-tertiary mb-2">
             <div class="container-fluid">
-                <a class="navbar-brand" href="index.html">Aula Express</a>
+                <a class="navbar-brand" href="/products">Aula Express</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarNav">
                     <ul class="navbar-nav">
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="index.html">Início</a>
+                            <a class="nav-link active" aria-current="page" href="/products">Início</a>
                         </li>
                     </ul>
-                    <a id="exit" href="login.html" class="btn btn-secondary ms-auto">Sair</a>
+                    <a id="exit" href="/products" class="btn btn-secondary ms-auto">Sair</a>
                 </div>
             </div>
         </nav>
@@ -55,14 +55,12 @@
             </div>
         </div>
 
+        <footer class="bg-secondary text-light text-center">
+            <p>Powered by <span class="text-primary">Node.js</span> and <span class="text-success">Express</span></p>
+            <p>&copy; 2023 - Todos os direitos reservados</p>
+        </footer>
+
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js" integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq" crossorigin="anonymous"></script>
 
     </body>
-
-    <footer class="mt-5">
-        <div class="container text-center">
-            <p>Powered by <span class="text-primary">Node.js</span> and <span class="text-success">Express</span></p>
-            <p>&copy; 2023 - Todos os direitos reservados</p>
-        </div>
-    </footer>
 </html>
