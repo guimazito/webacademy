@@ -1,0 +1,12 @@
+<div class="d-flex justify-content-between space-between mb-3">
+    <div class="card" style="width: 18rem;">
+        <div class="card-body">
+            <h5 class="card-title">{{product.name}}</h5>
+            <p class="card-text">Preço: {{product.price}}</p>
+            <p class="card-text">Estoque: {{product.stock}}</p>
+            <a href="/products/update/{{id}}"><i class="bi bi-pencil-square"></i></a>
+            <a href="/products/remove/{{id}}"><i class="bi bi-trash3"></i></a>
+        </div>
+    </div>
+    <a href="/products"><i class="bi bi-arrow-left-square"></i></a>
+</div>

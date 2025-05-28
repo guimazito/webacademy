@@ -4,7 +4,6 @@ import logger from "./middlewares/logger"
 import { engine } from "express-handlebars"
 // @ts-ignore
 import sassMiddleware from "sass-middleware"
-
 import validadeEnv from "./utils/validadeEnv"
 import express, { Request, Response } from "express"
 
@@ -31,6 +30,7 @@ app.use("/css", express.static(`${process.cwd()}/public/css`))
 app.use("/js", express.static(`${process.cwd()}/public/js`))
 app.use("/img", express.static(`${process.cwd()}/public/img`))
 
+app.use(express.urlencoded({ extended: false }));
 app.use(router)
 
 // Middleware to parse JSON bodies

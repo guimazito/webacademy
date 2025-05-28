@@ -6,5 +6,9 @@ import { defineConfig } from "eslint/config";
 export default defineConfig([
   { files: ["src/**/*.{js,mjs,cjs,ts,mts,cts}"], languageOptions: { globals: globals.browser } },
   tseslint.configs.recommended,
-  { rules: { '@typescript-eslint/no-unused-vars': 'off' } },
+  { rules: { 
+    '@typescript-eslint/no-unused-vars': 'off',
+    '@typescript-eslint/no-require-imports': 'off',
+    '@typescript-eslint/ban-ts-comment': 'off',
+  } },
 ]);

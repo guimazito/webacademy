@@ -7,7 +7,7 @@ const index = (req: Request, res: Response) => {
 };
 
 const hb1 = (req: Request, res: Response) => {
-    res.render("hb1", {
+    res.render("main/hb1", {
         message: "Olá, você está aprendendo Express + HBS!",
         layout: "main",
     })
