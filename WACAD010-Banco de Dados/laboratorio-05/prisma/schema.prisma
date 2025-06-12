@@ -24,28 +24,86 @@ https://www.prisma.io/docs/orm/prisma-schema/data-model/relations/many-to-many-r
 https://www.prisma.io/docs/orm/prisma-client/queries/crud
 */
 
-model Post {
-  id        Int      @id @default(autoincrement())
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  title     String   @db.VarChar(255)
-  content   String?
-  published Boolean  @default(false)
-  author    User     @relation(fields: [authorId], references: [id])
-  authorId  Int
+model Cliente {
+  cpfCliente     Int        @id
+  idEndereco     Int
+  nome           String     @db.VarChar(45)
+  celular        String     @db.VarChar(45)
+  email          String     @db.VarChar(45)
+  dataNascimento DateTime   @db.Date
+  endereco       Endereco[]
+  compras        Compra[]
 }
 
-model Profile {
-  id     Int     @id @default(autoincrement())
-  bio    String?
-  user   User    @relation(fields: [userId], references: [id])
-  userId Int     @unique
+model Endereco {
+  idEndereco   Int      @id @default(autoincrement())
+  cpfCliente   Int
+  cep          String   @db.VarChar(45)
+  bairro       String   @db.VarChar(45)
+  cidade       String   @db.VarChar(45)
+  numero       String   @db.VarChar(45)
+  logradouro   String   @db.VarChar(45)
+  complemento  String?  @db.VarChar(45)
+  cliente      Cliente  @relation(fields: [cpfCliente], references: [cpfCliente])
+  compras      Compra[]
 }
 
-model User {
-  id      Int      @id @default(autoincrement())
-  email   String   @unique
-  name    String?
-  posts   Post[]
-  profile Profile?
+model Produto {
+  idProduto             Int           @id @default(autoincrement())
+  idSubcategoria        Int
+  modelo                String        @db.VarChar(45)
+  fabricante            String        @db.VarChar(45)
+  precoBase             Float
+  quantidadeDisponivel  Int           
+  subcategoria          Subcategoria  @relation(fields: [idSubcategoria], references: [idSubcategoria])
+  numerosSerie          NumeroSerie[]
+  itensCompra           ItemCompra[]
 }
+
+model Categoria {
+  idCategoria   Int           @id @default(autoincrement())
+  nome          String        @db.VarChar(45)
+  subcategorias Subcategoria[]
+}
+
+model Subcategoria {
+  idSubcategoria  Int         @id @default(autoincrement())
+  idCategoria     Int
+  nome            String      @db.VarChar(45)
+  categoria       Categoria   @relation(fields: [idCategoria], references: [idCategoria])
+  produtos        Produto[]
+}
+
+model NumeroSerie {
+  idNumeroSerie  Int      @id @default(autoincrement())
+  idProduto      Int
+  numeroSerie    String   @db.VarChar(45)
+  produto        Produto  @relation(fields: [idProduto], references: [idProduto])
+}
+
+model Compra {
+  idCompra        Int       @id @default(autoincrement())
+  cpfCliente      Int
+  idEndereco      Int
+  dataHora        DateTime  @db.DateTime
+  formaPagamento  String    @db.VarChar(45)
+  total           Float
+  desconto        Float?
+  cliente         Cliente   @relation(fields: [cpfCliente], references: [cpfCliente])
+  endereco        Endereco  @relation(fields: [idEndereco], references: [idEndereco])
+  itens           ItemCompra[]
+}
+
+model ItemCompra {
+  idItemCompra   Int      @id @default(autoincrement())
+  idCompra       Int
+  idProduto      Int
+  precoUnitario  Float
+  quantidade     Int
+  compra         Compra   @relation(fields: [idCompra], references: [idCompra])
+  produto        Produto  @relation(fields: [idProduto], references: [idProduto])
+}
+
+/*
+Generate a new migration: npx prisma migrate dev --name init
+*/
