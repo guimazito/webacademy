@@ -3,16 +3,15 @@ import { PrismaClient } from './generated/prisma'
 const prisma = new PrismaClient()
 
 async function main() {
-  await prisma.user.create({
+  await prisma.endereco.create({
     data: {
-      name: 'Alice',
-      email: 'alice@prisma.io',
-      posts: {
-        create: { title: 'Hello World' },
-      },
-      profile: {
-        create: { bio: 'I like turtles' },
-      },
+      cpfCliente: '00449467244',
+      cep: '69037-155',
+      bairro: 'Cidade Nova',
+      cidade: 'Manaus',
+      numero: '123',
+      logradouro: 'Rua das Flores',
+      complemento: 'Apto 101'
     },
   })
 

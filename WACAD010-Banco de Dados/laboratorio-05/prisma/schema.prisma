@@ -25,8 +25,7 @@ https://www.prisma.io/docs/orm/prisma-client/queries/crud
 */
 
 model Cliente {
-  cpfCliente     Int        @id
-  idEndereco     Int
+  cpfCliente     String     @id
   nome           String     @db.VarChar(45)
   celular        String     @db.VarChar(45)
   email          String     @db.VarChar(45)
@@ -37,7 +36,7 @@ model Cliente {
 
 model Endereco {
   idEndereco   Int      @id @default(autoincrement())
-  cpfCliente   Int
+  cpfCliente   String
   cep          String   @db.VarChar(45)
   bairro       String   @db.VarChar(45)
   cidade       String   @db.VarChar(45)
@@ -83,7 +82,7 @@ model NumeroSerie {
 
 model Compra {
   idCompra        Int       @id @default(autoincrement())
-  cpfCliente      Int
+  cpfCliente      String
   idEndereco      Int
   dataHora        DateTime  @db.DateTime
   formaPagamento  String    @db.VarChar(45)
