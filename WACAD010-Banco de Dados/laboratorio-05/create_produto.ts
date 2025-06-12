@@ -3,25 +3,15 @@ import { PrismaClient } from './generated/prisma'
 const prisma = new PrismaClient()
 
 async function main() {
-  await prisma.endereco.create({
+  await prisma.produto.create({
     data: {
-      cpfCliente: '00449467244',
-      cep: '69037-155',
-      bairro: 'Cidade Nova',
-      cidade: 'Manaus',
-      numero: '123',
-      logradouro: 'Rua das Flores',
-      complemento: 'Apto 101'
+      idSubcategoria: 3,
+      modelo: 'Smart TV UHD 4K',
+      fabricante: 'Samsung',
+      precoBase: 2500.00,
+      quantidadeDisponivel: 50
     },
   })
-
-  const allUsers = await prisma.user.findMany({
-    include: {
-      posts: true,
-      profile: true,
-    },
-  })
-  console.dir(allUsers, { depth: null })
 }
 
 main()
@@ -35,5 +25,5 @@ main()
   })
 
 /*
-npx tsx index.ts
+npx tsx create_produto.ts
 */
