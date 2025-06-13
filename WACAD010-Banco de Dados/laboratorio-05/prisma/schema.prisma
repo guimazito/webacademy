@@ -6,7 +6,6 @@
 
 generator client {
   provider = "prisma-client-js"
-  output   = "../generated/prisma"
 }
 
 datasource db {
@@ -22,6 +21,8 @@ https://www.prisma.io/docs/orm/prisma-schema/data-model/relations/one-to-many-re
 https://www.prisma.io/docs/orm/prisma-schema/data-model/relations/many-to-many-relations
 
 https://www.prisma.io/docs/orm/prisma-client/queries/crud
+
+https://github.com/prisma/prisma-examples/blob/latest/orm/express/prisma/schema.prisma
 */
 
 model Cliente {
@@ -104,5 +105,6 @@ model ItemCompra {
 }
 
 /*
-Generate a new migration: npx prisma migrate dev --name init
+1. Generate the Prisma client: npx prisma generate
+2. Generate a new migration: npx prisma migrate dev --name init
 */
