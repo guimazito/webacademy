@@ -105,5 +105,6 @@ model ItemCompra {
 }
 
 /*
-Generate a new migration: npx prisma migrate dev --name init
+1. Generate the Prisma client: npx prisma generate
+2. Generate a new migration: npx prisma migrate dev --name init
 */
