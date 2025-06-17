@@ -1,6 +1,25 @@
 import { UpdateProductDTO, CreateProductDTO, Product } from './product.types';
 
-export let products: Product[] = [];
+export let products: Product[] = [
+	{
+		"id": 1,
+		"name": "Motorola Edge 50",
+		"price": 2500,
+		"stock": 10
+	},
+	{
+		"id": 2,
+		"name": "Caloi Vulcan",
+		"price": 1125,
+		"stock": 15
+	},
+    {
+		"id": 3,
+		"name": "LG OLED",
+		"price": 5499,
+		"stock": 5
+	}
+];
 
 export const getProducts = (): Product[] => {
     return products;
