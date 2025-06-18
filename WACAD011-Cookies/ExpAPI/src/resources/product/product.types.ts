@@ -1,12 +1,3 @@
-export type Product = {
-    id: number;
-    name: string;
-    price: number;
-    stock: number;
-};
+import { Product } from "@prisma/client";
 
-/* DTO: Data Transfer Object */
-export type CreateProductDTO = Pick<Product, "name" | "price" | "stock">;
-// export type CreateProductDTO = Omit<Product, "id">;
-
-export type UpdateProductDTO = Pick<Product, "name" | "price" | "stock">;
+export type CreateProductDto = Pick<Product, "name" | "price" | "stockQuantity">;

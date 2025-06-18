@@ -1,54 +1,42 @@
 import { Request, Response } from "express";
-import { CreateProductDTO } from "./product.types";
-import { getProducts, createProduct, getProduct, updateProduct, removeProduct } from "./product.service";
+import { StatusCodes, ReasonPhrases } from "http-status-codes";
+import { createProduct, getProducts } from "./product.service";
+import { CreateProductDto } from "../product/product.types";
+import { createProductError } from "./product.errors";
 
-const index = (req: Request, res: Response) => {
-    const products = getProducts();
-    res.json(products);
-};
-
-const create = (req: Request, res: Response) => {
-    const product = req.body as CreateProductDTO;
-    console.log("Creating product:", product);
-    const newProduct = createProduct(product);
-    res.status(201).json(newProduct)
-};
-
-const read = (req: Request, res: Response) => {
-    const id = parseInt(req.params.id);
-    console.log("Reading product with id:", id);
+const index = async (req: Request, res: Response) => {
+    const products = await getProducts();
     try {
-        const product = getProduct(id);
-        res.status(200).json(product);
+        res.status(StatusCodes.OK).json(products);
     } catch (error) {
-        const message = error instanceof Error ? error.message : "Unknown error";
-        res.status(404).json({ error: message });
+        res.status(StatusCodes.INTERNAL_SERVER_ERROR).send({
+            error: ReasonPhrases.INTERNAL_SERVER_ERROR,
+            message: "An error occurred while fetching products."
+        });
     }
 };
 
-const update = (req: Request, res: Response) => {
-    const id = parseInt(req.params.id);
-    const productData = req.body;
-    console.log("Updating product with id:", id, "Data:", productData);
+const create = async (req: Request, res: Response) => {
+    const newProduct = req.body as CreateProductDto;
     try {
-        const updatedProduct = updateProduct(id, productData);
-        res.status(200).json(updatedProduct);
+        const product = await createProduct(newProduct);
+        res.status(StatusCodes.CREATED).json(product);
     } catch (error) {
         const message = error instanceof Error ? error.message : "Unknown error";
-        res.status(404).json({ error: message });
+        res.status(StatusCodes.BAD_REQUEST).json({ error: message });
     }
 };
 
-const remove = (req: Request, res: Response) => {
-    const id = parseInt(req.params.id);
-    console.log("Removing product with id:", id);
-    try {
-        removeProduct(id);
-        res.status(204).send();
-    } catch (error) {
-        const message = error instanceof Error ? error.message : "Unknown error";
-        res.status(400).json({ error: message });
-    }
+const read = async (req: Request, res: Response) => {
+    
+};
+
+const update = async (req: Request, res: Response) => {
+    
+};
+
+const remove = async (req: Request, res: Response) => {
+    
 };
 
 export default {index, create, read, update, remove};
