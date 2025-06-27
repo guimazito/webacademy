@@ -1,0 +1,30 @@
+version: '3'
+
+services:
+  back:
+    build:
+      context: .
+      dockerfile: Dockerfile-Back
+    container_name: back
+    ports:
+      - "4000:4000"
+    networks:
+      - rede_webacademy
+    volumes:
+      - ./back.js:/home/app/back.js
+  front:
+    build:
+      context: .
+      dockerfile: Dockerfile-Front
+    container_name: front
+    ports:
+      - "3000:3000"
+    networks:
+      - rede_webacademy
+    volumes:
+      - ./front.js:/home/app/front.js
+    depends_on:
+      - back
+networks:
+  rede_webacademy:
+    driver: bridge
