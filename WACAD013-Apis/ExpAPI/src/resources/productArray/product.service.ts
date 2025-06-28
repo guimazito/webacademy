@@ -1,0 +1,74 @@
+import { UpdateProductDTO, CreateProductDTO, Product } from './product.types';
+
+export let products: Product[] = [
+	{
+		"id": 1,
+		"name": "Motorola Edge 50",
+		"price": 2500,
+		"stock": 10
+	},
+	{
+		"id": 2,
+		"name": "Caloi Vulcan",
+		"price": 1125,
+		"stock": 15
+	},
+    {
+		"id": 3,
+		"name": "LG OLED",
+		"price": 5499,
+		"stock": 5
+	}
+];
+
+export const getProducts = (): Product[] => {
+    return products;
+};
+
+export const createProduct = (product: CreateProductDTO): Product => {
+    const newProduct = {
+        id: products.length + 1,
+        ...product
+    }
+    products.push(newProduct);
+    return newProduct;
+};
+
+export const getProduct = (id: number) => {
+    const product = products.find(p => p.id === id);
+    if (!product) {
+        throw new Error(`Product with id ${id} not found`);
+    }
+    console.log("Found Product:", product);
+    return product;
+};
+
+export const updateProduct = (id: number, productData: UpdateProductDTO): Product => {
+    const productIndex = products.findIndex(p => p.id === id);
+    
+    if (productIndex === -1) {
+        throw new Error(`Product with id ${id} not found`);
+    }
+
+    const updatedProduct = {
+        ...products[productIndex],
+        ...productData
+    };
+
+    products[productIndex] = updatedProduct;
+    return updatedProduct;
+};
+
+export const removeProduct = (id: number): boolean => {
+    const productIndex = products.findIndex(p => p.id === id);
+    if (productIndex === -1) {
+        throw new Error(`Product with id ${id} not found`);
+    }
+    products.splice(productIndex, 1);
+    return true;
+};
+
+/*
+Apenas essa camada tem acesso ao dado original,
+ou seja, todo o código relacionado ao prisma (banco de dados)
+*/
