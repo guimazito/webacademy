@@ -1,13 +1,5 @@
-PostgreSQL: Banco de dados para aplicações web modernas
-
-9788555192555
-
-Tecnologias de banco de dados dão suporte diário para operações e tomadas de decisões nos mais diversos níveis da empresa, da operação à gerência. Eles são vitais para as organizações modernas que querem se manter competitivas no mercado e no cenário atual de extrema concorrência. O PostgreSQL é um poderoso sistema gerenciador de banco de dados objeto-relacional de código aberto. Seu recente aumento de popularidade veio de usuários de outros bancos de dados em busca de um sistema com melhores garantias de confiabilidade, melhores recursos de consulta, mais operação previsível, ou simplesmente querendo algo mais fácil de aprender, entender e usar.
-Neste livro, Vinícius Carvalho explora as principais características do PostgreSQL, mostrando por que ele é seguro, poderoso, confiável e rápido. Através do desenvolvimento de um projeto, você vai aprender na prática as funções, consultas e administração de um banco de dados, podendo revisar seus conhecimentos nos exercícios elaborados pelo autor ao fim do livro. 
-
-https://cdn.shopify.com/s/files/1/0155/7645/products/PostgreSQL_ebook_large.jpg?v=1631652465
-
-Vinícius Carvalho
+"PostgreSQL: Banco de dados para aplicações web modernas","9788555192555","Tecnologias de banco de dados dão suporte diário para operações e tomadas de decisões nos mais diversos níveis da empresa, da operação à gerência. Eles são vitais para as organizações modernas que querem se manter competitivas no mercado e no cenário atual de extrema concorrência. O PostgreSQL é um poderoso sistema gerenciador de banco de dados objeto-relacional de código aberto. Seu recente aumento de popularidade veio de usuários de outros bancos de dados em busca de um sistema com melhores garantias de confiabilidade, melhores recursos de consulta, mais operação previsível, ou simplesmente querendo algo mais fácil de aprender, entender e usar.
+Neste livro, Vinícius Carvalho explora as principais características do PostgreSQL, mostrando por que ele é seguro, poderoso, confiável e rápido. Através do desenvolvimento de um projeto, você vai aprender na prática as funções, consultas e administração de um banco de dados, podendo revisar seus conhecimentos nos exercícios elaborados pelo autor ao fim do livro.","https://cdn.shopify.com/s/files/1/0155/7645/products/PostgreSQL_ebook_large.jpg?v=1631652465","Vinícius Carvalho"
 
 
 
