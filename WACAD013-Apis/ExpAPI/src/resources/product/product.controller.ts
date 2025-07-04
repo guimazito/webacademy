@@ -15,6 +15,20 @@ const index = async (req: Request, res: Response) => {
 };
 
 const create = async (req: Request, res: Response) => {
+    /*
+    #swagger.summary = 'Adiciona um novo produto na base.'
+    #swagger.parameters['body'] = {
+        in: 'body',
+        schema: { $ref: '#/definitions/CreateProductDto' }
+    }
+    #swagger.responses[200] = {
+        schema: { $ref: '#/definitions/Product' }
+    }
+    #swagger.responses[403] = {
+        description: 'Erro ao criar o produto.',
+        schema: { $ref: '#/definitions/Error' }
+    }
+    */
     const newProduct = req.body as CreateProductDto;
     try {
         const product = await createProduct(newProduct);

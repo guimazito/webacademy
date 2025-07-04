@@ -47,3 +47,9 @@ export const changePasswordUser = async(id: string, oldPassword: string, newPass
 export const getUsers = async(): Promise<User[]> => {
     return await prisma.user.findMany();
 };
+
+export const getUserById = async(id: string): Promise<User | null> => {
+    return await prisma.user.findUnique({
+        where: { id }
+    })
+};
