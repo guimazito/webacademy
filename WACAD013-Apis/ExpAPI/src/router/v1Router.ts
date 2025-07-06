@@ -5,6 +5,7 @@ import languageRouter from "../resources/language/language.router";
 import userRouter from "../resources/user/user.router";
 import authRouter from "../resources/auth/auth.router";
 import purchaseRouter from "../resources/purchase/purchase.router"; 
+import purchaseItemRouter from "../resources/purchaseItem/purchaseItem.router"; 
 
 const router = Router();
 
@@ -38,6 +39,12 @@ router.use(
     "/purchases",
     // #swagger.tags = ['Purchases']
     purchaseRouter
+);
+
+router.use(
+    "/purchaseItems",
+    // #swagger.tags = ['Purchase Items']
+    purchaseItemRouter
 );
 
 export default router;

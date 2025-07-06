@@ -20,6 +20,7 @@ model Product {
   stockQuantity   Int         @db.Int()
   createdAt       DateTime    @default(now())
   updatedAt       DateTime    @updatedAt
+  PurchaseItem PurchaseItem[]
 
   @@index([name]) // Parâmetro de índice para consultas eficientes
 }
@@ -45,15 +46,23 @@ model User {
 }
 
 model Purchase {
+  id            String   @id @default(uuid()) @db.Char(36)
+  userId        String   @db.Char(36)
+  totalPrice    Decimal  @db.Decimal(10,2)
+  createdAt     DateTime @default(now())
+  user          User     @relation(fields: [userId], references: [id])
+
+  @@index([userId]) // Parâmetro de índice para consultas eficientes
+}
+
+model PurchaseItem {
   id          String   @id @default(uuid()) @db.Char(36)
-  userId      String   @db.Char(36)
+  purchaseId  String   @db.Char(36)
   productId   String   @db.Char(36)
   quantity    Int      @db.Int()
-  totalPrice  Decimal  @db.Decimal(10,2)
-  createdAt   DateTime @default(now())
-  user        User     @relation(fields: [userId], references: [id])
+  product     Product  @relation(fields: [productId], references: [id])
 
-  @@index([userId])
+  @@index([purchaseId]) // Parâmetro de índice para consultas eficientes
 }
 
 /*
