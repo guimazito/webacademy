@@ -2,7 +2,7 @@ import { usertError } from "./user.errors";
 import { Request, Response } from "express";
 import { changePasswordDTO, CreateUserDTO } from "./user.types";
 import { ReasonPhrases, StatusCodes } from "http-status-codes";
-import { createUser, getUserByEmail, changePasswordUser, getUsers, getUserById } from "./user.service";
+import { createUser, getUserByEmail, changePasswordUser, getUsers, getUserById, removeUser } from "./user.service";
 
 const index = async(req: Request, res: Response) => {
     try {
@@ -42,7 +42,16 @@ const read = async(req: Request, res: Response) => {
 };
 
 const update = async(req: Request, res: Response) => {};
-const remove = async(req: Request, res: Response) => {};
+
+const remove = async(req: Request, res: Response) => {
+    const { id } = req.params;
+    try {
+        await removeUser(id);
+        res.status(StatusCodes.NO_CONTENT).send(ReasonPhrases.NO_CONTENT);
+    } catch (error) {
+        usertError(res, error);
+    }
+};
 
 const changePassword = async(req: Request, res: Response) => {
     const { id } = req.params;
