@@ -8,11 +8,13 @@ import session from "express-session";
 import { v4 as uuidv4 } from "uuid";
 import swaggerUi from "swagger-ui-express";
 import swaggerFile from "./output-swagger.json"; // Need to enable `resolveJsonModule` in tsconfig.json
+import { AddProductDTO } from "./resources/purchase/purchase.types";
 
 declare module "express-session" {
   interface SessionData {
     uid: string;
     userTypeId: string;
+    purchaseCart: AddProductDTO[];
   }
 }
 

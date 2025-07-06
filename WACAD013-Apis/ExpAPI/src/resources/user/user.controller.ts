@@ -1,4 +1,4 @@
-import { usertError } from "./user.errors";
+import { userError } from "./user.errors";
 import { Request, Response } from "express";
 import { changePasswordDTO, CreateUserDTO } from "./user.types";
 import { ReasonPhrases, StatusCodes } from "http-status-codes";
@@ -9,7 +9,7 @@ const index = async(req: Request, res: Response) => {
         const users = await getUsers();
         res.status(StatusCodes.OK).json(users);
     } catch (error) {
-        usertError(res, error);
+        userError(res, error);
     }
 };
 
@@ -23,7 +23,7 @@ const create = async(req: Request, res: Response) => {
             res.status(StatusCodes.CREATED).json(user);
         }
     } catch (error) {
-        usertError(res, error);
+        userError(res, error);
     }
 };
 
@@ -37,7 +37,7 @@ const read = async(req: Request, res: Response) => {
             res.status(StatusCodes.NOT_FOUND).send(ReasonPhrases.NOT_FOUND);
         }
     } catch (error) {
-        usertError(res, error);
+        userError(res, error);
     }
 };
 
@@ -53,7 +53,7 @@ const update = async(req: Request, res: Response) => {
             res.status(StatusCodes.NOT_FOUND).send(ReasonPhrases.NOT_FOUND);
         }
     } catch (error) {
-        usertError(res, error);
+        userError(res, error);
     }
 };
 
@@ -63,7 +63,7 @@ const remove = async(req: Request, res: Response) => {
         await removeUser(id);
         res.status(StatusCodes.NO_CONTENT).send(ReasonPhrases.NO_CONTENT);
     } catch (error) {
-        usertError(res, error);
+        userError(res, error);
     }
 };
 
@@ -78,7 +78,7 @@ const changePassword = async(req: Request, res: Response) => {
             res.status(StatusCodes.BAD_REQUEST).send(ReasonPhrases.BAD_REQUEST);
         }
     } catch (error) {
-        usertError(res, error);
+        userError(res, error);
     }
 };
 

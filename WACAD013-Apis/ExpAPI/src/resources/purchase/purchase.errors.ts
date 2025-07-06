@@ -2,7 +2,7 @@ import { Response } from "express";
 import { Prisma } from "@prisma/client";
 import { StatusCodes, ReasonPhrases } from "http-status-codes";
 
-export const userError = (res: Response, err: any) => {
+export const purchaseError = (res: Response, err: any) => {
     if (err instanceof Prisma.PrismaClientValidationError) {
         res.status(StatusCodes.BAD_REQUEST).json({
             error: ReasonPhrases.BAD_REQUEST,

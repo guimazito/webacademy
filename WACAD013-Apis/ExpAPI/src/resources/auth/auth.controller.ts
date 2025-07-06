@@ -3,7 +3,7 @@ import { LoginDTO, SignUpDTO } from "./auth.types";
 import { ReasonPhrases, StatusCodes } from "http-status-codes";
 import { createUser, getUserByEmail } from "../user/user.service";
 import { UserTypes } from "../userType/userType.constants";
-import { usertError } from "../user/user.errors";
+import { userError } from "../user/user.errors";
 import { checkCredentials } from "./auth.services";
 
 const signup = async(req: Request, res: Response) => {
@@ -16,7 +16,7 @@ const signup = async(req: Request, res: Response) => {
             res.status(StatusCodes.CREATED).send(ReasonPhrases.CREATED);
         }
     } catch (error) {
-        usertError(res, error);
+        userError(res, error);
     }
 
 };
@@ -31,13 +31,14 @@ const login = async(req: Request, res: Response) => {
             if (user) {
                 req.session.uid = user.id;
                 req.session.userTypeId = user.userTypeId;
+                req.session.purchaseCart = [];
                 res.status(StatusCodes.OK).send(ReasonPhrases.OK);
             } else {
                 res.status(StatusCodes.UNAUTHORIZED).send(ReasonPhrases.UNAUTHORIZED);
             }
         }
     } catch (error) {
-        usertError(res, error);
+        userError(res, error);
     }
 };
 
@@ -52,7 +53,7 @@ const logout = async(req: Request, res: Response) => {
             }
         });
     } catch (error) {
-        usertError(res, error);
+        userError(res, error);
     }
 };
 
