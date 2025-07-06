@@ -59,3 +59,10 @@ export const removeUser = async(id: string): Promise<void> => {
         where: { id }
     })
 };
+
+export const updateUser = async(id: string, data: CreateUserDTO): Promise<User> => {
+    return await prisma.user.update({
+        where: { id },
+        data
+    });
+};
