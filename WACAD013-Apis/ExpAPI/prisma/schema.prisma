@@ -39,8 +39,21 @@ model User {
   userType   UserType @relation(fields: [userTypeId], references: [id])
   createdAt  DateTime @default(now())
   updatedAt  DateTime @updatedAt
+  Purchase   Purchase[]
 
   @@index([email]) // Parâmetro de índice para consultas eficientes
+}
+
+model Purchase {
+  id          String   @id @default(uuid()) @db.Char(36)
+  userId      String   @db.Char(36)
+  productId   String   @db.Char(36)
+  quantity    Int      @db.Int()
+  totalPrice  Decimal  @db.Decimal(10,2)
+  createdAt   DateTime @default(now())
+  user        User     @relation(fields: [userId], references: [id])
+
+  @@index([userId])
 }
 
 /*
