@@ -5,4 +5,4 @@ CREATE TABLE IF NOT EXISTS livros (
     isbn VARCHAR(13) NOT NULL UNIQUE,
     autores JSON NOT NULL,
     url_imagem TEXT
-);
+)ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;

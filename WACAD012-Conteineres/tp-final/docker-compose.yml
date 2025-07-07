@@ -13,9 +13,10 @@ services:
       - "3306:3306"
     volumes:
       - mysql_data:/var/lib/mysql
+      # docker exec -i mysql_container mysql -u root -proot webacademy < ./bd/script.sql
       - ./bd/script.sql:/docker-entrypoint-initdb.d/script.sql
-      - ./bd/importa-dados.sql:/docker-entrypoint-initdb.d/importa-dados.sql
-      - ./bd/dados-livros.txt:/docker-entrypoint-initdb.d/dados-livros.txt
+      # docker exec -i mysql_container mysql -u root -proot webacademy < ./bd/dados-livros.sql
+      - ./bd/dados-livros.sql:/docker-entrypoint-initdb.d/dados-livros.sql
 
   phpmyadmin:
     image: phpmyadmin/phpmyadmin
@@ -29,6 +30,21 @@ services:
       - "8080:80"
     depends_on:
       - mysql
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: backend_container
+    ports:
+      - "4444:4444"
+    env_file:
+      - ./backend/.env
+    depends_on:
+      - mysql
+    volumes:
+      - ./backend/prisma:/app/prisma
+      - ./backend/.env:/app/.env
 
 volumes:
   mysql_data:
