@@ -1,5 +1,5 @@
 # Estágio de construção da aplicação
-FROM node:18.16 AS build
+FROM node:18.18 AS build
 
 WORKDIR /appbuild
 
@@ -10,10 +10,11 @@ COPY ./src ./src
 COPY ./prisma ./prisma
 
 RUN npm ci
+
 RUN npm run build
 
 # Estágio de execução da aplicação
-FROM node:18.16-slim
+FROM node:18.18-slim
 
 WORKDIR /app
 

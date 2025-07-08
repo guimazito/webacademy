@@ -55,7 +55,7 @@ const Rodape: FC = (): JSX.Element => {
                         Responsáveis pela aplicação
                     </Typography>
                     <RodapeLista>
-                        {infosApi && infosApi.responsaveis.map(resp => (
+                        {infosApi?.responsaveis?.map(resp => (
                             <RodapeItemLista key={resp.email}>
                                 {resp.nome}
                                 <a href={`mailto:${resp.email}`}>

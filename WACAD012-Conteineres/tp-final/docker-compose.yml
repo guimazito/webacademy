@@ -7,16 +7,18 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: webacademy
-      MYSQL_USER: user
-      MYSQL_PASSWORD: password
+      # MYSQL_USER: webdb
+      MYSQL_PASSWORD: 181007
     ports:
       - "3306:3306"
     volumes:
       - mysql_data:/var/lib/mysql
+      - "./bd/script.sql:/docker-entrypoint-initdb.d/script.sql"
       # docker exec -i mysql_container mysql -u root -proot webacademy < ./bd/script.sql
-      - ./bd/script.sql:/docker-entrypoint-initdb.d/script.sql
+      # - ./bd/script.sql:/docker-entrypoint-initdb.d/script.sql
       # docker exec -i mysql_container mysql -u root -proot webacademy < ./bd/dados-livros.sql
-      - ./bd/dados-livros.sql:/docker-entrypoint-initdb.d/dados-livros.sql
+      # docker exec -i mysql mysql -u root -p181007 tp-final < ./bd/dados-livros2.sql
+      # - ./bd/dados-livros.sql:/docker-entrypoint-initdb.d/dados-livros.sql
 
   phpmyadmin:
     image: phpmyadmin/phpmyadmin
@@ -36,15 +38,14 @@ services:
       context: ./backend
       dockerfile: Dockerfile
     container_name: backend_container
+    environment:
+      DATABASE_URL: mysql://webdb:181007@mysql_container:3306/webacademy
     ports:
       - "4444:4444"
     env_file:
       - ./backend/.env
     depends_on:
       - mysql
-    volumes:
-      - ./backend/prisma:/app/prisma
-      - ./backend/.env:/app/.env
 
 volumes:
   mysql_data:
