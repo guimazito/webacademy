@@ -1,8 +1,13 @@
 "use client";
 import React from "react";
+import { ItemCarrinho as ItemCarrinhoType } from "@/app/types/carrinho";
 import ItemCarrinho from "../ItemCarrinho/ItemCarrinho";
 
-export default function ListagemCarrinho() {
+interface ListagemCarrinhoProps {
+    itemCarrinho: ItemCarrinhoType[];
+}
+
+export default function ListagemCarrinho({ itemCarrinho }: ListagemCarrinhoProps) {
     return (
         <>
             <div className="card mb-4">
@@ -22,10 +27,15 @@ export default function ListagemCarrinho() {
                                 </tr>
                             </thead>
                             <tbody>
-                                <ItemCarrinho />
-                                <ItemCarrinho />
-                                <ItemCarrinho />
-                                <ItemCarrinho />
+                                {itemCarrinho.map(item => (
+                                    <ItemCarrinho 
+                                        key={item.id}
+                                        nome={item.nome}
+                                        preco={item.preco}
+                                        quantidade={item.quantidade}
+                                        id={item.id}
+                                    />
+                                ))}
                             </tbody>
                         </table>
                     </div>

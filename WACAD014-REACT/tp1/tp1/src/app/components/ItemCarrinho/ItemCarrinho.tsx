@@ -1,7 +1,8 @@
 "use client";
+import type { ItemCarrinho } from "@/app/types/carrinho";
 import React from "react";
 
-export default function ItemCarrinho() {
+export default function ItemCarrinho(props: ItemCarrinho) {
     const valorTotalProduto = ( 
         precoUnitario: number,
         quantidade: number
@@ -9,12 +10,12 @@ export default function ItemCarrinho() {
 
     return (
         <>  
-            <tr key="1">
-                <td>Notebook 1</td>
-                <td>R$ {(1500).toFixed(2)}</td>
-                <td>2</td>
+            <tr key={props.id}>
+                <td>{props.nome}</td>
+                <td>R$ {props.preco.toFixed(2)}</td>
+                <td>{props.quantidade}</td>
 
-                <td>R$ {valorTotalProduto(1500, 2).toFixed(2)}</td>
+                <td>R$ {valorTotalProduto(props.preco, props.quantidade).toFixed(2)}</td>
                 <td>
                     <button className="btn btn-danger btn-sm">
                         Remover
