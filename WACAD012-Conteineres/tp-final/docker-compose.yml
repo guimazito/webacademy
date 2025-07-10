@@ -46,6 +46,8 @@ services:
       - mysql_container
     networks:
       - rede_webacademy
+    volumes:
+    - backend_logs:/log
 
   front_container:
     build:
@@ -62,7 +64,13 @@ services:
 
 volumes:
   mysql_data:
+  backend_logs:
 
 networks:
   rede_webacademy:
     driver: bridge
+
+# Verificar conteúdo do volume de logs do backend:
+# docker exec -it backend_container bash
+# ls /log
+# cat /log/seuarquivo.log
