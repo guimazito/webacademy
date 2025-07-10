@@ -19,7 +19,10 @@ export default function Produtos() {
       {/* <> significa React.Fragment. Posso retonar múltiplos componentes. Ex: nav e main, abaixo  */}
       <main>
         <div className="container p-5">
-          <ResumoCarrinho />
+          <ResumoCarrinho
+            quantidadeTotal={quantidadeTotal}
+            valorTotal={valorTotal}
+          />
           <ListagemProdutos 
             produtos={mockProdutos} 
             adicionarAoCarrinho={adicionarAoCarrinho}
