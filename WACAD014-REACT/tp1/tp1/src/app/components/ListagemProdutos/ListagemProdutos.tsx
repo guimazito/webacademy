@@ -2,13 +2,25 @@
 import React from "react";
 import CardProduto from "../CardProduto/CardProduto";
 import { Produto } from "@/app/types/produto";
+import { useListaProdutos } from "@/app/hooks/useListaProdutos";
 
 interface ListagemProdutosProps {
     produtos: Produto[];
     adicionarAoCarrinho: (produto: Produto) => void;
 }
 
-export default function ListagemProdutos({ produtos, adicionarAoCarrinho }: ListagemProdutosProps) {
+export default function ListagemProdutos({ adicionarAoCarrinho }: ListagemProdutosProps) {
+
+    const { produtos, isPending, isError } = useListaProdutos();
+
+    if (isPending) return <h5>Carregando...</h5>;
+
+    if (isError) return <h5>Erro ao carregar produtos</h5>;
+
+    if (!produtos) return <h5>Não há produtos disponíveis no momento</h5>;
+
+    console.log(produtos);
+
     return (
         <>
             <h5 className="mb-3">Produtos disponíveis:</h5>
@@ -25,7 +37,8 @@ export default function ListagemProdutos({ produtos, adicionarAoCarrinho }: List
                         vendido={produto.vendido}
                         usuario_id={produto.usuario_id}
                         adicionarAoCarrinho={adicionarAoCarrinho}
-                        produto={produto}                    />
+                        produto={produto}
+                    />
                 ))}
             </div>
         </>
