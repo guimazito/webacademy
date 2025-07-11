@@ -1,4 +1,6 @@
 import "bootstrap/dist/css/bootstrap.min.css";
+import "react-toastify/dist/ReactToastify.css";
+import { ToastContainer } from "react-toastify";
 import Navbar from "./components/Navbar/Navbar";
 import BootstrapClient from "./components/BootstrapClient/BootstrapClient";
 import { ReactQueryClientProvider } from "./components/ReactQueryClient/ReactQueryClient";
@@ -15,6 +17,7 @@ export default function RootLayout({
           <Navbar />
           {children}
           <BootstrapClient />
+          <ToastContainer />
         </ReactQueryClientProvider>
       </body>
     </html>
