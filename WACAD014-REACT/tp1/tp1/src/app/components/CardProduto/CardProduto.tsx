@@ -4,6 +4,8 @@ import Image from "next/image";
 import { toast } from "react-toastify";
 import { Produto } from "@/app/types/produto";
 import { useAddFavorito } from "@/app/hooks/useAddFavorito";
+import { useRemoveFavorito } from "@/app/hooks/useRemoveFavorito";
+import { useListaFavoritos } from "@/app/hooks/useListaFavoritos";
 
 interface CardProdutoProps {
     produto: Produto;
@@ -12,10 +14,36 @@ interface CardProdutoProps {
 
 export default function CardProduto(props: CardProdutoProps & Produto) {
 
-    const { isPending, addFavorito } = useAddFavorito(
-        () => toast.success("Produto adicionado aos favoritos!"),
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const { favoritos, isPending: isCheckFavoritoPending, isError: isCheckFavoritoError, refetch } = useListaFavoritos();    
+    
+    const { isPending: isAddPending, addFavorito } = useAddFavorito(
+        () => {
+            toast.success("Produto adicionado aos favoritos!");
+            refetch();
+        },
         () => toast.error("Erro ao adicionar produto aos favoritos!")
     );
+
+    const { isPending: isRemovePending, removeFavorito } = useRemoveFavorito(
+        () => {
+            toast.success("Produto removido dos favoritos!");
+            refetch();
+        },
+        () => toast.error("Erro ao remover produto dos favoritos!")
+    );  
+    
+    // console.log(favoritos);
+
+    const estaFavoritado = (favoritos ?? []).some(fav => fav.id === props.id);
+
+    const handleFavorito = () => {
+        if (estaFavoritado) {
+            removeFavorito(props);
+        } else {
+            addFavorito(props);
+        }
+    }
 
     return (
     <div className="col">
@@ -39,11 +67,16 @@ export default function CardProduto(props: CardProdutoProps & Produto) {
                     Adicionar no carrinho
                 </button>
                 <button 
-                    className="btn btn-warning d-block w-100 mt-2"
+                    className={`btn d-block w-100 mt-2 ${estaFavoritado ? "btn-success" : "btn-warning"}`}
                     type="button"
-                    onClick={() => addFavorito(props)}
+                    onClick={handleFavorito}
+                    disabled={isAddPending || isRemovePending}
                 >
-                    {isPending ? "Favoritando..." : "Favoritar"}
+                    {
+                        estaFavoritado
+                        ? "Desfavoritar"
+                        : "Favoritar"
+                    }
                 </button>
             </div>
         </div>

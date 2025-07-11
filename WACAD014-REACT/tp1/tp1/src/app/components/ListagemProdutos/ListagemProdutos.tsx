@@ -19,7 +19,7 @@ export default function ListagemProdutos({ adicionarAoCarrinho }: ListagemProdut
 
     if (!produtos) return <h5>Não há produtos disponíveis no momento</h5>;
 
-    console.log(produtos);
+    // console.log(produtos);
 
     return (
         <>
