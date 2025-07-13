@@ -1,8 +1,8 @@
 "use client";
 import React, { useState } from "react";
+import { mockItensCarrinho } from "../mocks/itensCarrinho";
 import ResumoCarrinho from "../components/ResumoCarrinho/ResumoCarrinho";
 import ListagemCarrinho from "../components/ListagemCarrinho/ListagemCarrinho";
-import { mockItensCarrinho } from "../mocks/itensCarrinho";
 
 export default function Carrinho() {
   const [itensCarrinho, setItemsCarrinho] = useState(mockItensCarrinho);

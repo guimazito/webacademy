@@ -29,15 +29,16 @@ export default function ListagemProdutos({ adicionarAoCarrinho }: ListagemProdut
                 {produtos.map((produto: Produto) => (
                     <CardProduto 
                         key={produto.id}
-                        nome={produto.nome}
-                        preco={produto.preco}
-                        fotos={produto.fotos}
-                        id={produto.id}
-                        descricao={produto.descricao}
-                        vendido={produto.vendido}
-                        usuario_id={produto.usuario_id}
-                        adicionarAoCarrinho={adicionarAoCarrinho}
                         produto={produto}
+                        adicionarAoCarrinho={adicionarAoCarrinho} refetchFavoritos={function (): void {
+                            throw new Error("Function not implemented.");
+                        } }                        // nome={produto.nome}
+                        // preco={produto.preco}
+                        // fotos={produto.fotos}
+                        // id={produto.id}
+                        // descricao={produto.descricao}
+                        // vendido={produto.vendido}
+                        // usuario_id={produto.usuario_id}
                     />
                 ))}
             </div>

@@ -1,5 +1,4 @@
 export interface Produto {
-  // adicionarAoCarrinho(props: Produto): void;
   id: string;
   fotos: { titulo: string; src: string }[];
   nome: string;

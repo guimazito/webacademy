@@ -8,5 +8,5 @@ export function useListaFavoritos() {
         queryFn: () => getListaFavoritos(),
     });
 
-    return { favoritos: data, isPending, isError, refetch };
+    return { favoritos: data, isPending, isError, refetchFavoritos: refetch };
 }

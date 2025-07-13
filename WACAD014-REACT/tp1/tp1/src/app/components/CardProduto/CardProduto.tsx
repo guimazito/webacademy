@@ -2,6 +2,7 @@
 import React from "react";
 import Image from "next/image";
 import { toast } from "react-toastify";
+import { useRouter } from "next/navigation";
 import { Produto } from "@/app/types/produto";
 import { useAddFavorito } from "@/app/hooks/useAddFavorito";
 import { useRemoveFavorito } from "@/app/hooks/useRemoveFavorito";
@@ -12,15 +13,16 @@ interface CardProdutoProps {
     adicionarAoCarrinho: (produto: Produto) => void;
 }
 
-export default function CardProduto(props: CardProdutoProps & Produto) {
+export default function CardProduto({ produto, adicionarAoCarrinho }: CardProdutoProps) {
+    const router = useRouter();
 
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const { favoritos, isPending: isCheckFavoritoPending, isError: isCheckFavoritoError, refetch } = useListaFavoritos();    
+    const { favoritos, isPending: isCheckFavoritoPending, isError: isCheckFavoritoError, refetchFavoritos } = useListaFavoritos();    
     
     const { isPending: isAddPending, addFavorito } = useAddFavorito(
         () => {
             toast.success("Produto adicionado aos favoritos!");
-            refetch();
+            refetchFavoritos();
         },
         () => toast.error("Erro ao adicionar produto aos favoritos!")
     );
@@ -28,20 +30,18 @@ export default function CardProduto(props: CardProdutoProps & Produto) {
     const { isPending: isRemovePending, removeFavorito } = useRemoveFavorito(
         () => {
             toast.success("Produto removido dos favoritos!");
-            refetch();
+            refetchFavoritos();
         },
         () => toast.error("Erro ao remover produto dos favoritos!")
     );  
-    
-    // console.log(favoritos);
 
-    const estaFavoritado = (favoritos ?? []).some(fav => fav.id === props.id);
+    const estaFavoritado = (favoritos ?? []).some(fav => fav.id === produto.id);
 
     const handleFavorito = () => {
         if (estaFavoritado) {
-            removeFavorito(props);
+            removeFavorito(produto);
         } else {
-            addFavorito(props);
+            addFavorito(produto);
         }
     }
 
@@ -49,20 +49,21 @@ export default function CardProduto(props: CardProdutoProps & Produto) {
     <div className="col">
         <div className="card shadow-sm h-100">
             <Image
-                src={props.fotos[0].src}
+                src={produto.fotos[0].src}
                 className="card-img-top"
-                alt={props.fotos[0].titulo}
+                alt={produto.fotos[0].titulo}
                 width={300}
                 height={320}
+                onClick={() => router.push(`/produto/${produto.id}`)}
             />
 
             <div className="card-body bg-light">
-                <h5 className="card-title">{props.nome}</h5>
-                <p className="card-text text-secondary">R$ {props.preco}</p>
+                <h5 className="card-title">{produto.nome}</h5>
+                <p className="card-text text-secondary">R$ {produto.preco}</p>
                 <button 
                     className="btn btn-dark d-block w-100"
                     type="button"
-                    onClick={() => props.adicionarAoCarrinho(props)}
+                    onClick={() => adicionarAoCarrinho(produto)}
                 >
                     Adicionar no carrinho
                 </button>

@@ -3,5 +3,4 @@ export interface ItemCarrinho {
   nome: string;
   preco: number;
   quantidade: number;
-  removerItemDoCarrinho(id: string): void;
 }

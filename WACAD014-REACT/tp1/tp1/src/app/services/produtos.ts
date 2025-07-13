@@ -20,3 +20,7 @@ export async function removeProdutoFavorito(produto: Produto) {
 
     return apiFavoritos.delete(`/favoritos/${produto.id}`).then((response) => response.data)
 }
+
+export async function getProduto(id: string): Promise<Produto> {
+    return apiProdutos.get(`/produto/${id}`).then((response) => response.data);
+}
