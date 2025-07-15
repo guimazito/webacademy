@@ -19,8 +19,6 @@ export default function ListagemProdutos({ adicionarAoCarrinho }: ListagemProdut
 
     if (!produtos) return <h5>Não há produtos disponíveis no momento</h5>;
 
-    // console.log(produtos);
-
     return (
         <>
             <h5 className="mb-3">Produtos disponíveis:</h5>
@@ -30,15 +28,7 @@ export default function ListagemProdutos({ adicionarAoCarrinho }: ListagemProdut
                     <CardProduto 
                         key={produto.id}
                         produto={produto}
-                        adicionarAoCarrinho={adicionarAoCarrinho} refetchFavoritos={function (): void {
-                            throw new Error("Function not implemented.");
-                        } }                        // nome={produto.nome}
-                        // preco={produto.preco}
-                        // fotos={produto.fotos}
-                        // id={produto.id}
-                        // descricao={produto.descricao}
-                        // vendido={produto.vendido}
-                        // usuario_id={produto.usuario_id}
+                        adicionarAoCarrinho={adicionarAoCarrinho}
                     />
                 ))}
             </div>
