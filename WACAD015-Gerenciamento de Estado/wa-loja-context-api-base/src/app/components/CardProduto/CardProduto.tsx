@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { useContext } from "react";
-import { FavoritosContext } from "@/app/page";
+import { FavoritosContext } from "../State/FavoritosProvider";
 import { calculaValorComPorcentagemDeDesconto } from "@/app/helpers";
 
 interface CardProdutoProps {

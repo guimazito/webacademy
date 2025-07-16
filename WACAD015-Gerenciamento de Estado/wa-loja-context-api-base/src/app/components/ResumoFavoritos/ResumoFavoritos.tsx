@@ -1,6 +1,6 @@
 import { useContext } from "react";
-import { FavoritosContext } from "@/app/page";
 import CardProduto from "../CardProduto/CardProduto";
+import { FavoritosContext } from "../State/FavoritosProvider";
 
 export default function ResumoFavoritos() {
   const { favoritos } = useContext(FavoritosContext);

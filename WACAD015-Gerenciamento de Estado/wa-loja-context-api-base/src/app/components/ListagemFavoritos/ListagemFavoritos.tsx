@@ -1,15 +1,11 @@
-import { calculaValorComPorcentagemDeDesconto } from "@/app/helpers";
 import ItemFavorito from "../ItemFavorito/ItemFavorito";
+import { calculaValorComPorcentagemDeDesconto } from "@/app/helpers";
+import { FavoritosContext } from "../State/FavoritosProvider";
+import { useContext } from "react";
 
-interface IListagemFavoritosProps {
-  produtosFavoritos: Produto[];
-  setFavoritos: React.Dispatch<React.SetStateAction<Produto[]>>;
-}
+export default function ListagemFavoritos() {
+  const { favoritos: produtosFavoritos } = useContext(FavoritosContext);
 
-export default function ListagemFavoritos({
-  produtosFavoritos,
-  setFavoritos,
-}: IListagemFavoritosProps) {
   const valorTotalFavoritos = produtosFavoritos.reduce((acc, produto) => {
     return (
       acc +
@@ -41,7 +37,6 @@ export default function ListagemFavoritos({
                   <ItemFavorito
                     key={item.id}
                     itemFavorito={item}
-                    setFavoritos={setFavoritos}
                   />
                 ))}
               </tbody>
