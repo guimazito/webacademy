@@ -1,9 +1,12 @@
 import ItemFavorito from "../ItemFavorito/ItemFavorito";
-import { useCalculaValorTotalFavoritos, useFavoritosContext } from "../State/FavoritosProvider";
+import { useFavoritosContext } from "../State/FavoritosProvider";
 
 export default function ListagemFavoritos() {
-  const { favoritos: produtosFavoritos } = useFavoritosContext();
-  const valorTotalFavoritos = useCalculaValorTotalFavoritos();
+
+  const {
+    favoritos: produtosFavoritos,
+    valorTotalFavoritos
+  } = useFavoritosContext();
   
   return (
     <div className="card mb-4">
@@ -41,7 +44,7 @@ export default function ListagemFavoritos() {
         </small>
 
         <small className="text-muted">
-          Valor total: R$ {valorTotalFavoritos}
+          Valor total: R$ {valorTotalFavoritos().toFixed(2)}
         </small>
       </div>
     </div>

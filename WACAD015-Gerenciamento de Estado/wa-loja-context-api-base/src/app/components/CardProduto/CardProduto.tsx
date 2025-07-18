@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { Produto } from "@/app/types/produto";
+import { useFavoritosContext } from "../State/FavoritosProvider";
 import { calculaValorComPorcentagemDeDesconto } from "@/app/helpers";
-import { useFavoritosContext, useVerificaProdutoFavorito } from "../State/FavoritosProvider";
 
 interface CardProdutoProps {
   produto: Produto;
@@ -14,8 +14,22 @@ export default function CardProduto({
   mostrarImagem = true,
   mostrarBotao = true,
 }: CardProdutoProps) {
-  const verificaFavorito = useVerificaProdutoFavorito(produto.id);
-  const { adicionarAosFavoritos, isAddFavoritoPending } = useFavoritosContext();
+
+  const {
+    adicionarAosFavoritos,
+    isAddFavoritoPending,
+    removerFavorito,
+    isRemoveFavoritoPending,
+    verificaSeFavorito
+  } = useFavoritosContext();
+
+  const handleFavorito = () => {
+    if (verificaSeFavorito?.(produto.id)) {
+        removerFavorito(produto);
+    } else {
+        adicionarAosFavoritos(produto);
+    }
+  }
 
   return (
     <div className="col">
@@ -47,15 +61,15 @@ export default function CardProduto({
           {mostrarBotao ? (
             <button
               className={
-                verificaFavorito
+                verificaSeFavorito?.(produto.id)
                   ? "btn btn-success d-block w-100"
                   : "btn btn-secondary d-block w-100"
               }
               type="button"
-              onClick={() => adicionarAosFavoritos(produto)}
-              disabled={isAddFavoritoPending}
+              onClick={handleFavorito}
+              disabled={isAddFavoritoPending || isRemoveFavoritoPending}
             >
-              {isAddFavoritoPending ? "Favoritado" : "Favoritar"}
+              {verificaSeFavorito?.(produto.id) ? "Favoritado" : "Favoritar"}
             </button>
           ) : null}
         </div>
