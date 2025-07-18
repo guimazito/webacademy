@@ -1,7 +1,6 @@
 import Image from "next/image";
-import { useContext } from "react";
-import { FavoritosContext } from "../State/FavoritosProvider";
 import { calculaValorComPorcentagemDeDesconto } from "@/app/helpers";
+import { useRemoveProdutoFavorito } from "../State/FavoritosProvider";
 
 interface IItemFavoritoProps {
   itemFavorito: Produto;
@@ -10,11 +9,7 @@ interface IItemFavoritoProps {
 export default function ItemFavorito({
   itemFavorito,
 }: IItemFavoritoProps) {
-  const { setFavoritos } = useContext(FavoritosContext);
-  
-  const removerFavorito = (id: string) => {
-    setFavoritos((favoritos) => favoritos.filter((item) => item.id !== id));
-  };
+  const removeFavorito = useRemoveProdutoFavorito(itemFavorito.id);
 
   return (
     <tr key={itemFavorito.id}>
@@ -44,7 +39,7 @@ export default function ItemFavorito({
 
       <td>
         <button
-          onClick={() => removerFavorito(itemFavorito.id)}
+          onClick={removeFavorito}
           className="btn btn-outline-danger btn-sm"
         >
           Remover

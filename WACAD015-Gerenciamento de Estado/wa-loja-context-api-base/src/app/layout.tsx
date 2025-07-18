@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Navbar from "./components/Navbar/Navbar";
 import BootstrapClient from "./components/BootstrapClient";
+import AuthProvider from "./components/State/AuthProvider";
 import FavoritosProvider from "./components/State/FavoritosProvider";
 
 export const metadata: Metadata = {
@@ -16,11 +17,13 @@ export default function RootLayout({
   return (
     <html lang="pt-br">
       <body>
-        <FavoritosProvider>
-          <Navbar />
-          {children}
-          <BootstrapClient />
-        </FavoritosProvider>
+        <AuthProvider>
+          <FavoritosProvider>
+            <Navbar />
+              {children}
+            <BootstrapClient />
+          </FavoritosProvider>
+        </AuthProvider>
       </body>
     </html>
   );

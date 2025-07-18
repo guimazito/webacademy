@@ -1,8 +1,17 @@
 "use client";
 
 import Link from "next/link";
+import { useContext } from "react";
+import { AuthContext } from "../State/AuthProvider";
+import { usePathname, useRouter } from "next/navigation";
 
 export default function Navbar() {
+  const { emailUsuario, logout } = useContext(AuthContext);
+  const router = useRouter();
+  const pathname = usePathname();
+
+  if (pathname === "/login" || pathname === "/cadastro") return null;
+
   return (
     <nav className="navbar navbar-expand-md bg-light border-bottom border-body sticky-top">
       <div className="container-fluid">
@@ -33,12 +42,20 @@ export default function Navbar() {
               </Link>
             </li>
           </ul>
-
-          <Link className="nav-link " href="/login">
-            <button type="button" className="btn btn-secondary">
-              Sair
-            </button>
-          </Link>
+          {emailUsuario ? (
+            <div className="d-flex align-items-center gap-2">
+              <span className="me-2 text-primary">{emailUsuario}</span>
+              <button type="button" className="btn btn-secondary" onClick={logout}>
+                Sair
+              </button>
+            </div>
+          ) : (
+            <Link className="nav-link" href="/login">
+              <button type="button" className="btn btn-secondary">
+                Entrar
+              </button>
+            </Link>
+          )}
         </div>
       </div>
     </nav>

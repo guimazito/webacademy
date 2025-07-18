@@ -1,6 +1,7 @@
 "use client";
 
-import { createContext, useState } from "react";
+import { createContext, useContext, useState } from "react";
+import { calculaValorComPorcentagemDeDesconto } from "@/app/helpers";
 
 interface IFavoritos {
   favoritos: Produto[];
@@ -29,6 +30,43 @@ const FavoritosProvider = ({ children }: FavoritosProviderProps) => {
             {children}
         </FavoritosContext.Provider>
     );
+};
+
+export const useFavoritosContext = () => {
+    const favoritosContext = useContext(FavoritosContext);
+    return favoritosContext;
+};
+
+export const useVerificaProdutoFavorito = (idProduto: string) => {
+    const { favoritos } = useFavoritosContext();
+    return favoritos.some((item) => item.id === idProduto);
+};
+
+export const useRemoveProdutoFavorito = (idProduto: string) => {
+    const { setFavoritos } = useFavoritosContext();
+    return () => {
+        setFavoritos((favoritos) => favoritos.filter((item) => item.id !== idProduto));
+    };
+};
+
+export const useAdicionaProdutoFavorito = (produto: Produto) => {
+    const { setFavoritos } = useFavoritosContext();
+    return () => {
+        setFavoritos((favoritos) => [...favoritos, produto]);
+    };
+};
+
+export const useCalculaValorTotalFavoritos = () => {
+    const { favoritos } = useFavoritosContext();
+    return favoritos.reduce((acc, produto) => {
+        return (
+            acc +
+            calculaValorComPorcentagemDeDesconto(
+                Number(produto.preco),
+                produto.desconto
+            )
+        );
+    }, 0);
 };
 
 export default FavoritosProvider;

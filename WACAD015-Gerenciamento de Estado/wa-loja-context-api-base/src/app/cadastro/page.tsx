@@ -1,8 +1,9 @@
 "use client";
 
 import Link from "next/link";
-
+import { useContext } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
+import { AuthContext } from "../components/State/AuthProvider";
 
 type Inputs = {
   nome: string;
@@ -18,7 +19,11 @@ export default function Cadastro() {
     formState: { errors },
   } = useForm<Inputs>();
 
-  const onSubmit: SubmitHandler<Inputs> = (data) => {};
+  const { login } = useContext(AuthContext);
+
+  const onSubmit: SubmitHandler<Inputs> = (data) => {
+    login(data.email);
+  };
 
   return (
     <main>
