@@ -1,16 +1,6 @@
-"use client";
+import { redirect } from "next/navigation";
 
-import { mockProdutos } from "./mocks/produtos";
-import ListagemProdutos from "./components/ListagemProdutos/ListagemProdutos";
-
-export default function App() {
-  const produtos = mockProdutos;
-
-  return (
-    <main>
-      <div className="container p-5">
-        <ListagemProdutos produtos={produtos} />
-      </div>
-    </main>
-  );
+export default function Home() {
+  redirect("/login");
+  return null;
 }

@@ -1,6 +1,7 @@
 import Image from "next/image";
+import { Produto } from "@/app/types/produto";
 import { calculaValorComPorcentagemDeDesconto } from "@/app/helpers";
-import { useAdicionaProdutoFavorito, useVerificaProdutoFavorito } from "../State/FavoritosProvider";
+import { useFavoritosContext, useVerificaProdutoFavorito } from "../State/FavoritosProvider";
 
 interface CardProdutoProps {
   produto: Produto;
@@ -14,7 +15,7 @@ export default function CardProduto({
   mostrarBotao = true,
 }: CardProdutoProps) {
   const verificaFavorito = useVerificaProdutoFavorito(produto.id);
-  const adicionarAosFavoritos = useAdicionaProdutoFavorito(produto);  
+  const { adicionarAosFavoritos, isAddFavoritoPending } = useFavoritosContext();
 
   return (
     <div className="col">
@@ -51,10 +52,10 @@ export default function CardProduto({
                   : "btn btn-secondary d-block w-100"
               }
               type="button"
-              onClick={adicionarAosFavoritos}
-              disabled={verificaFavorito}
+              onClick={() => adicionarAosFavoritos(produto)}
+              disabled={isAddFavoritoPending}
             >
-              {verificaFavorito ? "Favoritado" : "Favoritar"}
+              {isAddFavoritoPending ? "Favoritado" : "Favoritar"}
             </button>
           ) : null}
         </div>

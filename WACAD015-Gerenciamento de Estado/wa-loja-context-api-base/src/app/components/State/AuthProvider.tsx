@@ -34,7 +34,7 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
     const login = (email: string) => {
         setEmailUsuario(email);
         localStorage.setItem("user", email);
-        router.push("/");
+        router.push("/produtos");
     };
 
     const logout = () => {

@@ -1,4 +1,5 @@
 "use client";
+
 import { useState } from "react";
 import ListagemFavoritos from "../components/ListagemFavoritos/ListagemFavoritos";
 

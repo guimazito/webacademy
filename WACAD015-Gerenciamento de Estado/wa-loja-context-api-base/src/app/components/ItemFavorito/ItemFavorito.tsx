@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { Produto } from "@/app/types/produto";
 import { calculaValorComPorcentagemDeDesconto } from "@/app/helpers";
 import { useRemoveProdutoFavorito } from "../State/FavoritosProvider";
 

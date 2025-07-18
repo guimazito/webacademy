@@ -1,3 +1,4 @@
+import { Produto } from "@/app/types/produto";
 import CardProduto from "../CardProduto/CardProduto";
 import ResumoFavoritos from "../ResumoFavoritos/ResumoFavoritos";
 
