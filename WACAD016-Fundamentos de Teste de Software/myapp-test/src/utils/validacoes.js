@@ -4,7 +4,9 @@
  * @param {string} nomeCompleto - O nome completo do usuário, separado por espaços.
  * @returns {string} - O primeiro nome extraído do nome completo ou o próprio nome caso não haja espaços.
  */
-function primeiroNome(nomeCompleto) {  
+function primeiroNome(nomeCompleto) {
+  if (nomeCompleto === null || nomeCompleto === undefined || typeof nomeCompleto !== "string") return "";
+
   if (nomeCompleto.startsWith(" ")) {
     nomeCompleto = nomeCompleto.trimStart();    
   }
