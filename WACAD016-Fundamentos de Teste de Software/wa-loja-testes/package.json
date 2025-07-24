@@ -8,7 +8,8 @@
     "start": "next start",
     "lint": "next lint",
     "test": "jest",
-    "test-coverage": "jest --coverage"
+    "test-coverage": "jest --coverage",
+    "test-onlyFailure": "jest --onlyFailures"
   },
   "dependencies": {
     "bootstrap": "^5.3.3",

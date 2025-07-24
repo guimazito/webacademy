@@ -1,74 +1,64 @@
 import React from "react";
+import userEvent from "@testing-library/user-event";
+import { mockProdutos } from "@/app/mocks/produtos";
 import ListagemFavoritos from "../ListagemFavoritos";
 import { render, screen } from "@testing-library/react";
-import { FavoritosContext } from "@/app/State/FavoritosProvider";
+import { FavoritosProvider, useProdutosFavoritos } from "@/app/State/FavoritosProvider";
 
-const mockFavoritos = [
-  {
-    id: "notebook-3",
-    fotos: [
-      {
-        titulo: "notebook-4",
-        src: "https://ranekapi.origamid.dev/wp-content/uploads/2019/03/notebook-2.jpg",
-      },
-      {
-        titulo: "smartwatch-3",
-        src: "https://ranekapi.origamid.dev/wp-content/uploads/2019/03/smartwatch-2.jpg",
-      },
-    ],
-    nome: "Notebook",
-    preco: "2300",
-    desconto: 15,
-    descricao: "descrição legal",
-    vendido: "false",
-    usuario_id: "lobo@origamid.com",
-  },
-];
-
-const mockContext = {
-  favoritos: mockFavoritos,
-  valorTotalFavoritos: () => 0,
-  isAddFavoritoPending: false,
-  isRemoveFavoritoPending: false,
-  // adicionarAosFavoritos: jest.fn(),
-  removerFavorito: jest.fn(),
-  verificaSeFavorito: jest.fn(),
-  setFavoritos: jest.fn(),
-};
+jest.mock("../../../State/FavoritosProvider", () => ({
+  ...jest.requireActual("../../../State/FavoritosProvider"),
+  useProdutosFavoritos: jest.fn(),
+}));
 
 describe("ListagemFavoritos", () => {
-  it("deve renderizar um item na lista de favoritos", () => {
+  it("deve verificar se existe um item na lista de favoritos", () => {
+    const produtoMockado = mockProdutos[0];
+    const useProdutoFavoritoMock = useProdutosFavoritos as jest.Mock;
+    useProdutoFavoritoMock.mockReturnValue([produtoMockado]);
+
     render(
-      <FavoritosContext.Provider value={mockContext as any}>
+      <FavoritosProvider>
         <ListagemFavoritos />
-      </FavoritosContext.Provider>
+      </FavoritosProvider>
     );
 
-    expect(screen.getByText("Notebook")).toBeInTheDocument();
+    expect(screen.getByText(produtoMockado.nome)).toBeInTheDocument();
     expect(screen.getByText(/Quantidade de produtos: 1/i)).toBeInTheDocument();
   });
-});
-
-  const mockFavoritos2 = [];
-
-  const mockContext2 = {
-    favoritos: mockFavoritos2,
-    valorTotalFavoritos: () => 0,
-    isAddFavoritoPending: false,
-    isRemoveFavoritoPending: false,
-    adicionarAosFavoritos: jest.fn(),
-    removerFavorito: jest.fn(),
-    verificaSeFavorito: jest.fn(),
-    setFavoritos: jest.fn(),
-  };
 
   it("deve verificar se não existe nenhum item na lista de favoritos", () => {
+    const produtoMockado = mockProdutos[0];
+    const useProdutoFavoritoMock = useProdutosFavoritos as jest.Mock;
+    useProdutoFavoritoMock.mockReturnValue(false);
+
     render(
-      <FavoritosContext.Provider value={mockContext2 as any}>
+      <FavoritosProvider>
         <ListagemFavoritos />
-      </FavoritosContext.Provider>
+      </FavoritosProvider>
     );
 
     expect(screen.getByText("Sua lista de favoritos está vazia.")).toBeInTheDocument();
-    expect(screen.queryByText("Notebook")).not.toBeInTheDocument();
+    expect(screen.queryByText(produtoMockado.nome)).not.toBeInTheDocument();
   });
+
+  it("deve ser possível clicar no botão Remover", async () => {
+    const produtoMockado = mockProdutos[0];
+    const useProdutoFavoritoMock = useProdutosFavoritos as jest.Mock;
+    useProdutoFavoritoMock.mockReturnValue([produtoMockado]);
+
+    render(
+      <FavoritosProvider>
+        <ListagemFavoritos />
+      </FavoritosProvider>
+    );
+
+    const botao = screen.getByRole("button", {
+      name: /Remover/i,
+    });
+
+    await userEvent.click(botao);
+
+    expect(screen.getByText("Sua lista de favoritos está vazia.")).toBeInTheDocument();
+    expect(screen.queryByText(produtoMockado.nome)).not.toBeInTheDocument();
+  });
+});
