@@ -15,7 +15,7 @@ export default function ListagemFavoritos() {
       <div className="row card-body">
         <h5 className="card-title mb-4 fw-bold">Lista de favoritos:</h5>
 
-        {favoritos.length > 0 ? (
+        {(favoritos && favoritos.length > 0) ? (
           <div className="table-responsive">
             <table className="table table-borderless">
               <thead>
@@ -43,7 +43,7 @@ export default function ListagemFavoritos() {
       </div>
       <div className="card-footer d-flex flex-column">
         <small className="text-muted">
-          Quantidade de produtos: {favoritos.length}
+          Quantidade de produtos: {favoritos ? favoritos.length : 0}
         </small>
 
         <small className="text-muted">
