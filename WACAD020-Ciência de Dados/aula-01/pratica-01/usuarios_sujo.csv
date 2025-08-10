@@ -1,0 +1,216 @@
+user_id,nome,email,data_cadastro,cidade,estado,valor_ultima_compra,data_ultimo_login
+189d71cc-4e11-4b40-adf2-ca91330b4f29,Davi Luiz Barros,ana-clara73@example.com,16/10/2023,Vieira,sao paulo,"R$ 319,98",2025-07-15 22:22:59.584527
+55bc4070-e1ac-4e8f-8b81-f821ffd0389c,Ana Vitória Cirino,aylacirino@example.net,24-Jun-2025,Rodrigues,SC,Não informado,2025-07-21 09:33:36.967066
+3698d760-3e1b-4e09-8ce7-5c7c4a5b3427,Luiza Fernandes,correiajosue@example.net,2024-04-09,Martins da Praia,BA,"R$ 383,20",2025-07-28 19:25:37.695068
+eea972ac-310f-417e-a70c-bd6b13b60fe0,Ana Carolina Pastor,bda-mata@example.org,27-Aug-2023,Pacheco,SC,,2025-08-09 02:38:51.791704
+3906f8c2-75af-4e81-87b0-b996930e3a62,Bruna Nogueira,inunes@example.net,25/10/2023,Almeida da Mata,sao paulo,"R$ 103,44",2025-07-12 09:16:24.758296
+811d76ae-1c21-4032-8f9a-6fff91374fbe,Brenda Azevedo,jose22@example.net,2023-08-17,da Luz,SC,"R$ 124,72",2025-08-03 20:33:06.162557
+5d83b7e1-ce43-47eb-96b9-3efb03d06d15,Raul Sampaio,cavalcantirodrigo@example.com,2024-01-04,Leão,BA,"R$ 298,65",2025-07-20 19:48:52.645604
+f9a2ec4b-bf20-4d9e-a38e-5be9baccf097,Maria Sophia Caldeira,vargasmarcelo@example.com,20-Nov-2023,Rios de Minas,rio de janeiro,,2025-07-13 14:14:07.393841
+4e452fb4-e84d-477c-a7ed-ef7a01ef0100,Ana Laura da Rosa,teixeiragael-henrique@example.org,23/06/2025,Alves da Mata,SP,"R$ 588,96",2025-07-22 13:54:58.911005
+3894efea-ebf3-4617-9046-5f4944a9da4e,Danilo Porto,nunesluiz-henrique@example.net,06-25-2024,Pastor,SC,"R$ 721,89",2025-08-02 10:41:03.876535
+7fc7a89e-1810-4902-9365-496a018e85ed,Thales Duarte,bruno83@example.org,02-19-2025,Leão,BA,"R$ 325,68",2025-07-20 22:45:59.841121
+e55b9b5b-c55d-4443-9c92-3c1c72242136,Clarice Castro,caioleao@example.net,2024-04-11,Aparecida da Praia,PR,"R$ 280,00",2025-08-01 13:28:55.107605
+dec310c1-d6f9-4b78-8bc1-3048f85995bd,Laís Barbosa,apimenta@example.com,11/12/2024,Gonçalves,SP,"R$ 527,91",2025-08-07 06:43:49.062204
+6978e617-04a1-425f-9cb9-b57f043ec077,Júlia Borges,,2024-07-28,Pacheco,BA,"R$ 635,70",2025-07-30 22:34:32.236467
+564a6cb0-42ae-4c30-a32c-87efccb00cce,Davi Lucca Silveira,mendeskamilly@example.net,13-Feb-2024,Marques,rio de janeiro,"R$ 982,87",2025-07-20 03:18:49.808996
+f9c1b223-79ec-48f0-94f5-ed1d9e3b31c5,Lucas Gabriel Moraes,ryan62@example.com,2025-03-02,das Neves do Amparo,BA,"R$ 413,32",2025-07-31 17:18:57.330393
+731abb2b-451c-4c15-8d7c-837044744ba2,Dom Cavalcante,lporto@example.org,23/08/2023,Castro de Minas,São Paulo,"R$ 332,57",2025-08-08 00:58:22.274417
+d509d3dc-af18-4a8c-9193-ee93027498a7,Sra. Isabela Montenegro,enricomacedo@example.net,09/10/2023,Ramos,SC,,2025-07-18 03:03:36.193518
+bb466457-298d-4b24-ac18-c20421706fff,Davi Lucca Barros,albuquerqueian@example.com,2024-02-16,da Paz,SC,"R$ 492,02",2025-07-25 12:35:19.021276
+dcf76c7a-55c8-44ad-b855-33a0f5af65f6,Laís da Luz,helena55@example.com,29/10/2024,da Rocha Grande,PR,"R$ 550,46",2025-08-06 12:08:20.611456
+68e324c9-9f70-4a84-8ecf-b40457ca12c8,Isabelly Campos,oaraujo@example.net,08-09-2024,Cavalcanti Grande,SP,"R$ 238,62",2025-07-16 18:08:42.533037
+86357abf-0f48-440e-8c48-3890d9f948b1,Ana Clara Nogueira,msouza@example.net,08-12-2023,Correia,rio de janeiro,,2025-07-17 10:11:43.616873
+40b64449-7e6c-4de7-9726-85d5e06007f7,Pietro Marques,ocamargo@example.org,17-Jul-2025,Fernandes,MG,"R$ 567,26",2025-07-31 00:31:33.984236
+6ef9dd66-b738-4ed6-a7e5-704712fc9ce3,Bella Alves,samuellima@example.net,17/12/2023,Porto,PR,,2025-07-30 03:25:53.466879
+0202e2ca-2c37-457b-908d-0449588a1ea2,Sra. Ana Carolina Barbosa,joao-gabriel19@example.com,25/01/2025,Novaes das Pedras,São Paulo,"R$ 863,81",2025-07-22 04:06:19.488852
+6313d2a2-9256-4ecb-83aa-3bdca40fd015,Ayla Rios,maria-isisda-cunha@example.com,09-01-2023,Silva,BA,"R$ 671,31",2025-07-16 08:46:04.034339
+70595874-d971-4157-8d3a-515ed7350d9f,Antony Cavalcanti,cavalcantijade@example.net,05-01-2024,Machado,MG,"R$ 23,01",2025-07-25 01:31:40.911496
+05c4e709-cba0-414d-a8c5-95949171def1,Sara da Cunha,esilveira@example.net,23-Nov-2024,Brito de Novais,MG,"R$ 482,02",2025-07-27 15:37:09.087961
+6a95f463-3bfb-4dbf-b015-f17c5884a2ae,Luigi Souza,sousaanna-liz@example.org,02-03-2025,Barros do Campo,SP,"R$ 97,80",2025-07-28 16:46:57.366398
+6526e7a4-b943-48ad-91c2-79839d525c5d,Maria Isis Araújo,luiz-otavio67@example.org,2025-01-07,Gomes,PR,"R$ 779,50",2025-07-26 14:43:44.203932
+db8f2282-27ba-44ff-a45f-598e629ff52f,Srta. Alícia Fogaça,rodrigo67@example.net,05-19-2025,da Rosa,SC,"R$ 301,00",2025-07-30 20:59:24.297763
+464d937e-08ed-4aba-8262-9363108249e0,Lorenzo da Paz,liviapimenta@example.org,2023-09-10,Nunes,SC,"R$ 972,11",2025-07-26 13:43:16.632007
+ca7a14d6-77cf-40fe-ad64-e634319dc44b,Antonella Albuquerque,,2024-08-11,Pires do Amparo,São Paulo,"R$ 653,46",2025-07-29 18:33:57.643973
+45c0a4dc-cccd-4f43-bbf6-60faaa1d8ad4,Lucas Gabriel Jesus,costelajosue@example.com,20-Jan-2025,Cirino,MG,"R$ 867,26",2025-07-10 21:03:46.044164
+4e4a9e85-3de3-48ca-8fee-0be427e1cdcc,Marcos Vinicius Freitas,cunhayasmin@example.net,04/06/2024,Santos,BA,"R$ 27,62",2025-07-12 15:07:15.638927
+ad6934ac-511d-4ace-9cb3-7d4dec70219d,Diogo Cavalcante,yan01@example.net,29/09/2024,Viana de da Conceição,RJ,"R$ 90,46",2025-07-25 02:05:34.526482
+c6806a69-04f2-4750-896c-e8017ad45d9b,Yasmin Câmara,vitoria99@example.com,07-14-2024,Montenegro,sao paulo,,2025-08-06 13:24:15.353731
+2a5c3f88-0ad8-403f-856d-248e5ed0122d,Dr. Eduardo Campos,livia12@example.org,15-Sep-2023,Cardoso,SC,"R$ 621,73",2025-07-25 23:49:23.287023
+ef5772d8-26c8-4d11-9369-618aedce5997,Sr. Luiz Henrique Teixeira,ana-julia61@example.net,10-Feb-2024,Siqueira da Prata,PR,,2025-08-05 07:58:52.992805
+75f544de-ab06-49b7-9515-c863938e806c,Ana Vitória Pinto,macedomelina@example.com,07-20-2025,Costela,BA,,2025-07-19 02:26:39.523236
+0a0153c0-8dc9-49c7-90f9-a4f60824d7f6,Luiz Gustavo Silveira,leticiacirino@example.com,2024-11-28,Siqueira de Souza,sao paulo,"R$ 366,40",2025-07-15 05:03:33.888980
+ba8f76c8-5ab6-4d3d-80cc-fca9a9df97c7,Lunna da Luz,arthur-miguelcavalcanti@example.com,08-15-2023,Rocha de Goiás,PR,,2025-07-25 20:43:44.376232
+38f6e8b0-a916-42cd-8878-a54e8bb075e6,Sr. Bryan da Mota,kcavalcanti@example.net,11/12/2024,da Conceição de Minas,RJ,Não informado,2025-07-30 14:16:41.017849
+2461a821-e680-4524-917c-7c5ab69ad1e3,Nathan Gomes,,2024-07-20,Freitas de Goiás,MG,"R$ 740,73",2025-08-05 09:01:12.905638
+8636f47a-d72b-441b-ae15-7d7893f0baec,Luísa Ribeiro,,2023-08-11,Casa Grande de Castro,sao paulo,"R$ 686,37",2025-08-07 19:50:06.553527
+778a67f8-3067-4cdc-93d0-4877d5f3021a,Vicente Montenegro,jose-miguel92@example.net,06-30-2024,Aparecida Verde,BA,,2025-07-21 20:27:58.833155
+f9c984c7-9258-4dbd-a97a-e3b838630090,Maria Julia Porto,kaique97@example.net,2024-12-15,Monteiro,MG,"R$ 328,79",2025-07-20 04:35:01.231315
+0ec5e71a-2c57-42e2-9c20-3b1c9b73b4ae,José Pedro Vasconcelos,rjesus@example.com,30/07/2024,Oliveira de Goiás,MG,"R$ 171,39",2025-08-06 14:03:10.696326
+8fdc18e2-2ae8-4f26-91d8-e13cbd237de8,Rhavi Nascimento,mayaaragao@example.com,23-Jul-2024,Sá,sao paulo,"R$ 498,36",2025-07-17 06:35:30.588029
+aceb175c-f059-442f-b32f-e7aa5a8b1960,Ravi Novais,nascimentoluiz-miguel@example.org,17/09/2023,Jesus da Praia,rio de janeiro,"R$ 279,33",2025-08-05 04:14:43.586147
+7aa8bbdc-8d3d-4ea6-aa36-97d88eba2f77,Guilherme Santos,hmoura@example.com,2024-07-22,Viana,PR,"R$ 246,76",2025-07-22 13:38:19.424298
+a0680dbe-1329-4848-bc67-ebd954c24dd6,Maria Luísa Nascimento,sampaiojose-miguel@example.com,03-May-2024,Mendonça Grande,MG,"R$ 655,06",2025-08-05 20:39:29.310237
+efa8af2c-1061-438c-9291-ef066cbf922e,Srta. Ana Alves,isabellycaldeira@example.com,01-09-2025,Barros,sao paulo,,2025-07-16 18:29:55.495930
+c95a4f1e-67af-40a8-a534-f401cbd76783,Sr. Lucca Ribeiro,pintoeduarda@example.org,26/06/2024,da Cruz Alegre,BA,"R$ 502,69",2025-07-28 20:22:27.846833
+256c45d7-58de-452b-b55d-2aa7221b101c,Lucca Cirino,,15-Apr-2024,da Costa do Sul,BA,"R$ 836,62",2025-07-20 04:21:33.883647
+3cbcb621-9fcb-461e-9eee-4438cab9cc04,Bianca Gomes,qcostela@example.net,08-18-2024,Fernandes Grande,BA,"R$ 84,99",2025-08-01 10:20:02.534546
+2d0c5f35-5860-4c8f-a049-dd72d8aaf021,Dom Novaes,,04/11/2024,Carvalho,SP,"R$ 112,05",2025-07-20 14:25:49.737030
+a54acc97-496d-41db-9248-905d34661a71,Luiz Miguel Cunha,dmachado@example.org,01/08/2025,Pastor do Campo,PR,"R$ 448,42",2025-07-19 14:42:27.373861
+f5bf8198-1803-452d-836a-0046d0a839d1,Isaac Rocha,portocaue@example.com,2024-06-13,Vieira dos Dourados,PR,,2025-07-15 02:59:58.544305
+1b07bdfc-e00d-4f79-9ad5-4948b92a82dd,Vitor Hugo Machado,costajose@example.com,25/10/2023,Brito,BA,"R$ 79,57",2025-07-15 12:57:12.790609
+553d710e-6b86-489f-ab14-3b434c25ba3e,Théo Gonçalves,ulima@example.com,06-Feb-2025,Gonçalves Verde,SP,"R$ 515,55",2025-07-30 13:26:01.991392
+5d3bbc6c-839a-4f16-bbdc-748487dd1b63,Thiago da Costa,santospedro-miguel@example.com,2023-09-06,Pimenta da Mata,PR,"R$ 748,33",2025-08-01 03:21:07.562732
+45bb8ded-79d3-4103-882a-59f897028f60,Luan Farias,,06-06-2024,da Luz,SC,Não informado,2025-08-02 10:24:43.305121
+45b55f87-f011-4c7a-8456-fde23ca9facd,Fernanda Rios,da-costamaite@example.net,20-Nov-2024,da Cruz,RJ,"R$ 351,20",2025-08-05 02:35:06.035632
+89ddc4fc-4123-4124-8dae-7fc498a34d1f,Ana Laura Marques,silveirakevin@example.net,06/03/2025,Melo,São Paulo,"R$ 774,11",2025-08-09 00:30:47.876562
+7e96bc30-fb1a-48a2-aa23-e5d1f2fbd6d2,Ana Lívia Fernandes,mateusabreu@example.org,12-07-2024,Marques do Norte,MG,"R$ 688,36",2025-07-26 07:15:33.181642
+7facc1b7-4fda-4102-bf67-86ae7d7a55ee,Lavínia da Mota,asafe45@example.org,10-07-2024,Melo de Montenegro,PR,"R$ 474,15",2025-07-15 23:22:38.423259
+afb67384-afbf-409c-a983-f51dd174f621,Ana Brito,vicente30@example.com,2025-05-13,Aparecida da Praia,PR,"R$ 913,87",2025-07-29 01:59:46.757828
+1e129a39-3377-42ed-a546-e95ca8735151,Dr. Valentim Porto,da-motajoana@example.org,2024-09-08,Freitas,sao paulo,"R$ 957,85",2025-07-24 13:18:38.664114
+d67d0a73-39d9-4ee8-b821-27bf7895b850,Agatha Barbosa,maria-fernanda90@example.org,2025-07-06,Aparecida de Moura,PR,"R$ 183,50",2025-07-26 23:14:46.791033
+d029d685-8d0e-4991-99cb-db4d149bbb70,Valentina Moraes,maparecida@example.net,20-Dec-2024,da Rosa,rio de janeiro,"R$ 343,50",2025-08-01 21:42:08.362927
+3413b40f-586e-48d3-ab5c-e21c7ef58966,Melissa Barros,imoraes@example.com,07-28-2025,Campos de Barros,MG,"R$ 707,33",2025-07-20 16:55:43.707341
+e4707c90-7592-4a51-b165-a1731215d42b,Rael Guerra,maria-fernanda31@example.com,2024-07-19,Pereira,São Paulo,"R$ 797,17",2025-07-26 14:19:19.372890
+47f25dc5-ec8e-4577-9311-115407af4a05,Isabel Pires,isabelly64@example.org,2024-09-29,Pacheco,PR,"R$ 32,77",2025-07-27 10:40:37.690568
+922c5875-4c14-4db7-a231-c1b0ddd587c2,Esther Cunha,goncalvesmatheus@example.org,23/12/2023,Aragão,PR,"R$ 565,38",2025-07-30 16:51:22.967267
+968d9009-31bb-4af6-a795-5d1c9fbce592,Ana Vitória Oliveira,britodavi@example.com,04-Aug-2025,Siqueira,PR,"R$ 495,18",2025-07-14 04:11:41.234972
+7899558a-d96d-43ce-be06-54a51f1747fd,Breno Macedo,barbara79@example.org,2023-10-11,Gomes Grande,SP,"R$ 16,89",2025-07-11 19:56:05.288482
+b3cbf0bf-c54b-44a8-aa6e-bbf0a361534d,Dra. Mirella Farias,erickcamara@example.net,02/01/2024,Mendes de Costa,Rio de Janeiro,"R$ 29,50",2025-07-13 11:42:26.555581
+36441b83-d38c-43c7-b4de-92db47f42f9b,Aurora Nascimento,pastorlorena@example.org,06-Sep-2024,da Paz de Minas,MG,"R$ 19,37",2025-08-09 15:43:45.508993
+df0fdfb3-e55b-45c8-b750-01faae38fefa,Rhavi Abreu,luaraviana@example.org,18/08/2023,Ribeiro dos Dourados,SC,"R$ 494,92",2025-07-14 00:46:25.266574
+e36d3d35-d980-4b3f-a9e6-e4605f831975,Davi Lucas Alves,vitor-gabrielmonteiro@example.org,11-14-2023,Fernandes,sao paulo,"R$ 312,47",2025-07-26 18:33:53.146025
+81c3bc5a-23ea-48c5-b8ad-4583ae294a8f,Antony Fogaça,da-mataenrico@example.org,27-Sep-2024,Viana,PR,Não informado,2025-08-07 18:36:39.746206
+5d8fcc63-7c92-41ea-a5ba-58284d526a01,José Moraes,benjamin56@example.org,2023-12-19,da Conceição,MG,"R$ 543,35",2025-07-26 23:15:47.157000
+1426ce20-4cdb-4756-9ee8-ff1bca2183b6,Ester Fonseca,isabelasilva@example.org,2023-11-09,Mendonça,BA,"R$ 935,67",2025-07-23 11:30:29.374026
+737b7522-0f3c-4e33-8c21-688a51c902ad,Lorena da Costa,goncalvesyago@example.net,02-14-2025,Rocha,sao paulo,,2025-07-28 05:48:12.501597
+5a16d264-2c3f-428c-8a42-3b3234677b87,Dra. Maysa Ferreira,maria-flor05@example.org,12/11/2024,Vasconcelos de Minas,MG,"R$ 438,23",2025-07-31 01:33:35.290494
+a7f3d5b2-0333-4f6c-b459-125e5b44c968,Pedro Lucas Cassiano,montenegromatteo@example.com,11-19-2024,Borges da Mata,MG,"R$ 135,08",2025-07-14 22:33:06.582259
+5e707251-76d2-4760-8cc8-25f78eee4040,Ana Cecília Nogueira,natalia89@example.org,16/12/2023,Camargo do Amparo,SC,"R$ 777,26",2025-08-04 05:34:44.067341
+6547a55b-932a-4cca-a359-dd12ebc60e51,Pietra Pimenta,gomesyuri@example.com,17-Oct-2023,Siqueira de Goiás,sao paulo,Não informado,2025-07-28 01:20:12.270688
+76b77f06-7bfd-4ae0-9ddb-6f010492766a,Gabrielly Barros,paulocunha@example.net,07-22-2025,Araújo do Oeste,MG,Não informado,2025-07-23 07:57:27.622970
+4a5196da-82c3-4abe-8a07-f52f46b9b7d9,Maria Laura Aparecida,josuecosta@example.com,2025-07-09,Pires,MG,"R$ 692,97",2025-08-01 22:02:09.981445
+10cba97a-c0f6-4d02-bed2-ad3a4543aa98,Luísa Camargo,mendoncadavi-lucas@example.org,03/08/2025,Machado,Rio de Janeiro,,2025-08-02 16:56:46.090826
+dce20687-7851-43e2-a78d-7d7300cbb381,Ana Cecília Nunes,duartelivia@example.org,07-23-2025,Dias,São Paulo,,2025-07-17 09:31:47.978691
+96e59574-2516-4f27-b7e7-72740739f681,Davi Marques,vieiraana-clara@example.net,02-Sep-2024,da Mota,PR,"R$ 306,32",2025-07-26 09:20:49.140814
+92c496ce-7a93-4f05-a40b-9e4a4ae4622e,Stephany Sales,allana99@example.org,03/08/2024,Brito de Pinto,PR,,2025-08-02 18:15:56.821983
+30a29c16-c3c9-4ef8-8ddd-6ee19aa56be6,Felipe Vargas,correiajoao@example.net,17/07/2025,Pinto,BA,"R$ 231,34",2025-07-20 10:40:24.048529
+f2623259-b0cf-4135-9e8e-edac69743aac,Dra. Vitória da Rocha,aragaomaya@example.net,2024-09-22,Mendes,sao paulo,"R$ 653,31",2025-07-23 05:44:57.539088
+570de6c8-b82d-4a53-adc5-1e235b951b45,Dra. Luísa Monteiro,gabrielly94@example.org,11/10/2023,Viana de Cunha,MG,"R$ 775,15",2025-07-24 00:21:14.386313
+63fb2089-fd9a-4093-93cc-b4fc0485f8dc,Calebe da Cunha,gael52@example.net,2024-01-24,Viana de Correia,Rio de Janeiro,"R$ 317,81",2025-07-19 02:18:18.638192
+c73cb17f-e480-4252-9d0c-25df120a1b3c,Ana Clara Castro,mouratheodoro@example.net,19/08/2024,Aparecida,MG,"R$ 361,59",2025-07-20 11:40:09.782742
+f035f71e-5074-4922-9d78-76c303057d4b,Fernando Novais,esampaio@example.net,09-Mar-2024,da Luz das Pedras,São Paulo,"R$ 644,33",2025-07-27 04:24:01.955188
+e30b2270-aeca-4c0d-bc91-9795570638c4,Josué da Mota,bianca41@example.org,19/01/2025,Albuquerque,MG,"R$ 294,54",2025-07-14 02:49:21.323913
+375451bb-63c3-44b5-b39d-c247f5647e00,Valentim Barros,sda-rocha@example.com,07-18-2025,Melo do Sul,BA,"R$ 932,16",2025-07-15 04:09:45.229279
+0288dc21-ce0c-4256-a095-5e91446f2b9a,Yasmin Nogueira,cavalcantemariah@example.com,17-Jun-2024,Araújo de Gonçalves,BA,"R$ 137,29",2025-08-05 12:41:48.645957
+c6a2b0f5-8385-403e-8acc-6b6638edeef1,Maria Luiza da Rocha,thalesda-cunha@example.net,09-20-2023,Lima,São Paulo,"R$ 952,44",2025-08-03 05:09:58.690068
+bd1334f7-ee44-4116-88ad-34b3e1110a45,Mariah Campos,,2023-12-23,da Rosa Alegre,rio de janeiro,Não informado,2025-08-01 18:54:03.355043
+f52bdbf5-8ae0-4831-8c07-1f8bcdcb46e6,Camila Câmara,jose-pedro04@example.net,2024-11-25,Viana de Gonçalves,PR,"R$ 157,00",2025-08-09 11:22:34.995838
+3a557fbd-de93-4ec1-8f56-d5eaf49140bf,Asafe Correia,milenapacheco@example.com,2024-07-27,Alves de Machado,PR,"R$ 330,52",2025-07-26 05:55:03.198970
+23a6496f-8fc1-4cb0-b446-f2c2cd5bd1ae,Rafael Nascimento,apinto@example.net,2025-05-29,Dias da Mata,SP,"R$ 348,38",2025-07-16 01:55:35.357738
+1cf31af6-d257-4922-a64c-5f4fe3eb302c,Vinicius Camargo,da-cruzguilherme@example.org,27/04/2024,Mendonça das Flores,MG,"R$ 513,04",2025-07-20 21:53:32.267422
+f0f1ee2b-f6e0-4249-ad43-40e165067813,Marina Aparecida,lavinia57@example.com,15-Jan-2025,Araújo Paulista,SC,,2025-07-28 02:51:35.370042
+7fee4cc8-b407-4002-9249-869627f363dd,Augusto Garcia,giovannacamargo@example.com,11-13-2024,Moreira de Sousa,BA,,2025-07-26 01:36:59.428989
+3ed248c7-9519-43a3-ae1d-ae78e1165b6d,Dr. Ravy Cavalcanti,portokamilly@example.com,17-Nov-2023,Silveira de Guerra,SP,"R$ 643,37",2025-08-05 14:06:56.597262
+b8eb6643-83f3-46cd-a4f8-2811f568bb08,Henrique Ribeiro,jose-pedro45@example.org,05-19-2024,Andrade,SC,"R$ 42,04",2025-08-02 14:01:53.130934
+c70d35c1-7c0d-48d2-aabc-bb4cf0b2b1a5,Emilly Albuquerque,sophia01@example.org,09-Jun-2025,Moreira de da Rosa,MG,"R$ 672,43",2025-07-22 05:00:42.146594
+2297565f-e759-44fb-b4f3-d07157c2edbd,Sr. José Rios,ccorreia@example.com,18/06/2024,Oliveira,SC,"R$ 281,61",2025-07-17 13:35:04.845979
+e5001f76-c12d-429c-9968-65d8bb2992ed,Luiz Henrique Mendonça,maria-laura45@example.org,16-Apr-2025,Fogaça,São Paulo,"R$ 651,01",2025-07-18 06:38:49.560188
+ee45258e-3d17-479b-a1f7-731ab324f781,Samuel Vargas,camargojoao-vitor@example.net,07-18-2024,Fernandes,SC,"R$ 225,57",2025-07-15 01:34:03.741592
+06ed923b-62d2-42a1-aaba-18ab6b715d24,Paulo Pastor,,14-Jun-2025,Campos Verde,MG,"R$ 913,03",2025-07-20 19:20:19.340518
+f31ed6c9-15d0-424b-8bb8-24df115e01db,Maria Isis Duarte,,09-08-2023,Abreu da Serra,RJ,"R$ 42,34",2025-07-11 23:41:13.463374
+f25d9c5e-ad43-4098-a533-3006971b5dba,Levi Dias,hlima@example.net,2024-01-04,Nogueira,São Paulo,"R$ 967,42",2025-08-07 05:34:34.489195
+e154eaae-b8ae-4868-9cf9-163a0342df94,Ana Júlia Almeida,melissamoraes@example.org,2023-11-26,Mendonça de Câmara,PR,"R$ 899,13",2025-07-28 21:08:40.239274
+89181cd8-00e3-48e6-b8b9-387e0c9bb0cb,Ana Cecília Sá,zoe70@example.net,04/05/2025,Correia de Goiás,SC,,2025-08-04 09:59:32.895670
+a0536c3b-6e8f-4397-aaa4-8dc5697cf1a7,Alexia Vasconcelos,bviana@example.net,15-Jun-2024,Fogaça do Sul,MG,"R$ 433,72",2025-07-21 01:02:27.093270
+a5950d30-3807-4fc6-9d4a-c39b85ea2892,Caio Sales,,09-11-2023,Monteiro de Minas,sao paulo,"R$ 132,56",2025-07-29 03:52:24.677737
+13f6dbd7-7337-461d-9c34-dc7d19c96845,Gabriela Fonseca,,30-Sep-2024,Siqueira,SC,"R$ 364,64",2025-07-15 10:16:38.445506
+b44901fd-4e87-40b0-b846-aa4ceadfb103,Dr. Gael Macedo,casa-grandecaroline@example.com,31/08/2023,da Paz do Sul,rio de janeiro,"R$ 682,89",2025-08-06 09:12:59.409495
+f7deea64-454d-4dbd-9e95-42e345891410,Sr. Diego Borges,oliviaazevedo@example.org,2024-03-16,Costela da Praia,PR,"R$ 943,57",2025-08-01 05:03:59.193151
+0480102c-50f9-4586-a0b6-bd98597daed3,Yasmin Cassiano,pintoyago@example.com,17/04/2025,Alves de Almeida,São Paulo,,2025-07-30 10:22:33.216847
+1ac44222-44df-4b40-85a0-c7b0c9976c33,Vitor Hugo Rezende,dpereira@example.org,11-26-2023,Mendes de Goiás,BA,,2025-07-29 11:29:09.513077
+eb5fa7be-05ac-4184-a37e-55445432e65f,Marina Porto,pedro47@example.org,11-Oct-2024,Aparecida Grande,BA,"R$ 857,70",2025-07-10 20:14:25.757425
+9d947ed3-983c-4ce8-bd24-77220d504fda,Sr. Benjamin da Rocha,brenoda-costa@example.net,2024-08-17,Fernandes das Flores,MG,"R$ 192,72",2025-07-28 22:30:29.627212
+73c17ad3-e2c0-4448-8dcf-071b6688c2e1,Srta. Ana Cecília Fogaça,ada-mata@example.net,03-21-2024,Moreira,SP,,2025-08-06 16:56:33.723281
+0f38b289-cada-4a90-bdcf-00b7fad6084d,Mariah Montenegro,vicentegarcia@example.com,06-23-2025,Brito Alegre,RJ,,2025-07-18 14:32:38.348784
+8bcd4749-af2e-46cf-9161-e4fa3c3c1566,Maria Julia da Rocha,lunna77@example.net,2025-05-19,Vasconcelos dos Dourados,MG,,2025-07-19 21:15:42.836129
+c5ca6dc6-a545-4240-b6f1-12aa5884df6f,Pedro Henrique Pimenta,davi-lucca95@example.net,08-14-2023,Moreira Grande,BA,"R$ 75,04",2025-07-17 18:00:53.268672
+5566a583-c4f3-4934-a3f5-b84ca9abe15b,Lorena Castro,jcasa-grande@example.net,2025-02-16,Marques,sao paulo,"R$ 525,46",2025-07-19 16:37:31.496190
+e539abfa-b544-4867-9ba9-f5f3e0ca290f,Sra. Liz da Rocha,sophiemontenegro@example.com,26-May-2024,Viana,PR,"R$ 420,03",2025-07-13 19:25:47.769456
+63159af0-8ed8-466f-a3aa-cf3fea7624f2,Daniela Freitas,luigimoreira@example.com,23/01/2025,Moreira Paulista,BA,"R$ 453,06",2025-07-31 03:40:24.354059
+46012490-4813-47ef-ad49-a9cbb98aa2f3,Sra. Agatha Rocha,hpereira@example.net,05-03-2024,Pinto do Sul,SC,"R$ 50,35",2025-07-14 05:18:34.164893
+fb188e3c-206e-4377-a112-5dd643b425d6,Maria Luísa Castro,catarina42@example.com,02-Mar-2024,das Neves de Pastor,sao paulo,"R$ 807,45",2025-08-03 02:07:40.080714
+c055e68b-3601-4a94-a6ee-271b713dae30,Júlia da Cunha,evelyn87@example.org,2025-07-13,Cavalcante,PR,"R$ 912,77",2025-07-30 23:40:00.325875
+81512630-5338-46f1-b1de-90591e4a6ab5,Ayla da Cunha,valentina18@example.net,10-04-2024,Câmara,BA,"R$ 793,14",2025-08-06 03:13:46.916492
+e97296ae-25d9-4e7c-9abc-4d9efd49b014,Aylla Carvalho,camaraemanuelly@example.com,30/11/2023,da Mota,PR,"R$ 47,63",2025-07-23 23:54:17.534353
+5a3164e7-fa37-4497-8700-efebf786775a,Fernando Fernandes,sara37@example.net,2023-11-19,Camargo Alegre,São Paulo,"R$ 649,39",2025-07-15 03:10:01.462746
+25555e39-437e-400c-acad-0ff37237c39a,Srta. Bárbara Teixeira,julianaleao@example.net,15/06/2025,Rios Grande,BA,"R$ 331,46",2025-07-17 21:32:26.786646
+48a95397-cfe4-4d5b-84cf-c4ec62a3e946,Lucas Cassiano,pnogueira@example.org,17/03/2025,Rocha do Amparo,MG,"R$ 120,11",2025-07-29 08:47:57.015800
+41c5b04e-d55f-499a-b2c7-5fe5121c4765,Ester Cavalcanti,renan94@example.net,06-13-2025,Campos,rio de janeiro,"R$ 983,16",2025-08-07 10:44:08.851506
+436e7434-c146-465c-aec8-791fdb3b55c1,Sra. Lunna Siqueira,vcardoso@example.org,2024-01-26,Moraes,São Paulo,"R$ 593,67",2025-07-28 13:28:29.313371
+62406410-1559-4bec-9c6f-ae53bad5a2ad,José da Cruz,cavalcantemaite@example.net,2024-02-05,Carvalho da Mata,MG,"R$ 331,40",2025-07-16 18:41:45.108979
+66c4c530-db8b-4055-9818-ecb486dfab39,Mirella Andrade,arthur-gabrielrocha@example.com,2024-06-22,Martins,PR,"R$ 88,37",2025-07-11 04:33:34.979633
+69b25e98-6dbd-438d-8ebc-e39999f72983,Ravi Melo,,2024-04-03,da Cunha da Serra,PR,"R$ 600,02",2025-07-15 20:50:05.324770
+5245c3bd-e89b-4a70-b704-5befc3485b20,Ian Carvalho,,2023-11-22,Siqueira,São Paulo,"R$ 11,18",2025-07-13 16:33:15.870893
+5b8a8d6c-aef8-49ba-9c59-a251aab279ed,Luara Aparecida,bruna20@example.org,04-Jun-2024,Nogueira,SC,"R$ 154,81",2025-07-18 18:41:28.705003
+88211d16-bce4-44dc-8403-046824a8863c,Dr. Gael Henrique Pereira,,2025-07-19,Pinto,rio de janeiro,"R$ 52,52",2025-07-17 23:26:16.993447
+bcf18a25-ff70-44e1-acce-2bf1fdce269d,João Lucas Freitas,maria-helena04@example.net,30-Sep-2024,Câmara,MG,"R$ 123,13",2025-07-11 21:59:22.861526
+fe73dffd-f68f-401d-b3cd-b40ebeffcad6,Ravi Lucca Azevedo,cunhanicole@example.net,11-Jul-2024,Campos,São Paulo,"R$ 655,94",2025-07-17 20:28:41.162008
+e36fffe2-7df9-417b-9ea4-d18210193231,José Pedro Barbosa,gustavo55@example.org,08-05-2025,Gonçalves Grande,SC,"R$ 477,37",2025-08-02 04:56:32.504397
+4af04e57-5f60-4ccd-8ea1-264b013877d2,Bruno Souza,sophie02@example.net,02-Mar-2025,Mendes,MG,"R$ 970,65",2025-07-20 03:09:39.373109
+4a6533c8-7108-4e3d-a4ad-0dc12279b5a4,Dra. Mirella da Mata,caroline93@example.org,07-05-2025,Abreu de Aragão,MG,"R$ 555,72",2025-07-19 19:24:25.344441
+13b6a4b6-8936-4f83-bf3f-1ea9b4ca9998,Ana Carolina Casa Grande,fda-mota@example.com,06-Aug-2025,Borges de Minas,SP,"R$ 766,95",2025-08-07 18:06:29.314259
+99d47127-e593-4102-9f27-a3256f3ba341,Luigi Novais,guerraana-livia@example.com,07-15-2024,Nascimento,Rio de Janeiro,"R$ 459,40",2025-07-22 23:54:10.630019
+abae8955-8874-4176-8c98-81dbd9265b40,Esther Sampaio,diogomoura@example.com,06-Dec-2023,Peixoto do Campo,SC,"R$ 334,95",2025-07-26 02:24:42.971194
+22bd7e8d-953e-4492-95df-901df3c8df75,Lucas Araújo,guilhermecavalcante@example.net,12/09/2023,Novais,PR,,2025-07-29 08:29:28.643069
+6ae28579-8f5e-4240-9c40-ff5194338105,Maria Helena Monteiro,fandrade@example.com,2024-11-15,Caldeira das Pedras,sao paulo,"R$ 413,96",2025-07-12 17:40:37.509657
+d326f0f4-f6d5-42ce-b3d4-fa28483388f5,Luigi Rezende,,11-Nov-2023,Cavalcante,PR,"R$ 548,95",2025-07-30 09:08:19.502949
+08fb951d-0f44-47e7-800d-a57cafcc563c,Juliana Souza,augusto62@example.net,12-22-2023,Melo da Prata,PR,"R$ 510,09",2025-07-20 17:41:48.510714
+27afcbec-914d-4689-9415-e3651de4b1c9,José Pedro Montenegro,yalmeida@example.org,05/01/2024,Carvalho,PR,"R$ 953,30",2025-07-28 17:08:07.600332
+86f57f7e-fad6-4794-819c-ab447766bdf2,Ana Lívia Dias,ajesus@example.org,2023-12-05,Fernandes,SP,"R$ 662,88",2025-07-21 03:53:18.510967
+52733e2c-4cb5-496a-a4cf-d66807f36d50,Bernardo Pinto,xandrade@example.org,12-28-2024,Farias de Gonçalves,MG,"R$ 69,82",2025-07-15 13:31:09.202799
+b8cf4438-7640-42bd-af05-a15128733d71,Oliver Rodrigues,sferreira@example.net,06-Jun-2024,da Mota,MG,"R$ 218,31",2025-08-07 02:36:40.798705
+63288ed5-2bd2-4495-8372-d7500bd59f1e,Sra. Mariana Vasconcelos,qgoncalves@example.org,05/09/2024,Sampaio,SC,"R$ 461,65",2025-07-15 04:15:37.193289
+f93be1da-7787-4f11-8f26-9bc51f405bf6,Gael Henrique Siqueira,rrezende@example.org,22-Apr-2024,Macedo,São Paulo,"R$ 904,09",2025-07-29 19:00:52.068587
+c918e1da-07d5-461b-a340-12ea88b7fd12,Mariane Nunes,vargasisabella@example.net,29-Apr-2024,Câmara da Prata,SC,"R$ 680,53",2025-07-24 22:47:28.521167
+233e3275-25e6-4dbb-a310-21f117a25973,Benjamim Fernandes,scasa-grande@example.com,08-13-2024,Sá de Goiás,SC,,2025-08-07 18:55:59.676932
+b975c549-3d63-4c83-aed4-6224e5b07cb5,Henry Gabriel Cunha,isabelly68@example.org,10-18-2023,Viana,Rio de Janeiro,"R$ 434,86",2025-08-05 18:40:38.488646
+22763b59-a065-4fc2-88a7-502280bfbddd,Leandro Pinto,ycasa-grande@example.net,12-30-2023,Vieira da Mata,sao paulo,,2025-08-01 09:14:04.237670
+9c3b1fd8-190c-49ae-b1cd-fc262eddd204,Maria Luiza Cavalcanti,xalves@example.com,28/12/2023,da Paz de Cavalcanti,SC,"R$ 348,79",2025-07-20 21:55:50.048433
+5a70d93a-54fa-4bc1-9fc6-bc47b1b1e24b,Diego Montenegro,maria-sophiapeixoto@example.net,09/09/2024,Barros do Campo,SC,"R$ 218,29",2025-08-05 19:22:55.399750
+267fc72b-f891-4835-9ad5-bd16f95f6e07,Diego Silveira,mcampos@example.org,08/07/2025,das Neves de Goiás,SC,"R$ 841,03",2025-07-21 14:27:31.897147
+75798afb-1ea9-473e-9411-d3aaae6fdf8a,Dra. Vitória Rezende,kpires@example.net,14-Nov-2024,Nascimento Grande,sao paulo,"R$ 122,89",2025-07-15 09:47:12.518238
+dafd4eca-b0f6-4969-b943-9fa8141af339,Henrique Martins,bento91@example.net,2023-12-10,da Costa Paulista,SC,"R$ 445,89",2025-07-12 10:24:58.874315
+e161c626-2e66-4d09-a592-fb4ed9ad512a,Bruna Abreu,cavalcantejoaquim@example.com,02-19-2024,da Rosa,RJ,"R$ 428,45",2025-07-14 07:12:28.033848
+93384516-b41b-44a8-ab57-da7adbde2dc1,Sra. Catarina Machado,isadora89@example.org,21-Sep-2024,Alves,MG,Não informado,2025-08-02 02:00:33.926290
+70cbbe27-b16f-4b10-9bb2-d2345c7f8568,Ryan da Luz,vicente72@example.org,03-26-2025,Andrade,São Paulo,,2025-07-20 07:36:32.065511
+489bc927-ed15-4812-807f-6eab88ff566b,Isabela Alves,zda-mata@example.com,2025-07-19,Campos das Flores,PR,"R$ 59,75",2025-08-03 23:01:03.733887
+091f33dd-fd70-41dd-ae97-b0e6e7fa9230,Sr. Augusto Souza,mathias76@example.net,22-Aug-2023,Guerra de Farias,PR,"R$ 258,98",2025-08-03 13:14:09.825279
+0cdd4e7e-cc0b-439b-8b1d-51ff5008f3af,Isaac da Mata,levi07@example.net,2024-08-19,Teixeira do Galho,MG,Não informado,2025-07-11 15:39:02.350268
+a2119821-48b3-419f-b0e3-d17066d6387f,Erick Nogueira,antonio98@example.org,31-Jul-2025,Oliveira da Serra,SP,"R$ 167,30",2025-08-06 05:58:20.907653
+e62b2f5a-8f26-43fe-8a2c-2f766edf975c,Luiz Henrique Melo,vieirayago@example.com,2024-07-15,Aparecida Alegre,Rio de Janeiro,"R$ 469,63",2025-08-07 10:52:12.846068
+0cc5352a-d1b8-4ef4-a99d-1ea788ec61fd,Maria Cecília da Mota,nicolecarvalho@example.com,01-Jul-2024,da Mota de da Conceição,MG,"R$ 507,36",2025-07-25 07:52:27.611856
+1c8023eb-3da0-4522-893a-e7f2d8bf8a7e,Maya Casa Grande,almeidahadassa@example.org,08-28-2024,Camargo,SC,"R$ 37,58",2025-07-20 03:57:43.134057
+c9b3eafa-143c-412d-91cc-225efcde996a,Luara Fonseca,da-motanina@example.com,08-18-2024,Macedo da Serra,sao paulo,,2025-07-28 06:10:06.214069
+ba0a638c-48d3-4260-bc63-675c7c79a41f,Alice Camargo,teixeiranicolas@example.net,02-18-2024,Costela,MG,,2025-07-26 08:48:01.109632
+6588cfb9-6455-4cd7-89ce-fcff0e830a5e,Theodoro Pinto,lunnanunes@example.net,2025-04-23,Farias de Novais,PR,"R$ 115,09",2025-07-22 19:58:13.415779
+2d0b04f5-d1b5-4108-9694-25cae671ca01,Dr. Benjamin Rios,,24-Jan-2024,da Mota,PR,"R$ 691,49",2025-07-17 04:27:40.121189
+0fe23e47-f12f-4af9-a517-af808532a5ab,Raul Campos,cauada-cunha@example.org,2025-02-03,Mendonça,SP,"R$ 458,26",2025-08-07 03:07:11.955003
+962a404b-3ae9-4665-b9ca-07b5467f3379,Ana Clara Rios,esther31@example.com,08/02/2025,Moraes de Rodrigues,MG,,2025-08-01 20:01:01.092692
+740922f0-b869-4b00-a06f-b503a3a38fc1,Maria Sophia Oliveira,laura66@example.net,09-13-2024,Albuquerque Alegre,BA,"R$ 612,86",2025-07-16 05:38:36.601998
+afeec1c9-4ade-4b5d-992b-e522569ab4fd,Srta. Zoe Vargas,apollovieira@example.net,05/12/2024,Costa da Mata,MG,"R$ 442,09",2025-07-28 04:35:23.488589
+30a29c16-c3c9-4ef8-8ddd-6ee19aa56be6,Felipe Vargas,correiajoao@example.net,17/07/2025,Pinto,BA,"R$ 231,34",2025-07-20 10:40:24.048529
+f9c1b223-79ec-48f0-94f5-ed1d9e3b31c5,Lucas Gabriel Moraes,ryan62@example.com,2025-03-02,das Neves do Amparo,BA,"R$ 413,32",2025-07-31 17:18:57.330393
+db8f2282-27ba-44ff-a45f-598e629ff52f,Srta. Alícia Fogaça,rodrigo67@example.net,05-19-2025,da Rosa,SC,"R$ 301,00",2025-07-30 20:59:24.297763
+4af04e57-5f60-4ccd-8ea1-264b013877d2,Bruno Souza,sophie02@example.net,02-Mar-2025,Mendes,MG,"R$ 970,65",2025-07-20 03:09:39.373109
+0480102c-50f9-4586-a0b6-bd98597daed3,Yasmin Cassiano,pintoyago@example.com,17/04/2025,Alves de Almeida,São Paulo,,2025-07-30 10:22:33.216847
+2297565f-e759-44fb-b4f3-d07157c2edbd,Sr. José Rios,ccorreia@example.com,18/06/2024,Oliveira,SC,"R$ 281,61",2025-07-17 13:35:04.845979
+d67d0a73-39d9-4ee8-b821-27bf7895b850,Agatha Barbosa,maria-fernanda90@example.org,2025-07-06,Aparecida de Moura,PR,"R$ 183,50",2025-07-26 23:14:46.791033
+b8cf4438-7640-42bd-af05-a15128733d71,Oliver Rodrigues,sferreira@example.net,06-Jun-2024,da Mota,MG,"R$ 218,31",2025-08-07 02:36:40.798705
+233e3275-25e6-4dbb-a310-21f117a25973,Benjamim Fernandes,scasa-grande@example.com,08-13-2024,Sá de Goiás,SC,,2025-08-07 18:55:59.676932
+778a67f8-3067-4cdc-93d0-4877d5f3021a,Vicente Montenegro,jose-miguel92@example.net,06-30-2024,Aparecida Verde,BA,,2025-07-21 20:27:58.833155
+7facc1b7-4fda-4102-bf67-86ae7d7a55ee,Lavínia da Mota,asafe45@example.org,10-07-2024,Melo de Montenegro,PR,"R$ 474,15",2025-07-15 23:22:38.423259
+e161c626-2e66-4d09-a592-fb4ed9ad512a,Bruna Abreu,cavalcantejoaquim@example.com,02-19-2024,da Rosa,RJ,"R$ 428,45",2025-07-14 07:12:28.033848
+d326f0f4-f6d5-42ce-b3d4-fa28483388f5,Luigi Rezende,,11-Nov-2023,Cavalcante,PR,"R$ 548,95",2025-07-30 09:08:19.502949
+36441b83-d38c-43c7-b4de-92db47f42f9b,Aurora Nascimento,pastorlorena@example.org,06-Sep-2024,da Paz de Minas,MG,"R$ 19,37",2025-08-09 15:43:45.508993
+091f33dd-fd70-41dd-ae97-b0e6e7fa9230,Sr. Augusto Souza,mathias76@example.net,22-Aug-2023,Guerra de Farias,PR,"R$ 258,98",2025-08-03 13:14:09.825279
