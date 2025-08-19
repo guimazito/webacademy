@@ -52,7 +52,7 @@ df_loaded['mes'] = df_loaded['data_pas'].dt.month
 df_loaded['ano'] = df_loaded['data_pas'].dt.year
 
 # Show dataframe info
-print(df_loaded.info())
+# print(df_loaded.info())
 
 #! Stealit Dashboard
 # st.set_option('server.maxMessageSize', 400)
@@ -80,23 +80,44 @@ col1, col2 = st.columns(2)
 
 
 #! Mapa Geográfico
-with col1:
-    st.subheader(f"Mapa Geográfico")
-    st.map(df_estado[['latitude', 'longitude']].head(10000))
+st.subheader(f"Mapa Geográfico")
+st.map(df_estado[['latitude', 'longitude']].head(10000))
 
 
 #! Gráfico Temporal
-with col2:
-    st.subheader("Gráfico Temporal")
-    focos_por_mes = df_estado['mes'].value_counts().sort_index()
-    fig, ax = plt.subplots()
-    focos_por_mes.plot(kind='bar', ax=ax)
-    ax.set_xlabel('Mês')
-    ax.set_ylabel('Número de focos')
-    ax.set_title(f'Número de focos por mês em {estado_selecionado}')
-    st.pyplot(fig)
+st.subheader("Gráfico Temporal")
+focos_por_mes = df_estado['mes'].value_counts().sort_index()
+fig, ax = plt.subplots()
+focos_por_mes.plot(kind='bar', ax=ax)
+ax.set_xlabel('Mês')
+ax.set_ylabel('Número de focos')
+ax.set_title(f'Número de focos por mês em {estado_selecionado}')
+st.pyplot(fig)
 
+#! Tabela de Dados
+colunas_relevantes = ['data_pas', 'municipio', 'bioma']
+novos_nomes = {
+    'data_pas': 'Data Hora',
+    'municipio': 'Município',
+    'bioma': 'Bioma'
+}
+df_tabela = df_estado[colunas_relevantes].rename(columns=novos_nomes)
+st.subheader("Tabela de Dados")
+st.dataframe(df_tabela.head(10), hide_index=True)
+
+#! Métricas Principais (KPIs)
+total_focos = len(df_estado)
+bioma_mais_afetado = (
+    df_estado['bioma'].mode()[0] if not df_estado['bioma'].empty else "N/A"
+)
+st.subheader("Métricas Principais (KPIs)")
+colA, colB = st.columns(2)
+with colA:
+    st.metric("Total de Focos Registrados", total_focos)
+with colB:
+    st.metric("Bioma Mais Afetado", bioma_mais_afetado)
 
 # python3 -m venv venv
 # source venv/bin/activate
-# streamlit run app.py
+# pip install -r requirements.txt
+# streamlit run dashboard.py
