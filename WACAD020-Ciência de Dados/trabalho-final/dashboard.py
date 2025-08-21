@@ -15,29 +15,29 @@ except FileNotFoundError:
 
 # Checking columns number
 columns = len(df_loaded.columns)
-# print(f"Colunas disponíveis: {columns}")
+print(f"Colunas disponíveis: {columns}")
 
 # Checking rows number
 rows = df_loaded.shape[0]
-# print(f"Número de linhas: {rows}")
+print(f"Número de linhas: {rows}")
 
 # Removing rows with missing 'bioma' values
 df_loaded = df_loaded[df_loaded['bioma'].notnull()]
 
 # Checking for missing values
-# print(f"\nMissing values by columns: \n{df_loaded.isnull().sum()}")
+print(f"\nMissing values by columns: \n{df_loaded.isnull().sum()}")
 
 # Checking rows with missing values
-# print(f"Missing values rows: {df_loaded[df_loaded.isnull().any(axis=1)]}")
+print(f"Missing values rows: {df_loaded[df_loaded.isnull().any(axis=1)]}")
 
 # pd.set_option('display.max_columns', None)
-# print(df_loaded[df_loaded['numero_dias_sem_chuva'].isnull()])
+print(df_loaded[df_loaded['numero_dias_sem_chuva'].isnull()])
 
 # Checking for duplicates
-# print(f"Duplicates Total: {df_loaded.duplicated().sum()}")
+print(f"Duplicates Total: {df_loaded.duplicated().sum()}")
 
 # Show duplicated rows
-# print(f"Duplicated rows: {df_loaded[df_loaded.duplicated()]}")
+print(f"Duplicated rows: {df_loaded[df_loaded.duplicated()]}")
 
 # Convert 'data_pas' to datetime
 df_loaded['data_pas'] = pd.to_datetime(df_loaded['data_pas'])
@@ -52,7 +52,7 @@ df_loaded['mes'] = df_loaded['data_pas'].dt.month
 df_loaded['ano'] = df_loaded['data_pas'].dt.year
 
 # Show dataframe info
-# print(df_loaded.info())
+print(df_loaded.info())
 
 #! Stealit Dashboard
 # st.set_option('server.maxMessageSize', 400)
@@ -78,11 +78,9 @@ else:
 #! Mostrar na mesma linha
 col1, col2 = st.columns(2)
 
-
 #! Mapa Geográfico
 st.subheader(f"Mapa Geográfico")
 st.map(df_estado[['latitude', 'longitude']].head(10000))
-
 
 #! Gráfico Temporal
 st.subheader("Gráfico Temporal")
