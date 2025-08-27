@@ -1,0 +1,972 @@
+﻿{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Pixi App API",
+    "description": "Pixi Photo Sharing API",
+    "version": "1.0.0",
+    "contact": {
+      "email": "nicole.becher@owasp.org"
+    },
+    "license": {
+      "name": "Apache 2.0",
+      "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+    }
+  },
+  "servers": [
+    {
+      "url": "http://104.131.115.192:8090/"
+    }
+  ],
+  "tags": [
+    {
+      "name": "admins",
+      "description": "Secured Admin-only calls"
+    },
+    {
+      "name": "users",
+      "description": "Operations available to regular, logged in users"
+    },
+    {
+      "name": "anyone",
+      "description": "Operations available to anyone"
+    }
+  ],
+  "paths": {
+    "/api/pictures": {
+      "get": {
+        "tags": [
+          "users"
+        ],
+        "summary": "gets all pixi photos",
+        "description": "This will return the entirety of photos available in Pixi",
+        "parameters": [
+          {
+            "name": "token",
+            "in": "query",
+            "description": "JWT token",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "x-access-token",
+            "in": "header",
+            "description": "Users JWT token",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "json all pixi photos",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/PicturesItem"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "bad input parameter"
+          }
+        }
+      }
+    },
+    "/api/picture/{picture_id}": {
+      "get": {
+        "tags": [
+          "users"
+        ],
+        "summary": "get information about a specific photo",
+        "description": "user can get all photos they uploaded",
+        "parameters": [
+          {
+            "name": "x-access-token",
+            "in": "header",
+            "description": "Users JWT token",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "token",
+            "in": "query",
+            "description": "JWT token",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "picture_id",
+            "in": "path",
+            "description": "ID of picture",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful authentication user photo json object",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/PicturesItem"
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "invalid or missing token"
+          }
+        }
+      }
+    },
+    "/api/picture/delete": {
+      "delete": {
+        "tags": [
+          "users"
+        ],
+        "summary": "delete a specified picture",
+        "description": "user can delete a photo",
+        "parameters": [
+          {
+            "name": "x-access-token",
+            "in": "header",
+            "description": "Users JWT Token",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "picture_id",
+            "in": "query",
+            "description": "?picture_id=xxx",
+            "required": true,
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful authentication user photo json object"
+          },
+          "403": {
+            "description": "invalid or missing token"
+          }
+        }
+      }
+    },
+    "/api/picture/delete/{picture_id}": {
+      "get": {
+        "tags": [
+          "users"
+        ],
+        "summary": "delete a specified picture",
+        "description": "user can delete a photo",
+        "parameters": [
+          {
+            "name": "x-access-token",
+            "in": "header",
+            "description": "Users JWT Token",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "picture",
+            "in": "query",
+            "description": "ID of picture to be deleted",
+            "required": false,
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "picture_id",
+            "in": "path",
+            "description": "ID of picture to be deleted",
+            "required": true,
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful authentication user photo json object"
+          },
+          "403": {
+            "description": "invalid or missing token"
+          }
+        }
+      }
+    },
+    "/api/picture/{picture_id}/likes": {
+      "get": {
+        "tags": [
+          "users"
+        ],
+        "summary": "get a list of loves by user",
+        "description": "user can get a list of all their loves",
+        "parameters": [
+          {
+            "name": "x-access-token",
+            "in": "header",
+            "description": "Users JWT Token",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "picture_id",
+            "in": "path",
+            "description": "in URL string",
+            "required": true,
+            "schema": {
+              "type": "number",
+              "minimum": 1
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful authentication user photo json object"
+          },
+          "403": {
+            "description": "invalid or missing token"
+          }
+        }
+      }
+    },
+    "/api/picture/{picture_id}/loves": {
+      "get": {
+        "tags": [
+          "users"
+        ],
+        "summary": "get a list of loves by user",
+        "description": "user can get a list of all their loves",
+        "parameters": [
+          {
+            "name": "x-access-token",
+            "in": "header",
+            "description": "Users JWT Token",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "picture_id",
+            "in": "path",
+            "description": "in URL string",
+            "required": true,
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful authentication user photo json object"
+          },
+          "403": {
+            "description": "invalid or missing token"
+          }
+        }
+      }
+    },
+    "/api/pictures/love": {
+      "get": {
+        "tags": [
+          "users"
+        ],
+        "summary": "send a love to a picture",
+        "description": "love a picture initiates a .05 micropayment to creator.",
+        "parameters": [
+          {
+            "name": "x-access-token",
+            "in": "header",
+            "description": "Users JWT Token",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "picture_id",
+            "in": "query",
+            "description": "?picture_id=xxx",
+            "required": false,
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful authentication user photo json object"
+          },
+          "202": {
+            "description": "missing picture_id parameter"
+          },
+          "403": {
+            "description": "invalid or missing token"
+          }
+        }
+      }
+    },
+    "/api/pictures/like": {
+      "get": {
+        "tags": [
+          "users"
+        ],
+        "summary": "send a like to a picture",
+        "description": "you can only like a picture once if you like it again you will unlike it.",
+        "parameters": [
+          {
+            "name": "x-access-token",
+            "in": "header",
+            "description": "Users JWT Token",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "picture_id",
+            "in": "query",
+            "description": "?picture_id=xxx",
+            "required": false,
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful authentication user photo json object"
+          },
+          "202": {
+            "description": "missing picture_id parameter"
+          },
+          "403": {
+            "description": "invalid or missing token"
+          }
+        }
+      }
+    },
+    "/api/picture/upload": {
+      "post": {
+        "tags": [
+          "users"
+        ],
+        "summary": "upload a picture",
+        "description": "user can upload a photo",
+        "parameters": [
+          {
+            "name": "x-access-token",
+            "in": "header",
+            "description": "Users JWT Token",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PicturesItem"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "successful authentication user photo json object"
+          },
+          "403": {
+            "description": "invalid or missing token"
+          }
+        }
+      }
+    },
+    "/api/login": {
+      "post": {
+        "tags": [
+          "anyone"
+        ],
+        "summary": "login successfully and receive json web token.",
+        "description": "user supplies user name and password and receives a json web token",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UsersItem"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "successfully logged in, get JWT"
+          },
+          "202": {
+            "description": "successfully request, but invalid password"
+          },
+          "422": {
+            "description": "missing parameters"
+          }
+        }
+      }
+    },
+    "/api/register": {
+      "post": {
+        "tags": [
+          "anyone"
+        ],
+        "summary": "register for an account and receive token",
+        "description": "user supplies email and password to register and receives a json web token.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UsersItem"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "successfully registered, token received"
+          },
+          "202": {
+            "description": "email address already registered"
+          }
+        }
+      }
+    },
+    "/api/other_user_info": {
+      "get": {
+        "tags": [
+          "anyone"
+        ],
+        "summary": "returns public information of another user",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "user_id",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            },
+            "description": "user ID to be queried"
+          }
+        ],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "public user information",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "name": {
+                        "type": "string"
+                      },
+                      "pic": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "202": {
+            "description": "missing user_id",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/delete_photo": {
+      "delete": {
+        "tags": [
+          "anyone"
+        ],
+        "summary": "delete a photo by ID",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "picture_id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "ID of the photo to be deleted"
+          }
+        ],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "photo deleted successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string",
+                  "example": "Photo 123 deleted!"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "no photos specified to delete",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string",
+                  "example": "NO PICTURE SPECIFIED TO DELETE"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "photo not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string",
+                  "example": "photo not found"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/user/login": {
+      "post": {
+        "tags": [
+          "users"
+        ],
+        "summary": "user login",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "user": {
+                    "type": "string"
+                  },
+                  "pass": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "JWT Token Returned",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "token": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "missing parameters"
+          }
+        }
+      }
+    },
+    "/api/user/register": {
+      "post": {
+        "tags": [
+          "users"
+        ],
+        "summary": "user registration",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "user": {
+                    "type": "string"
+                  },
+                  "pass": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "registered user"
+          },
+          "422": {
+            "description": "missing parameters or short password"
+          }
+        }
+      }
+    },
+    "/api/user/info": {
+      "get": {
+        "tags": [
+          "users"
+        ],
+        "summary": "get user information",
+        "description": "user supplies valid token and receives all user info",
+        "parameters": [
+          {
+            "name": "x-access-token",
+            "in": "header",
+            "description": "Users JWT Token",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful authentication sent user information"
+          },
+          "403": {
+            "description": "invalid or missing token"
+          }
+        }
+      }
+    },
+    "/api/user/edit_info": {
+      "put": {
+        "tags": [
+          "users"
+        ],
+        "summary": "edit user information",
+        "description": "user supplies valid token and receives all user info",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UsersItem"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "successful authentication sent user information"
+          },
+          "403": {
+            "description": "invalid or missing token"
+          }
+        }
+      }
+    },
+    "/api/user/pictures": {
+      "get": {
+        "tags": [
+          "users"
+        ],
+        "summary": "get all photos uploaded by user",
+        "description": "user can get all photos they uploaded",
+        "parameters": [
+          {
+            "name": "x-access-token",
+            "in": "header",
+            "description": "Users JWT Token",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful authentication user photo json object"
+          },
+          "403": {
+            "description": "invalid or missing token"
+          }
+        }
+      }
+    },
+    "/api/user/likes": {
+      "get": {
+        "tags": [
+          "users"
+        ],
+        "summary": "get a list of likes by user",
+        "description": "user can get a list of all their likes",
+        "parameters": [
+          {
+            "name": "x-access-token",
+            "in": "header",
+            "description": "Users JWT Token",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful authentication user photo json object",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/LikesItem"
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "invalid or missing token"
+          }
+        }
+      }
+    },
+    "/api/user/loves": {
+      "get": {
+        "tags": [
+          "users"
+        ],
+        "summary": "get a list of loves by user",
+        "description": "user can get a list of all their loves",
+        "parameters": [
+          {
+            "name": "x-access-token",
+            "in": "header",
+            "description": "Users JWT Token",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful authentication user photo json object",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/LovesItem"
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "invalid or missing token"
+          }
+        }
+      }
+    },
+    "/api/admin/all_users": {
+      "get": {
+        "tags": [
+          "admins"
+        ],
+        "summary": "list all users",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "user list"
+          }
+        }
+      }
+    },
+    "/api/admin/total_money": {
+      "get": {
+        "tags": [
+          "admins"
+        ],
+        "summary": "total money moved",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "total money"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "UsersItem": {
+        "type": "object",
+        "required": [
+          "user",
+          "pass"
+        ],
+        "properties": {
+          "id": {
+            "type": "number",
+            "example": 1
+          },
+          "user": {
+            "type": "string",
+            "format": "email",
+            "example": "email@email.com"
+          },
+          "pass": {
+            "type": "string",
+            "format": "string",
+            "example": "p@ssword1"
+          },
+          "name": {
+            "type": "string",
+            "example": "Johnny Appleseed"
+          },
+          "is_admin": {
+            "type": "boolean",
+            "description": "is admin"
+          },
+          "account_balance": {
+            "type": "number",
+            "description": "remaning balance"
+          }
+        }
+      },
+      "PicturesItem": {
+        "type": "object",
+        "required": [
+          "filename"
+        ],
+        "properties": {
+          "filename": {
+            "type": "object",
+            "format": "jpg",
+            "example": "file.jpg"
+          },
+          "name": {
+            "type": "string",
+            "example": "Johnny Appleseed"
+          },
+          "email": {
+            "type": "string",
+            "format": "email",
+            "example": "email"
+          },
+          "creator_id": {
+            "$ref": "#/components/schemas/UsersItem"
+          }
+        }
+      },
+      "LikesItem": {
+        "type": "object",
+        "required": [
+          "user_id",
+          "picture_id"
+        ],
+        "properties": {
+          "user_id": {
+            "$ref": "#/components/schemas/UsersItem"
+          },
+          "picture_id": {
+            "$ref": "#/components/schemas/PicturesItem"
+          }
+        }
+      },
+      "LovesItem": {
+        "type": "object",
+        "required": [
+          "user_id",
+          "picture_id"
+        ],
+        "properties": {
+          "user_id": {
+            "$ref": "#/components/schemas/UsersItem"
+          },
+          "picture_id": {
+            "$ref": "#/components/schemas/PicturesItem"
+          }
+        }
+      }
+    },
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      }
+    }
+  }
+}

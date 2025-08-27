@@ -57,7 +57,6 @@ mongo.connect("mongodb://pixidb:27017/Pixidb", function(err, db) {
   }
 });
 
-
 // functions
 function api_authenticate(user, pass, req, res){
 	mongo.connect('mongodb://pixidb:27017/Pixidb', function(err, db){
@@ -152,7 +151,6 @@ function api_register(user, pass, req, res){
 		});
 }
 
-
 function api_token_check(req, res, next){
  console.log('toke' + JSON.stringify(req.headers['x-access-token']));	
  var token = req.body.token || req.query.token || req.headers['x-access-token'];
@@ -201,12 +199,11 @@ function random_sentence() {
 	return sentencer;
 }
 
-
 // routes
-
 
 // picture related.
 // OK
+// OK2
 app.get('/api/pictures', api_token_check, function(req, res){
 	console.log('in pics');
 	mongo.connect('mongodb://pixidb:27017/Pixidb', function(err, db){
@@ -222,6 +219,7 @@ app.get('/api/pictures', api_token_check, function(req, res){
 });
 
 // OK
+// OK2
 app.get('/api/picture/:pictureid', api_token_check, function(req, res){
 	console.log('in pics');
 	mongo.connect('mongodb://pixidb:27017/Pixidb', function(err, db){
@@ -237,6 +235,7 @@ app.get('/api/picture/:pictureid', api_token_check, function(req, res){
 });
 
 // OK
+// OK2
 app.delete('/api/picture/delete', api_token_check, function(req, res) {
 	console.log('pic ' + req.query.picture_id);
 	if(!req.query.picture_id) {
@@ -260,7 +259,7 @@ app.delete('/api/picture/delete', api_token_check, function(req, res) {
 
 });
 
-
+// OK2
 app.get('/api/picture/delete/:picture', function(req, res) {
 	console.log('in delete' + req.params.picture);
 	if(!req.params.picture) {
@@ -284,7 +283,7 @@ app.get('/api/picture/delete/:picture', function(req, res) {
 	}
 });
 
-
+// OK2
 app.get('/api/picture/:picture_id/likes', api_token_check, function(req, res){
 	console.log('pic id ' + req.params.picture_id);
 	mongo.connect('mongodb://pixidb:27017/Pixidb', function(err, db){
@@ -300,7 +299,7 @@ app.get('/api/picture/:picture_id/likes', api_token_check, function(req, res){
 	})
 });
 
-
+// OK2
 app.get('/api/picture/:picture_id/loves', api_token_check, function(req, res){
 	console.log('pic id ' + req.params.picture_id);
 	mongo.connect('mongodb://pixidb:27017/Pixidb', function(err, db){
@@ -316,7 +315,7 @@ app.get('/api/picture/:picture_id/loves', api_token_check, function(req, res){
 	})
 });
 
-
+// OK2
 app.get('/api/pictures/love', api_token_check, function(req, res){
  console.log(req.query.picture_id);
 	if(!req.query.picture_id) {
@@ -374,7 +373,7 @@ app.get('/api/pictures/love', api_token_check, function(req, res){
 
 });
 
-
+// OK2
 app.get('/api/pictures/like', api_token_check, function(req, res){
  console.log('in like ' + JSON.stringify(req.user.user));
  if(!req.query.picture_id) {
@@ -441,6 +440,7 @@ app.get('/api/pictures/like', api_token_check, function(req, res){
 });
 
 // OK
+// OK2
 app.post('/api/picture/upload', api_token_check, upload.single('file'), function(req, res, next){
 
  	console.log('in upload');
@@ -489,6 +489,7 @@ app.post('/api/picture/upload', api_token_check, upload.single('file'), function
 
 // user related.
 // OK
+// OK2 CHECK
 app.post('/api/user/login', function(req, res){
 	if ((!req.body.user) || (!req.body.pass)) {
 		res.status(422).json({message: "missing username and or password parameters"});
@@ -499,6 +500,7 @@ app.post('/api/user/login', function(req, res){
 })
 
 // OK
+// OK2 CHECK
 app.post('/api/user/register', function(req, res){
 	if ((!req.body.user) || (!req.body.pass)) {
 		res.status(422).json({message: "missing username and or password parameters"});
@@ -511,6 +513,7 @@ app.post('/api/user/register', function(req, res){
 })
 
 // OK
+// OK2
 app.get('/api/user/info', api_token_check, function(req, res){
 	if (!req.user.user._id) {
 		res.status(422).json({message: "missing userid"})
@@ -530,6 +533,7 @@ app.get('/api/user/info', api_token_check, function(req, res){
 });
 
 // OK
+// OK2
 app.put('/api/user/edit_info', api_token_check, function(req, res){
 	console.log('in user put ' + req.user.user._id);
 
@@ -560,7 +564,7 @@ app.put('/api/user/edit_info', api_token_check, function(req, res){
 	}
 });
 
-
+// OK2
 app.get('/api/other_user_info', api_token_check, function(req, res){
 	if (!req.query.user_id) { res.status(202).json({ 'error' : ' missing user_id '});}
 	mongo.connect('mongodb://pixidb:27017/Pixidb', function(err, db){
@@ -582,6 +586,7 @@ app.get('/api/other_user_info', api_token_check, function(req, res){
 });
 
 // OK
+// OK2
 app.get('/api/user/pictures', api_token_check, function(req, res){
 	mongo.connect('mongodb://pixidb:27017/Pixidb', function(err, db){
 	db.collection('pictures').find({ creator_id : req.user.user._id}).toArray(function(err, pictures){
@@ -597,6 +602,7 @@ app.get('/api/user/pictures', api_token_check, function(req, res){
 });
 
 // OK
+// OK2
 app.get('/api/user/likes', api_token_check, function(req, res){
 	console.log('like id ' + req.user._id);
 	mongo.connect('mongodb://pixidb:27017/Pixidb', function(err, db){
@@ -613,6 +619,7 @@ app.get('/api/user/likes', api_token_check, function(req, res){
 });
 
 // OK
+// OK2
 app.get('/api/user/loves', api_token_check, function(req, res){
 	console.log('love id ' + req.user.user._id);
 	mongo.connect('mongodb://pixidb:27017/Pixidb', function(err, db){
@@ -628,13 +635,14 @@ app.get('/api/user/loves', api_token_check, function(req, res){
 	})
 });
 
-
+// NO
 app.get('/about', function(req, res){
 	//the file ./about.html does not exist. Will return path to requested file in dev mode.
 	res.sendFile('./about.html', {root: __dirname})
 });
 
 // OK
+// OK2 CHECK
 app.get('/api/admin/all_users', api_token_check, function(req, res){
 	//res.json(req.user);
 
@@ -649,6 +657,7 @@ app.get('/api/admin/all_users', api_token_check, function(req, res){
 });
 
 // OK
+// OK2 CHECK
 app.get('/api/admin/total_money', api_token_check, function(req, res){
 	mongo.connect('mongodb://pixidb:27017/Pixidb', function(err, db){
 		db.collection('loves').find().toArray(function(err, loves){
@@ -666,22 +675,23 @@ app.get('/api/admin/total_money', api_token_check, function(req, res){
 
 //API ROUTES
 
+// OK2
 app.post('/api/login', function(req, res){
 	api_authenticate(req.body.user, req.body.pass, req, res);
 })
 
-
+// OK2
 app.post('/api/register', function(req, res){
 	api_register(req.body.user, req.body.pass, req, res);
 })
 
-
+// NO
 app.get('/about', function(req, res){
 	//the file ./about.html does not exist. Will return path to requested file in dev mode.
 	res.sendFile('./about.html', {root: __dirname})
 });
 
-
+// OK2
 app.delete('/api/delete_photo', api_token_check, function(req, res) {
 	if(!req.query.picture_id) {
 		res.json('NO PICTURE SPECIFIED TO DELETE');
@@ -703,7 +713,7 @@ app.delete('/api/delete_photo', api_token_check, function(req, res) {
 
 });
 
-
+// OK2
 app.get('/user_delete_photo/', function(req, res) {
 	console.log('in delete' + req.query.picture_id);
 	if(!req.query.picture_id) {
@@ -729,29 +739,30 @@ app.get('/user_delete_photo/', function(req, res) {
 
 
 //routes
+// NO
 app.get('/', function(req, res){
 	res.status(200).json(
 			{ message: "Welcome to the Pixi API, use /api/login using x-www-form-coded post data, user : email, pass : password - Make sure when you authenticate on the API you have a header called x-access-token with your token" })
 });
 
-
+// NO
 app.get('/logout', function(req, res){	
 	res.redirect('/login');	
 });
 
-
+// NO
 app.get('/login', function(req, res){
 	res.json({message:  "Welcome to Pixi" });
 
 });
 
-
+// NO
 app.get('/register', function(req, res){
 	res.json({message:  "Welcome to Pixi" });
 
 })
 
-
+// NO
 app.get('/pixi', api_token_check, function(req, res){
 	res.sendFile('./pixi.html', {root: __dirname});
 })
