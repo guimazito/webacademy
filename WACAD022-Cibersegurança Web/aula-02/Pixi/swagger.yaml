@@ -1,0 +1,237 @@
+openapi: 3.0.0
+info:
+  title: Pixi API
+  version: "1.0.0"
+  description: API para gerenciamento de usuários e fotos do Pixi.
+
+servers:
+  - url: http://localhost:8080
+
+paths:
+  /api/user/login:
+    post:
+      summary: Login do usuário
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                user:
+                  type: string
+                pass:
+                  type: string
+      responses:
+        '200':
+          description: Token JWT retornado
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                  token:
+                    type: string
+        '422':
+          description: Parâmetros ausentes
+
+  /api/user/register:
+    post:
+      summary: Registro de usuário
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                user:
+                  type: string
+                pass:
+                  type: string
+      responses:
+        '200':
+          description: Usuário registrado
+        '422':
+          description: Parâmetros ausentes ou senha curta
+
+  /api/pictures:
+    get:
+      summary: Lista todas as fotos (requer token)
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: Lista de fotos
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Picture'
+
+  /api/picture/{pictureid}:
+    get:
+      summary: Retorna uma foto pelo ID (requer token)
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: pictureid
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Foto encontrada
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Picture'
+
+  /api/picture/delete:
+    delete:
+      summary: Deleta uma foto pelo ID (requer token)
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: picture_id
+          in: query
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Foto deletada
+
+  /api/picture/upload:
+    post:
+      summary: Upload de uma nova foto (requer token)
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                file:
+                  type: string
+                  format: binary
+      responses:
+        '200':
+          description: Foto enviada
+
+  /api/user/info:
+    get:
+      summary: Retorna informações do usuário autenticado
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: Informações do usuário
+
+  /api/user/edit_info:
+    put:
+      summary: Edita informações do usuário autenticado
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                password:
+                  type: string
+                name:
+                  type: string
+                is_admin:
+                  type: boolean
+      responses:
+        '200':
+          description: Usuário atualizado
+
+  /api/user/pictures:
+    get:
+      summary: Lista fotos do usuário autenticado
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: Lista de fotos do usuário
+
+  /api/user/likes:
+    get:
+      summary: Lista de likes do usuário autenticado
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: Lista de likes
+
+  /api/user/loves:
+    get:
+      summary: Lista de loves do usuário autenticado
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: Lista de loves
+
+  /api/admin/all_users:
+    get:
+      summary: Lista todos os usuários (admin)
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: Lista de usuários
+
+  /api/admin/total_money:
+    get:
+      summary: Total de dinheiro movimentado (admin)
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: Total de dinheiro
+
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+
+  schemas:
+    Picture:
+      type: object
+      properties:
+        _id:
+          type: integer
+        title:
+          type: string
+        image_url:
+          type: string
+        name:
+          type: string
+        filename:
+          type: string
+        description:
+          type: string
+        creator_id:
+          type: integer
+        money_made:
+          type: number
+        likes:
+          type: integer
+        created_date:
+          type: string
+          format: date-time

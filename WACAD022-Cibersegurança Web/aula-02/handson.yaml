@@ -1,0 +1,152 @@
+openapi: 3.0.0
+
+info:
+  version: "0.3.0"
+  title: Music API
+
+servers:
+  - url: https://api.muzicplayz.com/v3
+
+paths:
+  /playlist:
+    get:
+      summary: Get one or more playlists
+      parameters:
+        - name: limit
+          in: query
+          required: false
+          schema:
+            type: integer
+        - name: offset
+          in: query
+          required: false
+          schema:
+            type: integer
+        - name: search
+          in: query
+          required: false
+          schema:
+            type: string
+      security:
+        - basicAuth: []
+      responses:
+        '200':
+          description: Successful response
+
+    post:
+      summary: Create a new playlist
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/newPlaylist'
+      responses:
+        '200':
+          description: Successful response
+
+  /playlist/{playlist-id}:
+    delete:
+      summary: Delete a playlist
+      parameters:
+        - name: playlist-id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+        '410':
+          description: Playlist already deleted
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+
+    get:
+      summary: Return a playlist
+      parameters:
+        - name: playlist-id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/playlistWithSongs'
+
+  /playlist/{playlist-id}/image:
+    get:
+      summary: Get playlist image
+      operationId: getImage
+      parameters:
+        - name: playlist-id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            image/png:
+              schema:
+                type: string
+                format: binary
+
+components:
+  schemas:
+    newPlaylist:
+      type: object
+      properties:
+        name:
+          type: string
+        songIds:
+          type: array
+          items:
+            type: integer
+
+    playlistWithSongs:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        song:
+          type: array
+          items:
+            $ref: '#/components/schemas/song'
+
+    song:
+      type: object
+      properties:
+        id:
+          type: integer
+        title:
+          type: string
+        artist:
+          type: string
+
+    error:
+      type: object
+      properties:
+        errorMessage:
+          type: string
+        logData:
+          type: object
+          properties:
+            entry:
+              type: integer
+            date:
+              type: string
+
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
